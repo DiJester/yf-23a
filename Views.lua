@@ -1,12 +1,12 @@
 ViewSettings = {
 	Cockpit = {
 		[1] = {                                              -- player slot 1
-			CockpitLocalPoint      = { 5.348, 0.365, 0.0 },  --cockpit model line up with external model {forward/back,up/down,left/right}
+			CockpitLocalPoint      = { 5.038, 1.29, 0.0 },   --cockpit model line up with external model {forward/back,up/down,left/right}
 			CameraViewAngleLimits  = { 20, 140 },            -- FOV Min Max (how much zoom in/out)
 			CameraAngleRestriction = { false, 90, 0.5 },
 			CameraAngleLimits      = { 200, -80.000000, 110.000000 }, -- View right/left, View down/up
 			limits_6DOF            = { x = { -0.050000, 0.4500000 }, y = { -0.300000, 0.100000 }, z = { -0.220000, 0.220000 }, roll = 90.000000 },
-			EyePoint               = { 5.059, 1.221, 0 },    -- Distance from pivot point. To simulate pivot around human neck, use {0.16,0.1,0}
+			EyePoint               = { 0.05, 0.00, 0.00 },   -- Distance from pivot point. To simulate pivot around human neck, use {0.16,0.1,0}
 			ShoulderSize           = 0.2,
 			Allow360rotation       = false,
 		},
