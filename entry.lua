@@ -48,11 +48,13 @@ declare_plugin(self_ID,
 
 ----------------------------------------------------------------------------------------------------------------------
 --mounting 3d model paths and texture paths
-mount_vfs_model_path(current_mod_path .. "/Shapes")       -- External Models
-mount_vfs_texture_path(current_mod_path .. "/Textures")
-mount_vfs_texture_path(current_mod_path .. "/Skins/1/ME") -- 指定路径  这个路径中有着背景 背景音乐  logo
-mount_vfs_sound_path(current_mod_path .. "/Sounds")       -- Sounds
-mount_vfs_liveries_path(current_mod_path .. "/Liveries")  -- Liveries
+mount_vfs_model_path(current_mod_path .. "/Shapes")         -- External Models
+mount_vfs_model_path(current_mod_path .. "/Cockpit/Shapes") -- Cockpit Models
+mount_vfs_texture_path(current_mod_path .. "/Textures")     -- Cockpit Textures
+mount_vfs_texture_path(current_mod_path .. "/Cockpit/Textures")
+mount_vfs_texture_path(current_mod_path .. "/Skins/1/ME")   -- 指定路径  这个路径中有着背景 背景音乐  logo
+mount_vfs_sound_path(current_mod_path .. "/Sounds")         -- Sounds
+mount_vfs_liveries_path(current_mod_path .. "/Liveries")    -- Liveries
 -----------------------------------------------------------------------------------------------------------------------
 -- local cfg_path = current_mod_path .. "/FM/F15/config.lua"
 -- dofile(cfg_path)
