@@ -12,11 +12,11 @@ Wingspan: 13.28 m
 Empty Weight: 13,154 kg (29,000 lb)
 Maximum Weight: 38,000 kg (83,500 lb)
 Maximum Speed: 1,450 mph
-Service ceiling: 20000 m
+Service ceiling: 19800 m
 Range: 4,489 km (2,424 nmi)
 Combat range: 1,206-1,287 km (651-695 nmi)
 Powerplant: 2 x Pratt & Whitney YF119 turbofan engines, 35,000 lbf (160 kN) with afterburner
-G limit: 7
+G limit: 9
 
 Fuel Capacity:
 Main: 22,320 lb / 10,124 kg

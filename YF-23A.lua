@@ -64,14 +64,14 @@ F_23A = {
 	Categories                               = { "{78EFB7A2-FD52-4b57-A6A6-3BF0E1D6555F}", "Interceptor", },
 
 	M_empty                                  = 13154, --13380,	-- kg  with pilot and nose load, F15
-	M_nominal                                = 23278, -- 19000,kg (Empty Plus Full Internal Fuel)
+	M_nominal                                = 18216, -- 19000,kg (Empty Plus Full Internal Fuel)
 	M_max                                    = 28123, -- 30845,kg (Maximum Take Off Weight)
 	M_fuel_max                               = 10124, -- kg (Internal Fuel Only)
-	H_max                                    = 20000, -- m  (Maximum Operational Ceiling)
+	H_max                                    = 19800, -- m  (Maximum Operational Ceiling)
 	average_fuel_consumption                 = 0.271,
-	CAS_min                                  = 58, -- Minimum CAS speed (m/s) (for AI)
-	V_opt                                    = 220, -- Cruise speed (m/s) (for AI)
-	V_take_off                               = 61, -- Take off speed in m/s (for AI)
+	CAS_min                                  = 61, -- Minimum CAS speed (m/s) (for AI)
+	V_opt                                    = 486, -- Cruise speed (m/s) (for AI)
+	V_take_off                               = 92.6, -- Take off speed in m/s (for AI)
 	V_land                                   = 71, -- Land speed in m/s (for AI)
 	has_afteburner                           = true,
 	has_speedbrake                           = true,
@@ -90,33 +90,35 @@ F_23A = {
 	main_gear_wheel_diameter                 = 0.709,                  -- in m
 
 	AOA_take_off                             = 0.16,                   -- AoA in take off (for AI)
-	stores_number                            = 12,
+	stores_number                            = 6,
 	bank_angle_max                           = 60,                     -- Max bank angle (for AI)
 	Ny_min                                   = -3,                     -- Min G (for AI)
-	Ny_max                                   = 7,                      -- Max G (for AI)
+	Ny_max                                   = 9,                      -- Max G (for AI)
 	V_max_sea_level                          = 403,                    -- Max speed at sea level in m/s (for AI)
-	V_max_h                                  = 736.11,                 -- Max speed at max altitude in m/s (for AI)
-	wing_area                                = 84,                     -- wing area in m2
+	V_max_h                                  = 737.5,                  -- Max speed at max altitude in m/s (for AI)
+	wing_area                                = 88,                     -- wing area in m2
 	thrust_sum_max                           = 23308,                  -- thrust in kgf (64.3 kN)
 	thrust_sum_ab                            = 32630,                  -- thrust in kgf (95.1 kN)
-	Vy_max                                   = 275,                    -- Max climb speed in m/s (for AI)
+	Vy_max                                   = 350,                    -- Max climb speed in m/s (for AI)
 	flaps_maneuver                           = 1,
 	Mach_max                                 = 2.2,                    -- Max speed in Mach (for AI)
 	range                                    = 4489,                   -- Max range in km (for AI)
 	RCS                                      = 0.0001,                 -- Radar Cross Section m2
-	Ny_max_e                                 = 7,                      -- Max G (for AI)
+	Ny_max_e                                 = 9,                      -- Max G (for AI)
 	detection_range_max                      = 250,
 	IR_emission_coeff                        = 0.5,                    -- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
-	IR_emission_coeff_ab                     = 2,                      -- With afterburner
+	IR_emission_coeff_ab                     = 0.8,                    -- With afterburner
 	tand_gear_max                            = 0.80,                   --XX  1.732 FA18 3.73,
 	tanker_type                              = 1,                      --F14=2/S33=4/ M29=0/S27=0/F15=1/ F16=1/To=0/F18=2/A10A=1/ M29K=4/F4=0/
-	wing_span                                = 13.28,                  --XX  wing spain in m
+	wing_span                                = 13.29,                  --XX  wing spain in m
 	wing_type                                = 0,                      -- 0=FIXED_WING/ 1=VARIABLE_GEOMETRY/ 2=FOLDED_WING/ 3=ARIABLE_GEOMETRY_FOLDED
 	length                                   = 20.55,
 	height                                   = 4.24,
 	crew_size                                = 1, --XX
 	engines_count                            = 2, --XX
 	wing_tip_pos                             = { -3.586, 0.146, 6.769 },
+	EPLRS                                    = true,
+	TACAN_AA                                 = true,
 	engines_nozzles                          =
 	{
 		[1] =
@@ -319,68 +321,68 @@ F_23A = {
 			Cy0 = 0,
 			Mzalfa = 4.335,
 			Mzalfadt = 0.8,
-			kjx = 2.95,
+			kjx = 2.65,
 			kjz = 0.00125,
-			Czbe = -0.016,
+			Czbe = -0.020,
 			cx_gear = 0.0268,
 			cx_flap = 0.06,
 			cy_flap = 0.4,
-			cx_brk = 0.06,
+			cx_brk = 0.08,
 			table_data =
 			{
 				--      M	 Cx0		 Cya		 B		 B4	      Omxmax	Aldop	Cymax
-				{ 0.0, 0.0215, 0.055, 0.08,  0.22,  0.65, 25.0, 1.2 },
-				{ 0.2, 0.0215, 0.055, 0.08,  0.22,  1.80, 25.0, 1.2 },
-				{ 0.4, 0.0215, 0.055, 0.08,  0.22,  3.00, 25.0, 1.2 },
-				{ 0.6, 0.0215, 0.055, 0.05,  0.28,  4.20, 25.0, 1.2 },
-				{ 0.7, 0.0215, 0.055, 0.05,  0.28,  4.20, 23.0, 1.15 },
-				{ 0.8, 0.0215, 0.055, 0.05,  0.28,  4.20, 21.7, 1.1 },
-				{ 0.9, 0.0230, 0.058, 0.09,  0.20,  4.20, 20.1, 1.07 },
-				{ 1.0, 0.0320, 0.062, 0.17,  0.15,  4.20, 18.9, 1.04 },
-				{ 1.1, 0.0430, 0.062, 0.235, 0.09,  3.78, 17.4, 1.02 },
-				{ 1.2, 0.0460, 0.062, 0.285, 0.08,  2.94, 17.0, 1.00 },
-				{ 1.3, 0.0470, 0.06,  0.29,  0.10,  2.10, 16.0, 0.92 },
-				{ 1.4, 0.0470, 0.056, 0.3,   0.136, 1.80, 15.0, 0.80 },
-				{ 1.6, 0.0470, 0.052, 0.34,  0.21,  1.08, 13.0, 0.7 },
-				{ 1.8, 0.0460, 0.042, 0.34,  2.43,  0.96, 12.0, 0.55 },
-				{ 2.2, 0.0420, 0.037, 0.49,  3.5,   0.84, 10.0, 0.37 },
-				{ 2.5, 0.0420, 0.033, 0.6,   4.7,   0.84, 9.0,  0.3 },
-				{ 3.9, 0.0400, 0.023, 0.9,   6.0,   0.84, 7.0,  0.2 },
+				{ 0.0, 0.0200, 0.055, 0.08,  0.22,  0.65, 25.0, 2.2 },
+				{ 0.2, 0.0200, 0.055, 0.08,  0.22,  2.15, 25.0, 2.2 },
+				{ 0.4, 0.0200, 0.055, 0.08,  0.22,  4.00, 25.0, 2.2 },
+				{ 0.6, 0.0200, 0.055, 0.05,  0.28,  6.30, 25.0, 2.2 },
+				{ 0.7, 0.0200, 0.055, 0.05,  0.28,  6.30, 23.0, 2.05 },
+				{ 0.8, 0.0200, 0.055, 0.05,  0.28,  6.30, 21.7, 1.95 },
+				{ 0.9, 0.0184, 0.058, 0.09,  0.20,  6.30, 20.1, 1.77 },
+				{ 1.0, 0.0180, 0.062, 0.17,  0.15,  6.30, 18.9, 1.64 },
+				{ 1.1, 0.0190, 0.062, 0.235, 0.09,  4.38, 17.4, 1.42 },
+				{ 1.2, 0.0210, 0.062, 0.285, 0.08,  3.67, 17.0, 1.20 },
+				{ 1.3, 0.0210, 0.06,  0.29,  0.10,  3.10, 16.0, 1.12 },
+				{ 1.4, 0.0205, 0.056, 0.3,   0.136, 2.80, 15.0, 1.02 },
+				{ 1.6, 0.0190, 0.052, 0.34,  0.21,  1.58, 13.0, 0.85 },
+				{ 1.8, 0.0186, 0.042, 0.34,  2.43,  1.24, 12.0, 0.65 },
+				{ 2.2, 0.0186, 0.037, 0.49,  3.5,   1.12, 10.0, 0.57 },
+				{ 2.5, 0.0180, 0.033, 0.6,   4.7,   0.95, 9.0,  0.40 },
+				{ 3.9, 0.0220, 0.023, 0.9,   6.0,   0.84, 7.0,  0.2 },
 			}, -- end of table_data
 		}, -- end of aerodynamics
 		engine =
 		{
-			Nmg        = 67.5,
+			Nmg        = 60,
 			MinRUD     = 0,
 			MaxRUD     = 1,
 			MaksRUD    = 0.85,
 			ForsRUD    = 0.91,
 			typeng     = 1,
-			hMaxEng    = 19.5,
+			hMaxEng    = 20,
 			dcx_eng    = 0.0114,
-			cemax      = 1.24,
-			cefor      = 2.56,
-			dpdh_m     = 6000,
-			dpdh_f     = 14000.0,
+			cemax      = 0.95,
+			cefor      = 1.20,
+			dpdh_m     = 2000,
+			dpdh_f     = 3000,
 			table_data = {
 				--   M		Pmax		 Pfor
-				{ 0.0, 115000, 212000 },
-				{ 0.2, 94000,  200000 },
-				{ 0.4, 92000,  205000 },
-				{ 0.6, 103000, 207000 },
-				{ 0.7, 105000, 210000 },
-				{ 0.8, 105000, 220000 },
-				{ 0.9, 105000, 235000 },
-				{ 1.0, 107000, 250000 },
-				{ 1.1, 103000, 258000 },
-				{ 1.2, 94000,  268000 },
-				{ 1.3, 84000,  285000 },
-				{ 1.4, 71000,  300000 },
-				{ 1.6, 34000,  318000 },
-				{ 1.8, 19000,  337000 },
-				{ 2.2, 17000,  370000 },
-				{ 2.5, 19000,  390000 },
-				{ 3.9, 82000,  310000 },
+				{ 0.0, 130880, 157031 },
+				{ 0.2, 121606, 148313 },
+				{ 0.4, 116957, 145368 },
+				{ 0.6, 116317, 147708 },
+				{ 0.7, 117375, 150799 },
+				{ 0.8, 119301, 155176 },
+				{ 0.9, 122081, 160861 },
+				{ 1.0, 125689, 167885 },
+				{ 1.1, 129479, 175478 },
+				{ 1.2, 133660, 183961 },
+				{ 1.3, 138318, 193520 },
+				{ 1.4, 143437, 204227 },
+				{ 1.6, 154843, 229221 },
+				{ 1.8, 167218, 259064 },
+				{ 2.2, 167218, 259064 },
+				{ 2.5, 167218, 259064 },
+				{ 3.9, 167218, 259064 },
 			}, -- end of table_data
 		}, -- end of engine
 	},
