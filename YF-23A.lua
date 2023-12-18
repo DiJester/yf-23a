@@ -1,14 +1,14 @@
 F_23A = {
 
-	Name                                     = 'YF-23A', --AG
-	DisplayName                              = _('YF-23A'), --AG
-	Picture                                  = "YF-23A.png",
-	Rate                                     = "50",
-	Shape                                    = "YF-23A", --AG	
-	WorldID                                  = WSTYPE_PLACEHOLDER,
+	Name                      = 'YF-23A', --AG
+	DisplayName               = _('YF-23A'), --AG
+	Picture                   = "YF-23A.png",
+	Rate                      = "50",
+	Shape                     = "YF-23A", --AG	
+	WorldID                   = WSTYPE_PLACEHOLDER,
 	--WorldID 		= 6,
 
-	shape_table_data                         =
+	shape_table_data          =
 	{
 		{
 			file        = 'YF-23A', --AG
@@ -28,7 +28,7 @@ F_23A = {
 		},
 	},
 
-	LandRWCategories                         =
+	LandRWCategories          =
 	{
 		[1] =
 		{
@@ -43,7 +43,7 @@ F_23A = {
 			Name = "AircraftCarrier With Tramplin",
 		},
 	}, -- end of LandRWCategories
-	TakeOffRWCategories                      =
+	TakeOffRWCategories       =
 	{
 		[1] =
 		{
@@ -59,67 +59,61 @@ F_23A = {
 		},
 	}, -- end of TakeOffRWCategories
 
-	mapclasskey                              = "P0091000024",
-	attribute                                = { wsType_Air, wsType_Airplane, wsType_Fighter, WSTYPE_PLACEHOLDER, "Fighters", "Refuelable", }, --AG
-	Categories                               = { "{78EFB7A2-FD52-4b57-A6A6-3BF0E1D6555F}", "Interceptor", },
+	mapclasskey               = "P0091000024",
+	attribute                 = { wsType_Air, wsType_Airplane, wsType_Fighter, WSTYPE_PLACEHOLDER, "Fighters", "Refuelable", }, --AG
+	Categories                = { "{78EFB7A2-FD52-4b57-A6A6-3BF0E1D6555F}", "Interceptor", },
 
-	M_empty                                  = 13154, --13380,	-- kg  with pilot and nose load, F15
-	M_nominal                                = 18216, -- 19000,kg (Empty Plus Full Internal Fuel)
-	M_max                                    = 28123, -- 30845,kg (Maximum Take Off Weight)
-	M_fuel_max                               = 10124, -- kg (Internal Fuel Only)
-	H_max                                    = 19800, -- m  (Maximum Operational Ceiling)
-	average_fuel_consumption                 = 0.271,
-	CAS_min                                  = 61, -- Minimum CAS speed (m/s) (for AI)
-	V_opt                                    = 486, -- Cruise speed (m/s) (for AI)
-	V_take_off                               = 92.6, -- Take off speed in m/s (for AI)
-	V_land                                   = 71, -- Land speed in m/s (for AI)
-	has_afteburner                           = true,
-	has_speedbrake                           = true,
-	radar_can_see_ground                     = true,
+	M_empty                   = 13154, --13380,	-- kg  with pilot and nose load, F15
+	M_nominal                 = 18216, -- 19000,kg (Empty Plus Full Internal Fuel)
+	M_max                     = 28123, -- 30845,kg (Maximum Take Off Weight)
+	M_fuel_max                = 10124, -- kg (Internal Fuel Only)
+	H_max                     = 19800, -- m  (Maximum Operational Ceiling)
+	average_fuel_consumption  = 0.271,
+	CAS_min                   = 61, -- Minimum CAS speed (m/s) (for AI)
+	V_opt                     = 486, -- Cruise speed (m/s) (for AI)
+	V_take_off                = 92.6, -- Take off speed in m/s (for AI)
+	V_land                    = 71, -- Land speed in m/s (for AI)
+	has_afteburner            = true,
+	has_speedbrake            = true,
+	radar_can_see_ground      = true,
 
-	nose_gear_pos                            = { 4.674, -2.087, 0 },   -- nosegear coord （前后 上下 左右）
-	nose_gear_amortizer_direct_stroke        = 0,                      -- down from nose_gear_pos !!!
-	nose_gear_amortizer_reversal_stroke      = 0,                      -- up
-	nose_gear_amortizer_normal_weight_stroke = 0,                      -- up
-	nose_gear_wheel_diameter                 = 0.513,                  -- in m
+	nose_gear_pos             = { 4.674, -2.087, 0 },   -- nosegear coord （前后 上下 左右）
+	nose_gear_wheel_diameter  = 0.513,                  -- in m
 
-	main_gear_pos                            = { -2.878, -2.163, 2.022 }, -- main gear coords
-	main_gear_amortizer_direct_stroke        = 0,                      --  down from main_gear_pos !!!
-	main_gear_amortizer_reversal_stroke      = 0,                      --  up
-	main_gear_amortizer_normal_weight_stroke = 0,                      -- down from main_gear_pos
-	main_gear_wheel_diameter                 = 0.709,                  -- in m
+	main_gear_pos             = { -2.878, -2.163, 2.022 }, -- main gear coords
+	main_gear_wheel_diameter  = 0.709,                  -- in m
 
-	AOA_take_off                             = 0.16,                   -- AoA in take off (for AI)
-	stores_number                            = 6,
-	bank_angle_max                           = 60,                     -- Max bank angle (for AI)
-	Ny_min                                   = -3,                     -- Min G (for AI)
-	Ny_max                                   = 9,                      -- Max G (for AI)
-	V_max_sea_level                          = 403,                    -- Max speed at sea level in m/s (for AI)
-	V_max_h                                  = 737.5,                  -- Max speed at max altitude in m/s (for AI)
-	wing_area                                = 88,                     -- wing area in m2
-	thrust_sum_max                           = 23308,                  -- thrust in kgf (64.3 kN)
-	thrust_sum_ab                            = 32630,                  -- thrust in kgf (95.1 kN)
-	Vy_max                                   = 350,                    -- Max climb speed in m/s (for AI)
-	flaps_maneuver                           = 1,
-	Mach_max                                 = 2.2,                    -- Max speed in Mach (for AI)
-	range                                    = 4489,                   -- Max range in km (for AI)
-	RCS                                      = 0.0001,                 -- Radar Cross Section m2
-	Ny_max_e                                 = 9,                      -- Max G (for AI)
-	detection_range_max                      = 250,
-	IR_emission_coeff                        = 0.5,                    -- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
-	IR_emission_coeff_ab                     = 0.8,                    -- With afterburner
-	tand_gear_max                            = 0.80,                   --XX  1.732 FA18 3.73,
-	tanker_type                              = 1,                      --F14=2/S33=4/ M29=0/S27=0/F15=1/ F16=1/To=0/F18=2/A10A=1/ M29K=4/F4=0/
-	wing_span                                = 13.29,                  --XX  wing spain in m
-	wing_type                                = 0,                      -- 0=FIXED_WING/ 1=VARIABLE_GEOMETRY/ 2=FOLDED_WING/ 3=ARIABLE_GEOMETRY_FOLDED
-	length                                   = 20.55,
-	height                                   = 4.24,
-	crew_size                                = 1, --XX
-	engines_count                            = 2, --XX
-	wing_tip_pos                             = { -3.586, 0.146, 6.769 },
-	EPLRS                                    = true,
-	TACAN_AA                                 = true,
-	engines_nozzles                          =
+	AOA_take_off              = 0.16,                   -- AoA in take off (for AI)
+	stores_number             = 6,
+	bank_angle_max            = 60,                     -- Max bank angle (for AI)
+	Ny_min                    = -3,                     -- Min G (for AI)
+	Ny_max                    = 9,                      -- Max G (for AI)
+	V_max_sea_level           = 403,                    -- Max speed at sea level in m/s (for AI)
+	V_max_h                   = 737.5,                  -- Max speed at max altitude in m/s (for AI)
+	wing_area                 = 88,                     -- wing area in m2
+	thrust_sum_max            = 23308,                  -- thrust in kgf (64.3 kN)
+	thrust_sum_ab             = 32630,                  -- thrust in kgf (95.1 kN)
+	Vy_max                    = 350,                    -- Max climb speed in m/s (for AI)
+	flaps_maneuver            = 1,
+	Mach_max                  = 2.2,                    -- Max speed in Mach (for AI)
+	range                     = 4489,                   -- Max range in km (for AI)
+	RCS                       = 0.0001,                 -- Radar Cross Section m2
+	Ny_max_e                  = 9,                      -- Max G (for AI)
+	detection_range_max       = 250,
+	IR_emission_coeff         = 0.5,                    -- Normal engine -- IR_emission_coeff = 1 is Su-27 without afterburner. It is reference.
+	IR_emission_coeff_ab      = 0.8,                    -- With afterburner
+	tand_gear_max             = 3.73,                   --XX  1.732 FA18 3.73,
+	tanker_type               = 1,                      --F14=2/S33=4/ M29=0/S27=0/F15=1/ F16=1/To=0/F18=2/A10A=1/ M29K=4/F4=0/
+	wing_span                 = 13.29,                  --XX  wing spain in m
+	wing_type                 = 0,                      -- 0=FIXED_WING/ 1=VARIABLE_GEOMETRY/ 2=FOLDED_WING/ 3=ARIABLE_GEOMETRY_FOLDED
+	length                    = 20.55,
+	height                    = 4.24,
+	crew_size                 = 1, --XX
+	engines_count             = 2, --XX
+	wing_tip_pos              = { -3.586, 0.146, 6.769 },
+	EPLRS                     = true,
+	TACAN_AA                  = true,
+	engines_nozzles           =
 	{
 		[1] =
 		{
@@ -140,7 +134,7 @@ F_23A = {
 			smokiness_level     = 0.01,
 		}, -- end of [2]
 	}, -- end of engines_nozzles
-	crew_members                             =
+	crew_members              =
 	{
 		[1] =
 		{
@@ -151,10 +145,10 @@ F_23A = {
 			canopy_pos         = { 3.533, 1.209, 0 },
 		}, -- end of [1]
 	}, -- end of crew_members
-	brakeshute_name                          = 0,
-	is_tanker                                = false,
-	air_refuel_receptacle_pos                = { 0.724, 1.172, 0 }, --{1.512,	0.805,	0},
-	fires_pos                                =
+	brakeshute_name           = 0,
+	is_tanker                 = false,
+	air_refuel_receptacle_pos = { 0.724, 1.172, 0 }, --{1.512,	0.805,	0},
+	fires_pos                 =
 	{
 		[1] = { -1.842, 0.563, 0 },
 		[2] = { -1.644, 0.481, 2.87 },
@@ -169,11 +163,11 @@ F_23A = {
 		[11] = { -1.683, 0.507, -2.91 },
 	}, -- end of fires_pos
 
-	effects_presets                          = {
+	effects_presets           = {
 		{ effect = "OVERWING_VAPOR", file = current_mod_path .. "/Effects/YF-23A_overwingVapor.lua" },
 	},
 
-	chaff_flare_dispenser                    =
+	chaff_flare_dispenser     =
 	{
 		[1] =
 		{
@@ -188,7 +182,7 @@ F_23A = {
 	}, -- end of chaff_flare_dispenser
 
 	-- Countermeasures
-	passivCounterm                           = {
+	passivCounterm            = {
 		CMDS_Edit         = true,
 		SingleChargeTotal = 180,
 		chaff             = { default = 90, increment = 45, chargeSz = 1 },
@@ -228,7 +222,7 @@ F_23A = {
 		modulation   = MODULATION_AM
 	},
 
-	Guns               = { gun_mount("M_61", { count = 480 }, { muzzle_pos = { 7.3070, 0.15, 0.526 } }) --**
+	Guns               = { gun_mount("M_61", { count = 480 }, { muzzle_pos = { 7.3070, 0.15, -0.526 } }) --**
 		--20-mm-Gatlingkanone vom Typ M61A2, die �ber 480 Schuss Munition verf�gt
 	},
 
@@ -321,7 +315,7 @@ F_23A = {
 			Cy0 = 0,
 			Mzalfa = 4.335,
 			Mzalfadt = 0.8,
-			kjx = 2.65,
+			kjx = 3.93,
 			kjz = 0.00125,
 			Czbe = -0.020,
 			cx_gear = 0.0268,
@@ -331,22 +325,23 @@ F_23A = {
 			table_data =
 			{
 				--      M	 Cx0		 Cya		 B		 B4	      Omxmax	Aldop	Cymax
-				{ 0.0, 0.0200, 0.055, 0.08,  0.22,  0.65, 25.0, 2.2 },
-				{ 0.2, 0.0200, 0.055, 0.08,  0.22,  2.15, 25.0, 2.2 },
-				{ 0.4, 0.0200, 0.055, 0.08,  0.22,  4.00, 25.0, 2.2 },
-				{ 0.6, 0.0200, 0.055, 0.05,  0.28,  6.30, 25.0, 2.2 },
-				{ 0.7, 0.0200, 0.055, 0.05,  0.28,  6.30, 23.0, 2.05 },
-				{ 0.8, 0.0200, 0.055, 0.05,  0.28,  6.30, 21.7, 1.95 },
-				{ 0.9, 0.0184, 0.058, 0.09,  0.20,  6.30, 20.1, 1.77 },
-				{ 1.0, 0.0180, 0.062, 0.17,  0.15,  6.30, 18.9, 1.64 },
-				{ 1.1, 0.0190, 0.062, 0.235, 0.09,  4.38, 17.4, 1.42 },
-				{ 1.2, 0.0210, 0.062, 0.285, 0.08,  3.67, 17.0, 1.20 },
-				{ 1.3, 0.0210, 0.06,  0.29,  0.10,  3.10, 16.0, 1.12 },
-				{ 1.4, 0.0205, 0.056, 0.3,   0.136, 2.80, 15.0, 1.02 },
-				{ 1.6, 0.0190, 0.052, 0.34,  0.21,  1.58, 13.0, 0.85 },
-				{ 1.8, 0.0186, 0.042, 0.34,  2.43,  1.24, 12.0, 0.65 },
-				{ 2.2, 0.0186, 0.037, 0.49,  3.5,   1.12, 10.0, 0.57 },
-				{ 2.5, 0.0180, 0.033, 0.6,   4.7,   0.95, 9.0,  0.40 },
+				{ 0.0, 0.0200, 0.055, 0.198, 0.22,  0.63, 25.0, 1.5 },
+				{ 0.2, 0.0200, 0.055, 0.198, 0.22,  2.79, 25.0, 1.5 },
+				{ 0.4, 0.0200, 0.055, 0.198, 0.22,  4.71, 25.0, 1.5 },
+				{ 0.6, 0.0200, 0.055, 0.198, 0.28,  4.71, 25.0, 1.5 },
+				{ 0.7, 0.0200, 0.055, 0.198, 0.28,  4.71, 23.0, 1.36 },
+				{ 0.8, 0.0200, 0.055, 0.198, 0.28,  4.71, 21.7, 1.3 },
+				{ 0.9, 0.0184, 0.058, 0.198, 0.20,  4.71, 20.1, 1.27 },
+				{ 1.0, 0.0180, 0.062, 0.198, 0.15,  4.71, 18.9, 1.12 },
+				{ 1.1, 0.0190, 0.062, 0.201, 0.09,  4.19, 17.4, 1.02 },
+				{ 1.2, 0.0210, 0.062, 0.210, 0.08,  3.32, 17.0, 1.01 },
+				{ 1.3, 0.0210, 0.06,  0.235, 0.10,  2.97, 16.0, 0.97 },
+				{ 1.4, 0.0205, 0.056, 0.255, 0.136, 3.30, 15.0, 0.95 },
+				{ 1.6, 0.0190, 0.052, 0.305, 0.21,  3.23, 13.0, 0.90 },
+				{ 1.8, 0.0186, 0.042, 0.381, 2.43,  3.32, 12.0, 0.65 },
+				{ 2.0, 0.0186, 0.040, 0.506, 2.5,   3.49, 10.5, 0.45, },
+				{ 2.2, 0.0186, 0.037, 0.755, 3.5,   0.87, 10.0, 0.37 },
+				{ 2.5, 0.0180, 0.033, 0.755, 4.7,   0.85, 9.0,  0.30 },
 				{ 3.9, 0.0220, 0.023, 0.9,   6.0,   0.84, 7.0,  0.2 },
 			}, -- end of table_data
 		}, -- end of aerodynamics
@@ -366,23 +361,23 @@ F_23A = {
 			dpdh_f     = 3000,
 			table_data = {
 				--   M		Pmax		 Pfor
-				{ 0.0, 130880, 157031 },
-				{ 0.2, 121606, 148313 },
-				{ 0.4, 116957, 145368 },
-				{ 0.6, 116317, 147708 },
-				{ 0.7, 117375, 150799 },
-				{ 0.8, 119301, 155176 },
-				{ 0.9, 122081, 160861 },
-				{ 1.0, 125689, 167885 },
-				{ 1.1, 129479, 175478 },
-				{ 1.2, 133660, 183961 },
-				{ 1.3, 138318, 193520 },
-				{ 1.4, 143437, 204227 },
-				{ 1.6, 154843, 229221 },
-				{ 1.8, 167218, 259064 },
-				{ 2.2, 167218, 259064 },
-				{ 2.5, 167218, 259064 },
-				{ 3.9, 167218, 259064 },
+				{ 0.0, 131441, 156373 },
+				{ 0.2, 123572, 148838 },
+				{ 0.4, 118652, 144932 },
+				{ 0.6, 116258, 144287 },
+				{ 0.7, 115903, 145105 },
+				{ 0.8, 116059, 146653 },
+				{ 0.9, 116695, 148918 },
+				{ 1.0, 117780, 151893 },
+				{ 1.1, 118785, 154918 },
+				{ 1.2, 119880, 158246 },
+				{ 1.3, 121134, 161982 },
+				{ 1.4, 122535, 166154 },
+				{ 1.6, 125636, 175763 },
+				{ 1.8, 128758, 186901 },
+				{ 2.2, 130159, 192955 },
+				{ 2.5, 130159, 192955 },
+				{ 3.9, 130159, 192955 },
 			}, -- end of table_data
 		}, -- end of engine
 	},
