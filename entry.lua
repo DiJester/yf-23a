@@ -56,13 +56,16 @@ mount_vfs_texture_path(current_mod_path .. "/Skins/1/ME")   -- 指定路径  这
 mount_vfs_sound_path(current_mod_path .. "/Sounds")         -- Sounds
 mount_vfs_liveries_path(current_mod_path .. "/Liveries")    -- Liveries
 -----------------------------------------------------------------------------------------------------------------------
--- local cfg_path = current_mod_path .. "/FM/F15/config.lua"
+-- local cfg_path = current_mod_path .. "/FM/config.lua"
 -- dofile(cfg_path)
--- F15FM[1]          = self_ID
--- F15FM[2]          = 'F15'
--- F15FM.config_path = cfg_path
--- F15FM.old         = 6
+-- YF23AFM[1]          = self_ID
+-- YF23AFM[2]          = 'YF-23A'
+-- YF23AFM.config_path = cfg_path
+-- YF23AFM.old         = 6
 
+-- local fm_path       = (current_mod_path .. "/YF-23A.lua")
+-- dofile(fm_path)
+-- YF23AFM.config_path = fm_path
 dofile(current_mod_path .. '/YF-23A.lua') --指定外部文件
 dofile(current_mod_path .. '/Views.lua')  --指定外部文件
 make_view_settings('YF-23A', ViewSettings, SnapViews)
