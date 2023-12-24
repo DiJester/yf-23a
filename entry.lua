@@ -2,7 +2,7 @@ local self_ID = "YF-23A Black Widow"
 declare_plugin(self_ID,
 	{
 		displayName       = _("YF-23A"),                                                                                                                                                                                                                                                                                        --显示名称
-		developerName     = _("TBD"),                                                                                                                                                                                                                                                                                           --开发商名称
+		developerName     = _("SchwarzWitwe & Dylan Liu"),                                                                                                                                                                                                                                                                      --开发商名称
 		installed         = true,                                                                                                                                                                                                                                                                                               --安装为真
 		dirName           = current_mod_path,                                                                                                                                                                                                                                                                                   --目录名
 		version           = "3.0.1",                                                                                                                                                                                                                                                                                            --版本
@@ -51,7 +51,7 @@ declare_plugin(self_ID,
 mount_vfs_model_path(current_mod_path .. "/Shapes")         -- External Models
 mount_vfs_model_path(current_mod_path .. "/Cockpit/Shapes") -- Cockpit Models
 mount_vfs_texture_path(current_mod_path .. "/Textures")     -- Cockpit Textures
-mount_vfs_texture_path(current_mod_path .. "/Cockpit/Textures")
+mount_vfs_texture_path(current_mod_path .. "/Cockpit/Textures/Cockpit_Textures")
 mount_vfs_texture_path(current_mod_path .. "/Skins/1/ME")   -- 指定路径  这个路径中有着背景 背景音乐  logo
 mount_vfs_sound_path(current_mod_path .. "/Sounds")         -- Sounds
 mount_vfs_liveries_path(current_mod_path .. "/Liveries")    -- Liveries

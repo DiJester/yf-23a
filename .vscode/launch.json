@@ -31,5 +31,11 @@
                 "file": "${workspaceFolder}/entry.lua"
             }
         },
+        {
+            "name": "print data",
+            "type": "lua",
+            "request": "launch",
+            "program": "${workspaceFolder}/printdata.lua"
+        },
     ]
 }
