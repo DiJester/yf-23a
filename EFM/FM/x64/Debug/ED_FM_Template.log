@@ -1,0 +1,4 @@
+﻿D:\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(499,5): warning MSB8004: Output 目录未以斜杠结尾。  此生成实例将添加斜杠，因为必须有这个斜杠才能正确计算 Output 目录。
+  ED_FM_Template.cpp
+    正在创建库 ..\..\..\bin\x86_64\vc100.debug\ED_FM_Template.lib 和对象 ..\..\..\bin\x86_64\vc100.debug\ED_FM_Template.exp
+  ED_FM_Template.vcxproj -> E:\Saved Games\DCS\Mods\aircraft\bin\x86_64\vc100.debug\ED_FM_Template.dll
