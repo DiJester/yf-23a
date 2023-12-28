@@ -6,183 +6,73 @@
 #include <Math.h>
 #include <stdio.h>
 #include <string>
+#include "./airframe/airframe.h"
+#include "./fuelsys/fuelsys.h"
+#include "./engine/engine.h"
+#include "./flightcontrol/flightcontrol.h"
+#include "./state/state.h"
+#include "./world/world.h"
+#include "./input/input.h"
 
 
-Vec3	common_moment;
-Vec3	common_force;
-Vec3    center_of_gravity;
-Vec3	wind;
-Vec3	velocity_world_cs;
-double  throttle		  = 0;
-double  stick_roll		  = 0;
-double  stick_pitch		  = 0;
+static Aircraft::World* world = NULL;
+static Aircraft::State* state = NULL;
+static Aircraft::AirFrame* airFrame = NULL;
+static Aircraft::FuelSys* fuelSys = NULL;
+static Aircraft::Engine* engine1 = NULL;
+static Aircraft::Engine* engine2 = NULL;
+static Aircraft::Input* input = NULL;
+static Aircraft::FlightControl* flightControl = NULL;
+static HWND window = NULL;
 
-double  internal_fuel     = 0;
-double  fuel_consumption_since_last_time  = 0;
-double  atmosphere_density = 0;
-double  aoa = 0;
-double  speed_of_sound = 320;
-
-
-double mach_table[] = {
-	0,	
-	0.2,
-	0.4,
-	0.6,
-	0.7,
-	0.8,
-	0.9,
-	1,	
-	1.05,
-	1.1,
-	1.2,
-	1.3,
-	1.5,
-	1.7,
-	1.8,
-	2,	
-	2.2,
-	2.5,
-	3.9,
-};
-
-double cx0[] =
+void init()
 {
-	0.0165,
-	0.0165,
-	0.0165,
-	0.0165,
-	0.0170,
-	0.0178,
-	0.0215,
-	0.0310,
-	0.0422,
-	0.0440,
-	0.0432,
-	0.0423,
-	0.0416,
-	0.0416,
-	0.0416,
-	0.0410,
-	0.0395,
-};
+	srand( 741 );
 
-double Cya[] = {
-	   0.077,	
-	   0.077,	
-	   0.077,	
-	   0.080,	
-	   0.083,	
-	   0.087,	
-	   0.091,	
-	   0.094,	
-	   0.094,	
-	   0.091,	
-	   0.085,	
-	   0.068,	
-	   0.051,	
-	   0.043,	
-	   0.037,	
-	   0.036,	
-	   0.033,	
-};
+	world = new Aircraft::World;
+	state = new Aircraft::State;
+	airFrame = new Aircraft::AirFrame;
+	fuelSys = new Aircraft:: FuelSys;
+	engine1 = new Aircraft::Engine;
+	engine2 = new Aircraft::Engine;
+	input = new Aircraft::Input;
+	flightControl = new Aircraft::FlightControl;
 
-double B[] ={
-	0.1,	
-	0.1,	
-	0.1,	 
-	0.094,	
-	0.094,	
-	0.094,	
-	0.11,	
-	0.15,	
-	0.15,	
-	0.14,	
-	0.17,	
-	0.23,	
-	0.23,	
-	0.08,	
-	0.16,	
-	0.25,	
-	0.35,	
-};
-
-double B4[] ={
-	0.032,	
-	0.032,	 
-	0.032,	
-	0.043,	
-	0.045,	
-	0.048,	
-	0.050,	
-	0.1,	
-	0.1,	
-	0.1,	
-	0.096,	
-	0.09,	
-	0.38,	
-	2.5,	
-	3.2,	
-	4.5,	
-	6.0,	
-};
-
-double CyMax[] = {
-	1.6,
-	1.6,
-	1.6,
-	1.5,
-	1.45,
-	1.4,
-	1.3,
-	1.2,
-	1.1,
-	1.05,
-	1.0,
-	0.9,
-	0.7,
-	0.55,
-	0.4,
-	0.4,
-	0.4,
-};
-
-
-
-void add_local_force(const Vec3 & Force, const Vec3 & Force_pos)
-{
-	common_force.x += Force.x;
-	common_force.y += Force.y;
-	common_force.z += Force.z;
-
-	Vec3 delta_pos(Force_pos.x - center_of_gravity.x,
-				   Force_pos.y - center_of_gravity.y,
-				   Force_pos.z - center_of_gravity.z);
-
-	Vec3 delta_moment = cross(delta_pos, Force);
-
-	common_moment.x += delta_moment.x;
-	common_moment.y += delta_moment.y;
-	common_moment.z += delta_moment.z;
+	window = GetActiveWindow();
+	printf( "Have window: %p\n", window );
 }
 
+void cleanup() {
+	delete world;
+	delete state;
+	delete airFrame;
+	delete fuelSys;
+	delete engine1;
+	delete engine2;
+	delete input;
+	delete flightControl;
 
-void simulate_fuel_consumption(double dt)
-{
-	fuel_consumption_since_last_time =  10 * throttle * dt; //10 kg persecond
-	if (fuel_consumption_since_last_time > internal_fuel)
-		fuel_consumption_since_last_time = internal_fuel;
-	internal_fuel -= fuel_consumption_since_last_time;
+
+	world = NULL;
+	state = NULL;
+	airFrame = NULL;
+	fuelSys = NULL;
+	engine1 = NULL;
+	engine2 =NULL;
+	input = NULL;
+	flightControl = NULL;
+	window = NULL;
 }
 
 void ed_fm_add_local_force(double & x,double &y,double &z,double & pos_x,double & pos_y,double & pos_z)
 {
-	x = common_force.x;
-	y = common_force.y;
-	z = common_force.z;
-	pos_x = center_of_gravity.x;
-	pos_y = center_of_gravity.y;
-	pos_z = center_of_gravity.z;
+	x = state->getForce().x;
+	y = state->getForce().y;
+	z = state->getForce().z;
+
+	pos_x = state->getCg().x;
+	pos_y = state->getCg().y;
+	pos_z = state->getCg().z;
 }
 
 void ed_fm_add_global_force(double & x,double &y,double &z,double & pos_x,double & pos_y,double & pos_z)
@@ -197,67 +87,44 @@ void ed_fm_add_global_moment(double & x,double &y,double &z)
 
 void ed_fm_add_local_moment(double & x,double &y,double &z)
 {
-	x = common_moment.x;
-	y = common_moment.y;
-	z = common_moment.z;
+	x = state->getMoment().x;
+	y = state->getMoment().y;
+	z = state->getMoment().z;
 }
 
 void ed_fm_simulate(double dt)
 {
-	common_force  = Vec3();
-	common_moment = Vec3();
+	Vec3 airspeed = state->getAirspeed();
+	double throttle = input->getThrottle();
 
-	Vec3 airspeed;
-
-	airspeed.x = velocity_world_cs.x - wind.x;
-	airspeed.y = velocity_world_cs.y - wind.y;
-	airspeed.z = velocity_world_cs.z - wind.z;
-
+	// Engine thrust
+	Force thrust1 = engine1->getThrust(throttle);
+	Force thrust2 = engine2->getThrust(throttle);
 	
-	Vec3 thrust_pos(-5.0,0,0);
-	Vec3 thrust(throttle * 5000, 0 , 0);
+	double asMag = magnitude(airspeed);
+	double dyPre= 0.5 * world->getAtmDensity()*asMag*asMag;
+	double mach = getMach(asMag);
+	double aoa = state.getAoa();
 
-	double V_scalar =  sqrt(airspeed.x * airspeed.x + airspeed.y * airspeed.y + airspeed.z * airspeed.z);
+	// Lift + Drag
+	Vec3 aeroForce = airFrame->getAeroForce(dyPre, aoa, mach);
+	// Control surfaces' forces
+	Vec3 alrnLeftF = flightControl->getLeftAlronForce();
+	Vec3 alrnRightF = flightControl->getRightAlronForce();
+	Vec3 eleLeftF = flightControl->getLeftAlronForce();
+	Vec3 eleRightF = flightControl->getRightAlronForce();
+	Vec3 rudderF = flightControl->getRudderForce(); 
 
-	double Mach		= V_scalar/ speed_of_sound;
+	state->addForce(thrust1);
+	state->addForce(thrust2);
+	state->addForce(aeroForce);
+	state->addForce(alrnLeftF);
+	state->addForce(alrnRightF);
+	state->addForce(eleLeftF);
+	state->addForce(eleRightF);
+	state->addForce(rudderF);
 
-	double CyAlpha_ = lerp(mach_table,Cya  ,sizeof(mach_table)/sizeof(double),Mach);
-	double Cx0_     = lerp(mach_table,cx0  ,sizeof(mach_table)/sizeof(double),Mach);
-	double CyMax_   = lerp(mach_table,CyMax,sizeof(mach_table)/sizeof(double),Mach);
-	double B_	    = lerp(mach_table,B    ,sizeof(mach_table)/sizeof(double),Mach);
-	double B4_	    = lerp(mach_table,B4   ,sizeof(mach_table)/sizeof(double),Mach);
-
-
-	double Cy  = (CyAlpha_ * 57.3) * aoa;
-	if (fabs(aoa) > 90/57.3)
-		Cy = 0;
-	if (Cy > CyMax_)
-		Cy = CyMax_;
-
-	double Cx  = 0.05 + B_ * Cy * Cy + B4_ * Cy * Cy * Cy * Cy;
-
-	double q	   =  0.5 * atmosphere_density * V_scalar * V_scalar;
-	const double S = 25;
-	double Lift =  Cy * q * S;
-	double Drag =  Cx * q * S;
-	
-	Vec3 aerodynamic_force(-Drag , Lift , 0 );
-	Vec3 aerodynamic_force_pos(1.0,0,0);
-
-	add_local_force(aerodynamic_force,aerodynamic_force_pos);
-	add_local_force(thrust			 ,thrust_pos);
-
-	Vec3 aileron_left (0 , 0.05 * Cy * (stick_roll) * q * S , 0 );
-	Vec3 aileron_right(0 ,-0.05 * Cy * (stick_roll) * q * S , 0 );
-
-	Vec3 aileron_left_pos(0,0,-5.0);
-	Vec3 aileron_right_pos(0,0, 5.0);
-
-
-	add_local_force(aileron_left ,aileron_left_pos);
-	add_local_force(aileron_right,aileron_right_pos);
-
-	simulate_fuel_consumption(dt);
+	fuelSys->simulate(dt);
 }
 
 void ed_fm_set_atmosphere(double h,//altitude above sea level
@@ -270,12 +137,11 @@ void ed_fm_set_atmosphere(double h,//altitude above sea level
 							double wind_vz //components of velocity vector, including turbulence in world coordinate system
 						)
 {
-	wind.x = wind_vx;
-	wind.y = wind_vy;
-	wind.z = wind_vz;
-
-	atmosphere_density = ro;
-	speed_of_sound     = a;
+	world->setWind((wind_vx, wind_vy, wind_vz));
+	world->setAtmDensity(ro);
+	world->setAtmPre(p);
+	world->setAltitude(h);
+	world->setAtmTemp(t);
 }
 /*
 called before simulation to set up your environment for the next step
@@ -289,9 +155,8 @@ void ed_fm_set_current_mass_state (double mass,
 									double moment_of_inertia_z
 									)
 {
-	center_of_gravity.x  = center_of_mass_x;
-	center_of_gravity.y  = center_of_mass_y;
-	center_of_gravity.z  = center_of_mass_z;
+	state.setMass(mass);
+	state->setMoment((center_of_mass_x,center_of_mass_y,center_of_mass_z));
 }
 /*
 called before simulation to set up your environment for the next step
@@ -317,9 +182,45 @@ void ed_fm_set_current_state (double ax,//linear acceleration component in world
 							double quaternion_w //orientation quaternion components in world coordinate system
 							)
 {
-	velocity_world_cs.x = vx;
-	velocity_world_cs.y = vy;
-	velocity_world_cs.z = vz;
+	world->setPos((px,py,pz));
+	world->setVelocity((vx,vy,vz));
+	Vec3 direction;
+
+	double x = quaternion_x;
+	double y = quaternion_y;
+	double z = quaternion_z;
+	double w = quaternion_w;
+
+	double y2 = y + y;
+	double z2 = z + z;
+
+	double yy = y * y2;
+	double zz = z * z2;
+
+	double xy = x * y2;
+	double xz = x * z2;
+
+	double wz = w * z2;
+	double wy = w * y2;
+
+
+	direction.x = 1.0 - (yy + zz);
+	direction.y = xy + wz;
+	direction.z = xz - wy;
+	world->setDirection(direction);
+
+	Vec3 globalUp;
+	double x2 = x + x;
+	double yz = y * z2;
+	double wx = w * x2;
+
+	double xx = x * x2;
+
+	globalUp.x = xy + wz;
+	globalUp.y = 1.0 - (xx + zz);
+	globalUp.z = yz - wx;
+	world->setGlobalDown(-globalUp);
+
 }
 
 
@@ -346,7 +247,14 @@ void ed_fm_set_current_state_body_axis(double ax,//linear acceleration component
 	double common_angle_of_slide   //AoS radians
 	)
 {
-	aoa = common_angle_of_attack;
+	state->setAoa(common_angle_of_attack);
+	state->setAos(common_angle_of_slide);
+	state->setAngle((roll, yaw, pitch));
+	state->setAngVelo((omegax,omegay, omegaz));
+	state->setAngAcc((omegadotx,omegadoty,omegadotz));
+	state->setLocalSpeed((vx,vy,vz));
+	state->setAirspeed((vx-wind_vx, vy-wind_vy, vz-wind_vz));
+	state->setAccel((ax,ay,az));
 }
 /*
 input handling
@@ -354,17 +262,21 @@ input handling
 void ed_fm_set_command (int command,
 							float value)
 {
-	if (command == 2004)//iCommandPlaneThrustCommon
-	{
-		throttle = 0.5 * (-value + 1.0);
-	}
-	else if (command == 2001)//iCommandPlanePitch
-	{
-		stick_pitch		  = value;
-	}
-	else if (command == 2002)//iCommandPlaneRoll
-	{
-		stick_roll		  = value;
+	switch (command) {
+		case Aircraft::Control::THROTTLE:
+			input->setThrottle(value);
+			break;
+		case Aircraft::Control::ROLL:
+			input->setStickRoll(value);
+			break;
+		case Aircraft::Control::PITCH:
+			input->setStickPitch(value);
+			break;
+		case Aircraft::Control::YAW:
+			input->setPedalYaw(value);
+			break;
+		default:
+		;
 	}
 }
 /*
@@ -396,25 +308,15 @@ bool ed_fm_change_mass  (double & delta_mass,
 						double & delta_mass_moment_of_inertia_z
 						)
 {
-	if (fuel_consumption_since_last_time > 0)
-	{
-		delta_mass		 = fuel_consumption_since_last_time;
-		delta_mass_pos_x = -1.0;
-		delta_mass_pos_y =  1.0;
-		delta_mass_pos_z =  0;
+	const Vec3& fuelSysPos = fuelSys->getPos();
+	delta_mass = fuelSys->getFuelQtyDelta();
+	fuelSys->setPreInterFuel();
 
-		delta_mass_moment_of_inertia_x	= 0;
-		delta_mass_moment_of_inertia_y	= 0;
-		delta_mass_moment_of_inertia_z	= 0;
+	delta_mass_pos_x = fuelSysPos.x;
+	delta_mass_pos_y = fuelSysPos.y;
+	delta_mass_pos_z = fuelSysPos.z;
 
-		fuel_consumption_since_last_time = 0; // set it 0 to avoid infinite loop, because it called in cycle 
-		// better to use stack like structure for mass changing 
-		return true;
-	}
-	else 
-	{
-		return false;
-	}
+	return true;
 }
 /*
 	set internal fuel volume , init function, called on object creation and for refueling , 
@@ -422,14 +324,14 @@ bool ed_fm_change_mass  (double & delta_mass,
 */
 void   ed_fm_set_internal_fuel(double fuel)
 {
-	internal_fuel = fuel;
+	fuelSys->setInternalFuel(fuel);
 }
 /*
 	get internal fuel volume 
 */
 double ed_fm_get_internal_fuel()
 {
-	return internal_fuel;
+	return fuelSys->getInternalFuel();
 }
 /*
 	set external fuel volume for each payload station , called for weapon init and on reload
@@ -452,8 +354,8 @@ double ed_fm_get_external_fuel ()
 
 void ed_fm_set_draw_args (EdDrawArgument * drawargs,size_t size)
 {
-	drawargs[28].f   = (float)throttle;
-	drawargs[29].f   = (float)throttle;
+	drawargs[28].f   = input->getThrottle();
+	drawargs[29].f   = input->getThrottle();
 
 	if (size > 616)
 	{	
@@ -462,6 +364,11 @@ void ed_fm_set_draw_args (EdDrawArgument * drawargs,size_t size)
 		drawargs[616].f = drawargs[5].f;
 	}
 
+	drawargs[LEFT_AILERON].f = flightControl->getLeftAlrnDflt();
+	drawargs[RIGHT_AILERON].f =flightControl->getRightAlrnDflt();
+	drawargs[LEFT_ELEVATOR].f= flightControl->getLeftEleDflt();
+	drawargs[RIGHT_ELEVATOR].f = flightControl->getRightEleDflt();
+	drawargs[RUDDER].f = flightControl->getRudderDflt();
 }
 
 
@@ -473,9 +380,8 @@ void ed_fm_configure(const char * cfg_path)
 double test_gear_state = 0;
 double ed_fm_get_param(unsigned index)
 {
-	if (index <= ED_FM_END_ENGINE_BLOCK)
-	{
-		switch (index)
+
+	switch (index)
 		{
 		case ED_FM_ENGINE_0_RPM:			
 		case ED_FM_ENGINE_0_RELATED_RPM:	
@@ -483,29 +389,28 @@ double ed_fm_get_param(unsigned index)
 		case ED_FM_ENGINE_0_RELATED_THRUST:	
 			return 0; // APU
 		case ED_FM_ENGINE_1_RPM:
-			return throttle * 3000;
+			return engine1->getRPM();
 		case ED_FM_ENGINE_1_RELATED_RPM:
-			return throttle;
+			return engine1->getRPMNorm();
 		case ED_FM_ENGINE_1_THRUST:
-			return throttle * 5000 * 9.81;
+			return magnitude(engine1->getThrust().force);
 		case ED_FM_ENGINE_1_RELATED_THRUST:
-			return throttle;
+			return magnitude(engine1->getThrust().force);
+		case ED_FM_ENGINE_1_COMBUSTION:
+			return engine1->getFuelFlow();
+		case ED_FM_ENGINE_2_RPM:
+			return engine2->getRPM();
+		case ED_FM_ENGINE_2_RELATED_RPM:
+			return engine2->getRPMNorm();
+		case ED_FM_ENGINE_2_THRUST:
+			return magnitude(engine2->getThrust().force);
+		case ED_FM_ENGINE_2_RELATED_THRUST:
+			return engine2->magnitude(getThrust().force);
+		case ED_FM_ENGINE_2_COMBUSTION:
+			return engine2->getFuelFlow();
 		}
-	}
-	else if (index >= ED_FM_SUSPENSION_0_RELATIVE_BRAKE_MOMENT &&
-			 index < ED_FM_OXYGEN_SUPPLY)
-	{
-		static const int block_size = ED_FM_SUSPENSION_1_RELATIVE_BRAKE_MOMENT - ED_FM_SUSPENSION_0_RELATIVE_BRAKE_MOMENT;
-		switch (index)
-		{
-		case 0 * block_size + ED_FM_SUSPENSION_0_GEAR_POST_STATE:
-		case 1 * block_size + ED_FM_SUSPENSION_0_GEAR_POST_STATE:
-		case 2 * block_size + ED_FM_SUSPENSION_0_GEAR_POST_STATE:
-			return test_gear_state;
-		}
-	}
-	return 0;
 
+	return 0;
 }
 
 
@@ -542,5 +447,17 @@ bool ed_fm_add_local_moment_component( double & x,double &y,double &z )
 bool ed_fm_add_global_moment_component( double & x,double &y,double &z )
 {
 	return false;
+}
+
+
+void ed_fm_set_plugin_data_install_path ( const char* path )
+{
+	init();
+}
+
+
+void ed_fm_release ()
+{
+	cleanup();
 }
 
