@@ -9,11 +9,11 @@
 namespace Aircraft {
     class Engine {
         public: 
-            Engine();
+            Engine() {};
             Engine(Vec3& pos_){
                 pos = pos_;
             };
-            ~Engine();
+            ~Engine() {};
 
             inline Force getThrust(double throttle);
             inline Vec3 getPos();
@@ -27,17 +27,14 @@ namespace Aircraft {
     };
 
     Force Engine::getThrust(double throttle) {
-        return Force{
-            force: (throttle * maxThrustVal, 0, 0 ),
-            pos: pos,
-        };
+        return Force((throttle * maxThrustVal, 0, 0 ), pos);
     }
 
     Vec3 Engine::getPos(){
         return pos;
     }
 
-    Vec3 Engine::setPos(Vec3& pos_){
+    void inline Engine::setPos(Vec3& pos_){
         pos = pos_;
     }
 

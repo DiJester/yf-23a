@@ -9,11 +9,11 @@
 namespace Aircraft{
     class FlightControl {
         public:
-            FlightControl();
-            ~FlightControl();
+            FlightControl() {};
+            ~FlightControl() {};
 
-            inline Vec3 getLeftAlronPos();
-            inline Vec3 getRightAlronPos();
+            inline Vec3 getLeftAlrnPos();
+            inline Vec3 getRightAlrnPos();
             
             inline Vec3 getLeftElePos();
             inline Vec3 getRightElePos();
@@ -43,18 +43,18 @@ namespace Aircraft{
             void setRudderDflt(double rudderDflt_) { rudderDflt = rudderDflt_; }
         
         private:
-            Vec3 leftAlronPos = (0,0,-5.0);
+            Vec3 leftAlrnPos = (0,0,-5.0);
             double leftAlrnDflt = 0.0;
 
-            Vec3 rightAlronPos = (0,0,5.0);
+            Vec3 rightAlrnPos = (0,0,5.0);
             double rightAlrnDflt = 0.0;
             
             double alronArea = 5;
 
-            Vec3 leftElePos = (0,-5,-2.0);
+            Vec3 leftElePos = (0,-8,-2.0);
             double leftEleDflt = 0.0;
 
-            Vec3 rightElePos = (0,-5,2.0);
+            Vec3 rightElePos = (0,-8,2.0);
             double rightEleDflt = 0.0;
 
             double eleArea = 2;
@@ -65,12 +65,12 @@ namespace Aircraft{
 
     };
 
-    Vec3 FlightControl::getLeftAlronPos(){
-        return leftAlronPos;
+    Vec3 FlightControl::getLeftAlrnPos(){
+        return leftAlrnPos;
     }
 
-    Vec3 FlightControl::getRightAlronPos(){
-        return rightAlronPos;
+    Vec3 FlightControl::getRightAlrnPos(){
+        return rightAlrnPos;
     }
 
     Vec3 FlightControl::getLeftElePos(){
@@ -86,38 +86,23 @@ namespace Aircraft{
     }
 
     Force FlightControl::getLeftAlrnForce(double cy, double dyPre, double stickRoll){
-        return Force{
-            force: (0, 0.05* cy* stickRoll*dyPre*alronArea, 0),
-            pos: leftAlronPos,
-        };
+        return Force((0, 0.05 * cy * stickRoll * dyPre * alronArea, 0), leftAlrnPos);
     }
 
     Force FlightControl::getRightAlrnForce(double cy, double dyPre, double stickRoll){
-        return Force{
-            force: (0, -0.05* cy* stickRoll*dyPre*alronArea, 0),
-            pos: rightAlronPos,
-        };
+        return Force((0, -0.05* cy* stickRoll*dyPre*alronArea, 0),rightAlrnPos);
     }
 
     Force FlightControl::getLeftEleForce(double dyPre, double stickPitch){
-        return Force{
-            force: (0, 0.05* stickPitch*dyPre*eleArea, 0),
-            pos: leftElePos,
-        };
+        return Force((0, 0.05 * stickPitch * dyPre * eleArea, 0), leftElePos);
     }
 
     Force FlightControl::getRightEleForce(double dyPre, double stickPitch){
-        return Force{
-            force: (0, 0.05* stickPitch*dyPre*eleArea, 0),
-            pos: rightElePos,
-        };
+        return Force((0, 0.05 * stickPitch * dyPre * eleArea, 0), rightElePos);
     }
 
     Force FlightControl::getRudderForce(double dyPre, double stickRaw){
-        return Force{
-            force: (0, 0, 0.05* stickRaw*dyPre*eleArea),
-            pos: rudderPos,
-        };
+        return Force((0, 0, 0.05 * stickRaw * dyPre * eleArea), rudderPos);
     }
 
 }

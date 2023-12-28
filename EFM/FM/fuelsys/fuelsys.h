@@ -7,8 +7,11 @@
 namespace Aircraft {
     class FuelSys {
         public:
-            FuelSys();
-            ~FuelSys();
+            FuelSys() {
+            }
+
+            ~FuelSys() {
+            };
 
             inline void simulate(double dt, double throttle);
 

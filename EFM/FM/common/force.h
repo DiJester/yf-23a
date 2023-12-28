@@ -5,8 +5,9 @@
 #include "vec3.h"
 
 struct Force{
-    Vec3 pos;
+    Force(const Vec3& force_, const Vec3& pos_) :force(force_), pos(pos_){}
     Vec3 force;
+    Vec3 pos;
 };
 
 #endif

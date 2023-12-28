@@ -13,6 +13,16 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="common\utilities.h" />
     <ClInclude Include="common\vec3.h" />
+    <ClInclude Include="common\units.h" />
+    <ClInclude Include="common\force.h" />
+    <ClInclude Include="engine\engine.h" />
+    <ClInclude Include="flightcontrol\flightcontrol.h" />
+    <ClInclude Include="fuelsys\fuelsys.h" />
+    <ClInclude Include="input\input.h" />
+    <ClInclude Include="state\state.h" />
+    <ClInclude Include="world\world.h" />
+    <ClInclude Include="airframe\airframe.h" />
+    <ClInclude Include="airframe\airframedata.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />

@@ -34,7 +34,9 @@ void init()
 	airFrame = new Aircraft::AirFrame;
 	fuelSys = new Aircraft:: FuelSys;
 	engine1 = new Aircraft::Engine;
+	engine1->setPos(Vec3(-8, 0, -1));
 	engine2 = new Aircraft::Engine;
+	engine2->setPos(Vec3(-8, 0, 1));
 	input = new Aircraft::Input;
 	flightControl = new Aircraft::FlightControl;
 
@@ -104,16 +106,21 @@ void ed_fm_simulate(double dt)
 	double asMag = magnitude(airspeed);
 	double dyPre= 0.5 * world->getAtmDensity()*asMag*asMag;
 	double mach = getMach(asMag);
-	double aoa = state.getAoa();
+	double aoa = state->getAoa();
 
 	// Lift + Drag
-	Vec3 aeroForce = airFrame->getAeroForce(dyPre, aoa, mach);
+	Force aeroForce = airFrame->getAeroForce(dyPre, aoa, mach);
+	double cy = airFrame->getCy();
+	double cx = airFrame->getCx();
+	double stickRoll = input->getStickRoll();
+	double stickPitch = input->getStickPitch();
+	double rudderYaw = input->getPedalYaw();
 	// Control surfaces' forces
-	Vec3 alrnLeftF = flightControl->getLeftAlronForce();
-	Vec3 alrnRightF = flightControl->getRightAlronForce();
-	Vec3 eleLeftF = flightControl->getLeftAlronForce();
-	Vec3 eleRightF = flightControl->getRightAlronForce();
-	Vec3 rudderF = flightControl->getRudderForce(); 
+	Force alrnLeftF = flightControl->getLeftAlrnForce(cy,dyPre,stickRoll);
+	Force alrnRightF = flightControl->getRightAlrnForce(cy, dyPre, stickRoll);
+	Force eleLeftF = flightControl->getLeftEleForce(dyPre, stickPitch);
+	Force eleRightF = flightControl->getRightEleForce(dyPre, stickPitch);
+	Force rudderF = flightControl->getRudderForce(dyPre, rudderYaw);
 
 	state->addForce(thrust1);
 	state->addForce(thrust2);
@@ -124,7 +131,7 @@ void ed_fm_simulate(double dt)
 	state->addForce(eleRightF);
 	state->addForce(rudderF);
 
-	fuelSys->simulate(dt);
+	fuelSys->simulate(dt, input->getThrottle());
 }
 
 void ed_fm_set_atmosphere(double h,//altitude above sea level
@@ -155,7 +162,7 @@ void ed_fm_set_current_mass_state (double mass,
 									double moment_of_inertia_z
 									)
 {
-	state.setMass(mass);
+	state->setMass(mass);
 	state->setMoment((center_of_mass_x,center_of_mass_y,center_of_mass_z));
 }
 /*
@@ -380,7 +387,7 @@ void ed_fm_configure(const char * cfg_path)
 double test_gear_state = 0;
 double ed_fm_get_param(unsigned index)
 {
-
+	double throttle = input->getThrottle();
 	switch (index)
 		{
 		case ED_FM_ENGINE_0_RPM:			
@@ -389,25 +396,25 @@ double ed_fm_get_param(unsigned index)
 		case ED_FM_ENGINE_0_RELATED_THRUST:	
 			return 0; // APU
 		case ED_FM_ENGINE_1_RPM:
-			return engine1->getRPM();
+			return engine1->getRPM(throttle);
 		case ED_FM_ENGINE_1_RELATED_RPM:
 			return engine1->getRPMNorm();
 		case ED_FM_ENGINE_1_THRUST:
-			return magnitude(engine1->getThrust().force);
+			return magnitude(engine1->getThrust(throttle).force);
 		case ED_FM_ENGINE_1_RELATED_THRUST:
-			return magnitude(engine1->getThrust().force);
+			return magnitude(engine1->getThrust(throttle).force);
 		case ED_FM_ENGINE_1_COMBUSTION:
-			return engine1->getFuelFlow();
+			return fuelSys->getFuelFlow();
 		case ED_FM_ENGINE_2_RPM:
-			return engine2->getRPM();
+			return engine2->getRPM(throttle);
 		case ED_FM_ENGINE_2_RELATED_RPM:
 			return engine2->getRPMNorm();
 		case ED_FM_ENGINE_2_THRUST:
-			return magnitude(engine2->getThrust().force);
+			return magnitude(engine2->getThrust(throttle).force);
 		case ED_FM_ENGINE_2_RELATED_THRUST:
-			return engine2->magnitude(getThrust().force);
+			return magnitude(engine2->getThrust(throttle).force);
 		case ED_FM_ENGINE_2_COMBUSTION:
-			return engine2->getFuelFlow();
+			return fuelSys->getFuelFlow();
 		}
 
 	return 0;

@@ -12,7 +12,7 @@ declare_plugin(self_ID,
 
 		binaries          =                                                                                                                                                                                                                                                                                                     --二进制文件
 		{
-
+			'yf23a',
 		},
 		InputProfiles     = --输入配置文件
 		{
@@ -56,22 +56,23 @@ mount_vfs_texture_path(current_mod_path .. "/Skins/1/ME")   -- 指定路径  这
 mount_vfs_sound_path(current_mod_path .. "/Sounds")         -- Sounds
 mount_vfs_liveries_path(current_mod_path .. "/Liveries")    -- Liveries
 -----------------------------------------------------------------------------------------------------------------------
--- local cfg_path = current_mod_path .. "/FM/config.lua"
--- dofile(cfg_path)
--- YF23AFM[1]          = self_ID
--- YF23AFM[2]          = 'YF-23A'
--- YF23AFM.config_path = cfg_path
--- YF23AFM.old         = 6
+local cfg_path = current_mod_path .. "/FM/config.lua"
+dofile(cfg_path)
+YF23AFM[1]          = self_ID
+YF23AFM[2]          = 'YF-23A'
+YF23AFM.config_path = cfg_path
+YF23AFM.old         = 6
 
 -- local fm_path       = (current_mod_path .. "/YF-23A.lua")
 -- dofile(fm_path)
 -- YF23AFM.config_path = fm_path
+
+make_flyable('YF-23A', current_mod_path .. '/Cockpit/Scripts/', YF23AFM, current_mod_path .. '/Comm/comm.lua')
+--make_flyable('YF-23A', current_mod_path .. '/Cockpit/Scripts/', F_23A, current_mod_path .. '/Comm/comm.lua')
+--old=4代表模组基于su33进行开发
 dofile(current_mod_path .. '/YF-23A.lua') --指定外部文件
 dofile(current_mod_path .. '/Views.lua')  --指定外部文件
 make_view_settings('YF-23A', ViewSettings, SnapViews)
-make_flyable('YF-23A', current_mod_path .. '/Cockpit/Scripts/', { nil, old = 6 }, current_mod_path .. '/Comm/comm.lua')
---make_flyable('YF-23A', current_mod_path .. '/Cockpit/Scripts/', F_23A, current_mod_path .. '/Comm/comm.lua')
---old=4代表模组基于su33进行开发
 ----------------------------------------------------------------------------------------------------------------------
 
 plugin_done() --插件完成

@@ -141,9 +141,19 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="airframe\airframe.h" />
+    <ClInclude Include="airframe\airframedata.h" />
+    <ClInclude Include="common\force.h" />
+    <ClInclude Include="common\units.h" />
     <ClInclude Include="common\utilities.h" />
     <ClInclude Include="common\vec3.h" />
+    <ClInclude Include="engine\engine.h" />
+    <ClInclude Include="flightcontrol\flightcontrol.h" />
+    <ClInclude Include="fuelsys\fuelsys.h" />
+    <ClInclude Include="input\input.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="state\state.h" />
+    <ClInclude Include="world\world.h" />
     <ClInclude Include="yf23a.h" />
     <ClInclude Include="ED_FM_API.h" />
     <ClInclude Include="stdafx.h" />

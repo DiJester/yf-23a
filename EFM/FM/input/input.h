@@ -66,8 +66,8 @@ enum Control {
 
     class Input {
         public:
-            Input();
-            ~Input();
+			Input() {};
+			~Input() {};
 
             inline void setThrottle(double thrt);
             inline void setStickPitch(double pitch);

@@ -7,17 +7,20 @@
 #include "../common/units.h"
 #include "../common/utilities.h"
 #include "airframedata.h"
+#include "../common/force.h"
 
 namespace Aircraft {
     class AirFrame {
         public: 
-            AirFrame();
-            ~AirFrame();
+            AirFrame() {};
+            ~AirFrame() {};
 
             inline Vec3 getLift(double dyPre, double aoa, double mach);
             inline Vec3 getDrag(double dyPre, double aoa, double mach);
-            inline Vec3 getAeroForce(double dyPre, double aoa, double mach);
+            inline Force getAeroForce(double dyPre, double aoa, double mach);
             inline Vec3 getPos();
+            inline double getCx();
+            inline double getCy();
 
         private:
 
@@ -53,11 +56,11 @@ namespace Aircraft {
         return cx * dyPre * wingArea;
     }
 
-    Vec3 AirFrame::getAeroForce(double dyPre, double aoa, double mach){
+    Force AirFrame::getAeroForce(double dyPre, double aoa, double mach){
         calAeroCoeffs(mach, aoa);
         double lift = cy * dyPre * wingArea;
         double drag = cx * dyPre * wingArea;
-        return (-drag, lift, 0)
+        return Force((-drag, lift, 0), pos);
     }
 
     void AirFrame::calAeroCoeffs(double mach, double aoa) {
@@ -86,6 +89,17 @@ namespace Aircraft {
         cx =  0.05 + b*cy*cy + b4*cy*cy*cy*cy;
     }
 
+    Vec3 AirFrame::getPos() {
+        return pos;
+    }
+
+    double AirFrame::getCx(){
+        return cx;
+    }
+
+    double AirFrame::getCy() {
+        return cy;
+    }
 }
 
 #endif

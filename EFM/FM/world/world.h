@@ -3,13 +3,13 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include "vec3.h"
+#include "../common/vec3.h"
 
 namespace Aircraft {
 	class World {
         public:
-            World();
-            ~World();
+            World() {};
+            ~World() {};
 
             Vec3 getWind() const { return wind; }
             void setWind(const Vec3 &wind_) { wind = wind_; }

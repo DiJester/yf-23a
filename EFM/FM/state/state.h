@@ -2,14 +2,14 @@
 
 #ifndef STATE_H
 #define STATE_H
-#include "vec3.h"
-#include "force.h"
+#include "../common/vec3.h"
+#include "../common/force.h"
 
 namespace Aircraft {
 	class State {
 		public:
-			State();
-			~State();
+			State() {};
+			~State() {};
 
 			double getAoa() const { 
 				return aoa;
@@ -77,9 +77,6 @@ namespace Aircraft {
 			Vec3 getLocalSpeed() const { return localSpeed; }
 			void setLocalSpeed(const Vec3 &localSpeed_) { localSpeed = localSpeed_; }
 
-			Vec3 getAirspeed() const { return airspeed; }
-			void setAirspeed(const Vec3 &airspeed_) { airspeed = airspeed_; }
-
 			Vec3 getAccel() const { return accel; }
 			void setAccel(const Vec3 &accel_) { accel = accel_; }
 		
@@ -100,7 +97,6 @@ namespace Aircraft {
 			double mass = 0;
 			
 			Vec3 cg = (0, 0, 0);
-			Vec3 airspeed = (0,0,0);
 			Vec3 moment = (0,0,0);
 			Vec3 force =  (0,0,0);
 
