@@ -21,14 +21,13 @@
 
 #define PI 3.14159265359
 
-namespace Scooter
+namespace Aircraft
 {
 
-	extern const Vec3 rotate(const Vec3 &v, const double pitch, const double yaw);
-	extern const Vec3 rotateVectorIntoXYPlane(const Vec3 &v);
-	extern const Vec3 windAxisToBody(const Vec3 &force, const double &alpha, const double &beta);
+	extern const Vec3 rotate(const Vec3& v, const double pitch, const double yaw);
+	extern const Vec3 rotateVectorIntoXYPlane(const Vec3& v);
+	extern const Vec3 windAxisToBody(const Vec3& force, const double& alpha, const double& beta);
 	extern const Vec3 directionVector(const double pitch, const double yaw);
-
 }
 
 static inline double toDegrees(double radians)
@@ -52,7 +51,7 @@ static inline double lerpWeight(double v0, double v1, double w)
 	return v0 + w * (v1 - v0);
 }
 
-static inline double randomx()
+static inline double random()
 {
 	return (double)(rand() % 100) / 100.0;
 }

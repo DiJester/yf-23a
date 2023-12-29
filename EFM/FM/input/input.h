@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef INPUT_H
 #define INPUT_H
 
@@ -71,11 +73,11 @@ namespace Aircraft
 	{
 	public:
 		Input() : thrtAxis(0.015, -1, 1, 0, 1),
-				  pitchAxis(0.015, -1, 1, 0, 1),
-				  rollAxis(0.015, -1, 1, 0, 1),
-				  yawAxis(0.015, -1, 1, 0, 1),
-				  leftBrkAxis(0.02, 0, 1, 0, 0),
-				  rightBrkAxis(0.02, 0, 1, 0, 0)
+			pitchAxis(0.015, -1, 1, 0, 1),
+			rollAxis(0.015, -1, 1, 0, 1),
+			yawAxis(0.015, -1, 1, 0, 1),
+			leftBrkAxis(0.02, 0, 1, 0, 0),
+			rightBrkAxis(0.02, 0, 1, 0, 0)
 		{
 		}
 		~Input() {}

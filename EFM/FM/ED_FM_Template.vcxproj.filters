@@ -4,6 +4,7 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="yf23a.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="common\maths.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="yf23a.h" />
@@ -16,13 +17,16 @@
     <ClInclude Include="common\units.h" />
     <ClInclude Include="common\force.h" />
     <ClInclude Include="engine\engine.h" />
-    <ClInclude Include="flightcontrol\flightcontrol.h" />
     <ClInclude Include="fuelsys\fuelsys.h" />
     <ClInclude Include="input\input.h" />
     <ClInclude Include="state\state.h" />
     <ClInclude Include="world\world.h" />
     <ClInclude Include="airframe\airframe.h" />
-    <ClInclude Include="airframe\airframedata.h" />
+    <ClInclude Include="common\maths.h" />
+    <ClInclude Include="aeromodel\aeromodel.h" />
+    <ClInclude Include="aeromodel\aeromodeldata.h" />
+    <ClInclude Include="actuator\actuator.h" />
+    <ClInclude Include="input\axis\axis.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />

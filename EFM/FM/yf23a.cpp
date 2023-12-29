@@ -14,14 +14,14 @@
 #include "./world/world.h"
 #include "./input/input.h"
 
-static Aircraft::World *world = NULL;
-static Aircraft::State *state = NULL;
-static Aircraft::AeroModel *aeroModel = NULL;
-static Aircraft::FuelSys *fuelSys = NULL;
-static Aircraft::Engine *engineL = NULL;
-static Aircraft::Engine *engineR = NULL;
-static Aircraft::Input *input = NULL;
-static Aircraft::AirFrame *airFrame = NULL;
+static Aircraft::World* world = NULL;
+static Aircraft::State* state = NULL;
+static Aircraft::AeroModel* aeroModel = NULL;
+static Aircraft::FuelSys* fuelSys = NULL;
+static Aircraft::Engine* engineL = NULL;
+static Aircraft::Engine* engineR = NULL;
+static Aircraft::Input* input = NULL;
+static Aircraft::AirFrame* airFrame = NULL;
 static HWND window = NULL;
 
 void init()
@@ -65,7 +65,7 @@ void cleanup()
 	window = NULL;
 }
 
-void ed_fm_add_local_force(double &x, double &y, double &z, double &pos_x, double &pos_y, double &pos_z)
+void ed_fm_add_local_force(double& x, double& y, double& z, double& pos_x, double& pos_y, double& pos_z)
 {
 	x = state->getForce().x;
 	y = state->getForce().y;
@@ -76,15 +76,15 @@ void ed_fm_add_local_force(double &x, double &y, double &z, double &pos_x, doubl
 	pos_z = state->getCg().z;
 }
 
-void ed_fm_add_global_force(double &x, double &y, double &z, double &pos_x, double &pos_y, double &pos_z)
+void ed_fm_add_global_force(double& x, double& y, double& z, double& pos_x, double& pos_y, double& pos_z)
 {
 }
 
-void ed_fm_add_global_moment(double &x, double &y, double &z)
+void ed_fm_add_global_moment(double& x, double& y, double& z)
 {
 }
 
-void ed_fm_add_local_moment(double &x, double &y, double &z)
+void ed_fm_add_local_moment(double& x, double& y, double& z)
 {
 	x = state->getMoment().x;
 	y = state->getMoment().y;
@@ -140,13 +140,13 @@ void ed_fm_simulate(double dt)
 }
 
 void ed_fm_set_atmosphere(double h,		  // altitude above sea level
-						  double t,		  // current atmosphere temperature , Kelwins
-						  double a,		  // speed of sound
-						  double ro,	  // atmosphere density
-						  double p,		  // atmosphere pressure
-						  double wind_vx, // components of velocity vector, including turbulence in world coordinate system
-						  double wind_vy, // components of velocity vector, including turbulence in world coordinate system
-						  double wind_vz  // components of velocity vector, including turbulence in world coordinate system
+	double t,		  // current atmosphere temperature , Kelwins
+	double a,		  // speed of sound
+	double ro,	  // atmosphere density
+	double p,		  // atmosphere pressure
+	double wind_vx, // components of velocity vector, including turbulence in world coordinate system
+	double wind_vy, // components of velocity vector, including turbulence in world coordinate system
+	double wind_vz  // components of velocity vector, including turbulence in world coordinate system
 )
 {
 	world->setWind((wind_vx, wind_vy, wind_vz));
@@ -159,12 +159,12 @@ void ed_fm_set_atmosphere(double h,		  // altitude above sea level
 called before simulation to set up your environment for the next step
 */
 void ed_fm_set_current_mass_state(double mass,
-								  double center_of_mass_x,
-								  double center_of_mass_y,
-								  double center_of_mass_z,
-								  double moment_of_inertia_x,
-								  double moment_of_inertia_y,
-								  double moment_of_inertia_z)
+	double center_of_mass_x,
+	double center_of_mass_y,
+	double center_of_mass_z,
+	double moment_of_inertia_x,
+	double moment_of_inertia_y,
+	double moment_of_inertia_z)
 {
 	state->setMass(mass);
 	state->setCg((center_of_mass_x, center_of_mass_y, center_of_mass_z));
@@ -173,24 +173,24 @@ void ed_fm_set_current_mass_state(double mass,
 called before simulation to set up your environment for the next step
 */
 void ed_fm_set_current_state(double ax,			  // linear acceleration component in world coordinate system
-							 double ay,			  // linear acceleration component in world coordinate system
-							 double az,			  // linear acceleration component in world coordinate system
-							 double vx,			  // linear velocity component in world coordinate system
-							 double vy,			  // linear velocity component in world coordinate system
-							 double vz,			  // linear velocity component in world coordinate system
-							 double px,			  // center of the body position in world coordinate system
-							 double py,			  // center of the body position in world coordinate system
-							 double pz,			  // center of the body position in world coordinate system
-							 double omegadotx,	  // angular accelearation components in world coordinate system
-							 double omegadoty,	  // angular accelearation components in world coordinate system
-							 double omegadotz,	  // angular accelearation components in world coordinate system
-							 double omegax,		  // angular velocity components in world coordinate system
-							 double omegay,		  // angular velocity components in world coordinate system
-							 double omegaz,		  // angular velocity components in world coordinate system
-							 double quaternion_x, // orientation quaternion components in world coordinate system
-							 double quaternion_y, // orientation quaternion components in world coordinate system
-							 double quaternion_z, // orientation quaternion components in world coordinate system
-							 double quaternion_w  // orientation quaternion components in world coordinate system
+	double ay,			  // linear acceleration component in world coordinate system
+	double az,			  // linear acceleration component in world coordinate system
+	double vx,			  // linear velocity component in world coordinate system
+	double vy,			  // linear velocity component in world coordinate system
+	double vz,			  // linear velocity component in world coordinate system
+	double px,			  // center of the body position in world coordinate system
+	double py,			  // center of the body position in world coordinate system
+	double pz,			  // center of the body position in world coordinate system
+	double omegadotx,	  // angular accelearation components in world coordinate system
+	double omegadoty,	  // angular accelearation components in world coordinate system
+	double omegadotz,	  // angular accelearation components in world coordinate system
+	double omegax,		  // angular velocity components in world coordinate system
+	double omegay,		  // angular velocity components in world coordinate system
+	double omegaz,		  // angular velocity components in world coordinate system
+	double quaternion_x, // orientation quaternion components in world coordinate system
+	double quaternion_y, // orientation quaternion components in world coordinate system
+	double quaternion_z, // orientation quaternion components in world coordinate system
+	double quaternion_w  // orientation quaternion components in world coordinate system
 )
 {
 	world->setPos((px, py, pz));
@@ -233,26 +233,26 @@ void ed_fm_set_current_state(double ax,			  // linear acceleration component in 
 }
 
 void ed_fm_set_current_state_body_axis(double ax,	   // linear acceleration component in body coordinate system
-									   double ay,	   // linear acceleration component in body coordinate system
-									   double az,	   // linear acceleration component in body coordinate system
-									   double vx,	   // linear velocity component in body coordinate system
-									   double vy,	   // linear velocity component in body coordinate system
-									   double vz,	   // linear velocity component in body coordinate system
-									   double wind_vx, // wind linear velocity component in body coordinate system
-									   double wind_vy, // wind linear velocity component in body coordinate system
-									   double wind_vz, // wind linear velocity component in body coordinate system
+	double ay,	   // linear acceleration component in body coordinate system
+	double az,	   // linear acceleration component in body coordinate system
+	double vx,	   // linear velocity component in body coordinate system
+	double vy,	   // linear velocity component in body coordinate system
+	double vz,	   // linear velocity component in body coordinate system
+	double wind_vx, // wind linear velocity component in body coordinate system
+	double wind_vy, // wind linear velocity component in body coordinate system
+	double wind_vz, // wind linear velocity component in body coordinate system
 
-									   double omegadotx,			  // angular accelearation components in body coordinate system
-									   double omegadoty,			  // angular accelearation components in body coordinate system
-									   double omegadotz,			  // angular accelearation components in body coordinate system
-									   double omegax,				  // angular velocity components in body coordinate system
-									   double omegay,				  // angular velocity components in body coordinate system
-									   double omegaz,				  // angular velocity components in body coordinate system
-									   double yaw,					  // radians
-									   double pitch,				  // radians
-									   double roll,					  // radians
-									   double common_angle_of_attack, // AoA radians
-									   double common_angle_of_slide	  // AoS radians
+	double omegadotx,			  // angular accelearation components in body coordinate system
+	double omegadoty,			  // angular accelearation components in body coordinate system
+	double omegadotz,			  // angular accelearation components in body coordinate system
+	double omegax,				  // angular velocity components in body coordinate system
+	double omegay,				  // angular velocity components in body coordinate system
+	double omegaz,				  // angular velocity components in body coordinate system
+	double yaw,					  // radians
+	double pitch,				  // radians
+	double roll,					  // radians
+	double common_angle_of_attack, // AoA radians
+	double common_angle_of_slide	  // AoS radians
 )
 {
 	state->setAoa(common_angle_of_attack);
@@ -268,7 +268,7 @@ void ed_fm_set_current_state_body_axis(double ax,	   // linear acceleration comp
 input handling
 */
 void ed_fm_set_command(int command,
-					   float value)
+	float value)
 {
 	switch (command)
 	{
@@ -307,15 +307,15 @@ void ed_fm_set_command(int command,
 	//internal DCS calculations for changing mass, center of gravity,  and moments of inertia
 	}
 */
-bool ed_fm_change_mass(double &delta_mass,
-					   double &delta_mass_pos_x,
-					   double &delta_mass_pos_y,
-					   double &delta_mass_pos_z,
-					   double &delta_mass_moment_of_inertia_x,
-					   double &delta_mass_moment_of_inertia_y,
-					   double &delta_mass_moment_of_inertia_z)
+bool ed_fm_change_mass(double& delta_mass,
+	double& delta_mass_pos_x,
+	double& delta_mass_pos_y,
+	double& delta_mass_pos_z,
+	double& delta_mass_moment_of_inertia_x,
+	double& delta_mass_moment_of_inertia_y,
+	double& delta_mass_moment_of_inertia_z)
 {
-	const Vec3 &fuelSysPos = fuelSys->getPos();
+	const Vec3& fuelSysPos = fuelSys->getPos();
 	delta_mass = fuelSys->getFuelQtyDelta();
 	fuelSys->setPreInterFuel();
 
@@ -344,10 +344,10 @@ double ed_fm_get_internal_fuel()
 	set external fuel volume for each payload station , called for weapon init and on reload
 */
 void ed_fm_set_external_fuel(int station,
-							 double fuel,
-							 double x,
-							 double y,
-							 double z)
+	double fuel,
+	double x,
+	double y,
+	double z)
 {
 }
 /*
@@ -358,7 +358,7 @@ double ed_fm_get_external_fuel()
 	return 0;
 }
 
-void ed_fm_set_draw_args(EdDrawArgument *drawargs, size_t size)
+void ed_fm_set_draw_args(EdDrawArgument* drawargs, size_t size)
 {
 	drawargs[28].f = input->getThrottle();
 	drawargs[29].f = input->getThrottle();
@@ -388,7 +388,7 @@ void ed_fm_set_draw_args(EdDrawArgument *drawargs, size_t size)
 	airFrame->setRightWhlArg(drawargs[102].f);
 }
 
-void ed_fm_configure(const char *cfg_path)
+void ed_fm_configure(const char* cfg_path)
 {
 }
 
@@ -440,27 +440,27 @@ void ed_fm_hot_start_in_air()
 {
 }
 
-bool ed_fm_add_local_force_component(double &x, double &y, double &z, double &pos_x, double &pos_y, double &pos_z)
+bool ed_fm_add_local_force_component(double& x, double& y, double& z, double& pos_x, double& pos_y, double& pos_z)
 {
 	return false;
 }
 
-bool ed_fm_add_global_force_component(double &x, double &y, double &z, double &pos_x, double &pos_y, double &pos_z)
+bool ed_fm_add_global_force_component(double& x, double& y, double& z, double& pos_x, double& pos_y, double& pos_z)
 {
 	return false;
 }
 
-bool ed_fm_add_local_moment_component(double &x, double &y, double &z)
+bool ed_fm_add_local_moment_component(double& x, double& y, double& z)
 {
 	return false;
 }
 
-bool ed_fm_add_global_moment_component(double &x, double &y, double &z)
+bool ed_fm_add_global_moment_component(double& x, double& y, double& z)
 {
 	return false;
 }
 
-void ed_fm_set_plugin_data_install_path(const char *path)
+void ed_fm_set_plugin_data_install_path(const char* path)
 {
 	init();
 }

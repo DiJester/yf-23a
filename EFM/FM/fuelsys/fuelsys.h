@@ -5,65 +5,65 @@
 #include "../common/vec3.h"
 
 namespace Aircraft {
-    class FuelSys {
-        public:
-            FuelSys() {
-            }
+	class FuelSys {
+	public:
+		FuelSys() {
+		}
 
-            ~FuelSys() {
-            };
+		~FuelSys() {
+		};
 
-            inline void simulate(double dt, double throttle);
+		inline void simulate(double dt, double throttle);
 
-            inline void setInternalFuel(double fuel);
-            inline void setFuelFlow(double ff);
-            
-            inline double getInternalFuel();
-            inline double getFuelFlow();
+		inline void setInternalFuel(double fuel);
+		inline void setFuelFlow(double ff);
 
-            inline double getFuelQtyDelta() const;
+		inline double getInternalFuel();
+		inline double getFuelFlow();
 
-            Vec3 getPos() const { return pos; }
-            void setPos(const Vec3 &pos_) { pos = pos_; }
+		inline double getFuelQtyDelta() const;
 
-            void setPreInterFuel() { preInterFuel = internalFuel; }
+		Vec3 getPos() const { return pos; }
+		void setPos(const Vec3& pos_) { pos = pos_; }
 
-        private:
-            double internalFuel= 0;
-            double preInterFuel = 0;
-            double fuelFlow =0; 
-            Vec3 pos = (0,0,0);
-    };
+		void setPreInterFuel() { preInterFuel = internalFuel; }
 
-    void FuelSys::setInternalFuel(double fuel){
-        internalFuel = fuel;
-    }
+	private:
+		double internalFuel = 0;
+		double preInterFuel = 0;
+		double fuelFlow = 0;
+		Vec3 pos = (0, 0, 0);
+	};
 
-    void FuelSys::setFuelFlow(double ff){
-        fuelFlow = ff;
-    }
+	void FuelSys::setInternalFuel(double fuel) {
+		internalFuel = fuel;
+	}
 
-    double FuelSys::getInternalFuel(){
-        return internalFuel;
-    }
+	void FuelSys::setFuelFlow(double ff) {
+		fuelFlow = ff;
+	}
 
-    double FuelSys::getFuelFlow(){
-        return fuelFlow;
-    }
+	double FuelSys::getInternalFuel() {
+		return internalFuel;
+	}
 
-    void FuelSys::simulate(double dt, double throttle){
-        double fuelCons = fuelFlow * throttle * dt;
-        if (fuelCons> internalFuel){
-            fuelCons = internalFuel;
-        } 
+	double FuelSys::getFuelFlow() {
+		return fuelFlow;
+	}
 
-        preInterFuel = internalFuel;
-        internalFuel = internalFuel - fuelCons;
-    }
+	void FuelSys::simulate(double dt, double throttle) {
+		double fuelCons = fuelFlow * throttle * dt;
+		if (fuelCons > internalFuel) {
+			fuelCons = internalFuel;
+		}
 
-    double FuelSys::getFuelQtyDelta() const{
-        return preInterFuel - internalFuel;
-    }
+		preInterFuel = internalFuel;
+		internalFuel = internalFuel - fuelCons;
+	}
+
+	double FuelSys::getFuelQtyDelta() const {
+		return preInterFuel - internalFuel;
+	}
 
 }
 #endif

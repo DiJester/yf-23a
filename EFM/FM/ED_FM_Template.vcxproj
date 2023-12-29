@@ -141,15 +141,18 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="actuator\actuator.h" />
+    <ClInclude Include="aeromodel\aeromodel.h" />
+    <ClInclude Include="aeromodel\aeromodeldata.h" />
     <ClInclude Include="airframe\airframe.h" />
-    <ClInclude Include="airframe\airframedata.h" />
     <ClInclude Include="common\force.h" />
+    <ClInclude Include="common\maths.h" />
     <ClInclude Include="common\units.h" />
     <ClInclude Include="common\utilities.h" />
     <ClInclude Include="common\vec3.h" />
     <ClInclude Include="engine\engine.h" />
-    <ClInclude Include="flightcontrol\flightcontrol.h" />
     <ClInclude Include="fuelsys\fuelsys.h" />
+    <ClInclude Include="input\axis\axis.h" />
     <ClInclude Include="input\input.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="state\state.h" />
@@ -160,6 +163,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="common\maths.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
