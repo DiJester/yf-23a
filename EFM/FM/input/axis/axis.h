@@ -1,80 +1,108 @@
 #pragma once
 
-#ifndef ACTUATOR_H
-#define ACTUATOR_H
+#ifndef AXIS_H
+#define AXIS_H
 
-#include "../common/maths.h"
-#include <cmath>
+#include "../../common/maths.h"
 
-namespace Aircraft
+class Axis
 {
-	class Actuator
-	{
-	public:
-		Actuator() {}
-		Actuator(double speed) : speed(speed) {}
-		~Actuator() {}
 
-		inline double inputUpdate(double targetPos, double dt);
-		inline void physicsUpdate(double dt);
-		inline double getPosition();
-		inline void setActuatorSpeed(double factor);
+public:
+    Axis(double sensitivity, double min, double max, double reset, double linear) : sensitivity(sensitivity),
+                                                                                    min(min),
+                                                                                    max(max),
+                                                                                    reset(reset),
+                                                                                    linear(linear)
+    {
+    }
+    ~Axis() {}
+    inline void update();
+    inline void updateAxis(double axis);
+    inline void keyIncrease();
+    inline void keyDecrease();
+    inline void reset();
+    inline void slowReset();
+    inline void stop();
+    inline const double getValue() const;
 
-		void setSpeed(double speed_) { speed = speed_; }
+private:
+    double value = 0.0;
+    int dir = 0;
+    bool slowReset = false;
 
-		double getPos() const { return pos; }
+    const double sensitivity;
+    const double min;
+    const double max;
+    const double reset;
+    const double linear;
+};
 
-	private:
-		double factor = 0;
-		double speed = 0;
-		double pos = 0;
-		double targetPos = 0;
-	};
-
-	double Actuator::inputUpdate(double targetPos, double dt)
-	{
-		targetPos = targetPos;
-		physicsUpdate(dt);
-		return pos;
-	}
-
-	void Actuator::physicsUpdate(double dt)
-	{
-		double reqSpd = (targetPos - pos) / dt;
-		double actSpd = 0;
-		if (pos > 0)
-		{
-			if (targetPos - pos < 0)
-			{
-				actSpd = speed;
-			}
-			else
-			{
-				actSpd = speed * factor;
-			}
-		}
-		else
-		{
-			if (targetPos - pos > 0)
-			{
-				actSpd = speed;
-			}
-			else
-			{
-				actSpd = speed * factor;
-			}
-		}
-
-		if (abs(reqSpd) <= actSpd)
-		{
-			pos = targetPos;
-		}
-		else
-		{
-			pos += copysign(1.0, reqSpd) * actSpd * dt;
-		}
-
-		pos = clamp(pos, -1, 1);
-	}
+void Axis::updateAxis(double axis)
+{
+    reset;
+    value = axis;
+    dir = 0;
 }
-#endif // ACTUATOR_H
+
+void Axis::stop()
+{
+    dir = 0;
+    slowReset = false;
+}
+
+void Axis::reset()
+{
+    value = reset;
+    dir = 0;
+    slowReset = false;
+}
+
+void Axis::slowReset()
+{
+    dir = (int)copysign(1.0, reset - value);
+    slowReset = true;
+}
+
+void Axis::keyIncrease()
+{
+    if (slowReset)
+        dir = 0;
+
+    dir += 1;
+    slowReset = false;
+}
+
+void Axis::keyDecrease()
+{
+    if (slowReset)
+        dir = 0;
+
+    dir -= 1;
+    slowReset = false;
+}
+
+const double Axis::getValue() const
+{
+    return value;
+}
+
+void Axis::update()
+{
+    value += sensitivity * (double)dir * (0.2 + fabs(value) * linear);
+    value = clamp(value, min, max);
+
+    if (slowReset)
+    {
+        int sign = (int)copysign(1.0, reset - value);
+
+        if (sign != dir)
+        {
+            dir = 0;
+            value = reset;
+            slowReset = false;
+        }
+    }
+}
+
+#endif // AXIS_H
