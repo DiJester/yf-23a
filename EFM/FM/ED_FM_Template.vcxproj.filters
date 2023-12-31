@@ -2,36 +2,121 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="yf23a.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="common\maths.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="yf23a.h" />
-    <ClInclude Include="ED_FM_API.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="common\utilities.h" />
-    <ClInclude Include="common\vec3.h" />
-    <ClInclude Include="common\units.h" />
-    <ClInclude Include="common\force.h" />
-    <ClInclude Include="engine\engine.h" />
-    <ClInclude Include="fuelsys\fuelsys.h" />
-    <ClInclude Include="input\input.h" />
-    <ClInclude Include="state\state.h" />
-    <ClInclude Include="world\world.h" />
-    <ClInclude Include="airframe\airframe.h" />
-    <ClInclude Include="common\maths.h" />
-    <ClInclude Include="aeromodel\aeromodel.h" />
-    <ClInclude Include="aeromodel\aeromodeldata.h" />
-    <ClInclude Include="actuator\actuator.h" />
-    <ClInclude Include="input\axis\axis.h" />
+    <ClCompile Include="aircraft.cpp">
+      <Filter>aircraft</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="yf23a.rc" />
+    <ClInclude Include="ED_FM_API.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="..\include\Cockpit\ccParametersAPI.h">
+      <Filter>include\Cockpit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\FM\wHumanCustomPhysicsAPI.h">
+      <Filter>include\FM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\FM\wHumanCustomPhysicsAPI_ImplementationDeclare.h">
+      <Filter>include\FM</Filter>
+    </ClInclude>
+    <ClInclude Include="cockpit_base_api.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="maths.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="force.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="vec3.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="units.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="axis.h">
+      <Filter>aircraft\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>aircraft\input</Filter>
+    </ClInclude>
+    <ClInclude Include="actuator.h">
+      <Filter>aircraft\airframe</Filter>
+    </ClInclude>
+    <ClInclude Include="aeromodel.h">
+      <Filter>aircraft\aeromodel</Filter>
+    </ClInclude>
+    <ClInclude Include="aeromodeldata.h">
+      <Filter>aircraft\aeromodel</Filter>
+    </ClInclude>
+    <ClInclude Include="aircraft.h">
+      <Filter>aircraft</Filter>
+    </ClInclude>
+    <ClInclude Include="airframe.h">
+      <Filter>aircraft\airframe</Filter>
+    </ClInclude>
+    <ClInclude Include="engine.h">
+      <Filter>aircraft\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="fuelsys.h">
+      <Filter>aircraft\fuelsys</Filter>
+    </ClInclude>
+    <ClInclude Include="state.h">
+      <Filter>aircraft\state</Filter>
+    </ClInclude>
+    <ClInclude Include="world.h">
+      <Filter>aircraft\world</Filter>
+    </ClInclude>
+    <ClInclude Include="edapi.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="log.h">
+      <Filter>common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="aircraft">
+      <UniqueIdentifier>{0fcfdd23-82b5-4354-ac4b-dbed86778a23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{361a515d-1fa6-45d6-ad11-bf3c7f06797c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Cockpit">
+      <UniqueIdentifier>{f15cc187-61ec-45d7-b5bd-8aece26d90a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\FM">
+      <UniqueIdentifier>{4c2f97f6-9d7e-4c87-a864-e3cd63429690}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{7566fe85-b807-44f9-a3cd-74cef184bc5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="aircraft\input">
+      <UniqueIdentifier>{7c187bb0-75aa-41cb-937a-a46b6f10b68f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="aircraft\airframe">
+      <UniqueIdentifier>{4ea8afc3-26cb-4160-a0af-62084e446cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="aircraft\aeromodel">
+      <UniqueIdentifier>{a4a81951-1071-4684-95aa-e93367abfcb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="aircraft\engine">
+      <UniqueIdentifier>{09f4501b-11f5-4ed9-83c7-cfb0f2b123a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="aircraft\fuelsys">
+      <UniqueIdentifier>{ca3e7749-91c7-45b8-8e4d-71741a672f96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="aircraft\state">
+      <UniqueIdentifier>{72e77806-973f-499c-a25c-7d556e9396d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="aircraft\world">
+      <UniqueIdentifier>{7071f381-e0b6-4012-8d6b-a7d18b866187}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

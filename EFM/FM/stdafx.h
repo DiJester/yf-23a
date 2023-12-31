@@ -11,6 +11,6 @@
 // Windows Header Files:
 #include <windows.h>
 
-
+static const char srcvers[] = "YF-23A Version 0.0.1";
 
 // TODO: reference additional headers your program requires here

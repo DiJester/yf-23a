@@ -1,5 +1,5 @@
 #pragma once
-#include "FM\wHumanCustomPhysicsAPI.h"
+#include "..\FM\wHumanCustomPhysicsAPI.h"
 
 #ifndef EXPORT_ED_FM_PHYSICS_IMP
 //declare as classic declspec prior including this file 

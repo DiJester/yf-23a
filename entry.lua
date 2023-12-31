@@ -12,7 +12,7 @@ declare_plugin(self_ID,
 
 		binaries          =                                                                                                                                                                                                                                                                                                     --二进制文件
 		{
-			'yf23a',
+			'YF-23A',
 		},
 		InputProfiles     = --输入配置文件
 		{
@@ -61,13 +61,11 @@ dofile(cfg_path)
 YF23AFM[1]          = self_ID
 YF23AFM[2]          = 'YF-23A'
 YF23AFM.config_path = cfg_path
-YF23AFM.old         = 6
-
 -- local fm_path       = (current_mod_path .. "/YF-23A.lua")
 -- dofile(fm_path)
 -- YF23AFM.config_path = fm_path
 
-make_flyable('YF-23A', current_mod_path .. '/Cockpit/Scripts/', YF23AFM, current_mod_path .. '/Comm/comm.lua')
+make_flyable('YF-23A', current_mod_path .. '/Cockpit/KneeboardRight/', YF23AFM, current_mod_path .. '/Comm/comm.lua')
 --make_flyable('YF-23A', current_mod_path .. '/Cockpit/Scripts/', F_23A, current_mod_path .. '/Comm/comm.lua')
 --old=4代表模组基于su33进行开发
 dofile(current_mod_path .. '/YF-23A.lua') --指定外部文件
