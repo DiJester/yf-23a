@@ -73,19 +73,37 @@ namespace Aircraft
 	{
 	public:
 		Input() : thrtAxis(0.015, -1, 1, 0, 1),
-			pitchAxis(0.015, -1, 1, 0, 1),
-			rollAxis(0.015, -1, 1, 0, 1),
-			yawAxis(0.015, -1, 1, 0, 1),
-			leftBrkAxis(0.02, 0, 1, 0, 0),
-			rightBrkAxis(0.02, 0, 1, 0, 0)
+				  pitchAxis(0.015, -1, 1, 0, 1),
+				  rollAxis(0.015, -1, 1, 0, 1),
+				  yawAxis(0.015, -1, 1, 0, 1),
+				  leftBrkAxis(0.02, 0, 1, 0, 0),
+				  rightBrkAxis(0.02, 0, 1, 0, 0)
 		{
 		}
 		~Input() {}
 
-		inline void setThrottle(double thrt);
+		inline void setThrt(double thrt);
+		inline void startThrtUp();
+		inline void startThrtDown();
+		inline void stopThrtMove();
+
 		inline void setStickPitch(double pitch);
+		inline void resetStickPitch();
+		inline void stopStickPitch();
+		inline void startPitchUp();
+		inline void startPitchDown();
+
 		inline void setStickRoll(double roll);
+		inline void resetStickRoll();
+		inline void stopStickRoll();
+		inline void startRollLeft();
+		inline void startRollRight();
+
 		inline void setPedalYaw(double yaw);
+		inline void resetPedalYaw();
+		inline void stopPedalYaw();
+		inline void startYawLeft();
+		inline void startYawRight();
 
 		inline double getThrottle();
 		inline double getStickPitch();
@@ -103,9 +121,9 @@ namespace Aircraft
 			return leftBrkAxis.getValue();
 		}
 
-		inline const double& setLeftBrk() const
+		inline const double &setLeftBrk() const
 		{
-			//Fade the brake linearly based on rudder position.
+			// Fade the brake linearly based on rudder position.
 			return (1.0 - clamp(yawAxis.getValue(), 0.0, 1.0)) * leftBrkAxis.getValue();
 		}
 
@@ -121,9 +139,9 @@ namespace Aircraft
 			return rightBrkAxis.getValue();
 		}
 
-		inline const double& setRightBrk() const
+		inline const double &setRightBrk() const
 		{
-			//Fade the brake linearly based on rudder position.
+			// Fade the brake linearly based on rudder position.
 			return (1.0 - clamp(yawAxis.getValue(), -1.0, 0.0)) * rightBrkAxis.getValue();
 		}
 
@@ -158,9 +176,24 @@ namespace Aircraft
 		double yawTrim = 0;
 	};
 
-	void Input::setThrottle(double thrt)
+	void Input::setThrt(double thrt)
 	{
 		thrtAxis.updateAxis(thrt);
+	}
+
+	void Input::startThrtUp()
+	{
+		thrtAxis.keyDecrease();
+	}
+
+	void Input::startThrtDown()
+	{
+		thrtAxis.keyIncrease();
+	}
+
+	void Input::stopThrtMove()
+	{
+		thrtAxis.stop();
 	}
 
 	void Input::setStickPitch(double pitch)
@@ -168,14 +201,74 @@ namespace Aircraft
 		pitchAxis.updateAxis(pitch);
 	}
 
+	void Input::resetStickPitch()
+	{
+		pitchAxis.reset();
+	}
+
+	void Input::stopStickPitch()
+	{
+		pitchAxis.stop();
+	}
+
+	void Input::startPitchUp()
+	{
+		pitchAxis.keyIncrease();
+	}
+
+	void Input::startPitchDown()
+	{
+		pitchAxis.keyDecrease();
+	}
+
 	void Input::setStickRoll(double roll)
 	{
 		rollAxis.updateAxis(roll);
 	}
 
+	void Input::resetStickRoll()
+	{
+		rollAxis.reset();
+	}
+
+	void Input::stopStickRoll()
+	{
+		rollAxis.stop();
+	}
+
+	void Input::startRollLeft()
+	{
+		rollAxis.keyDecrease();
+	}
+
+	void Input::startRollRight()
+	{
+		rollAxis.keyIncrease();
+	}
+
 	void Input::setPedalYaw(double yaw)
 	{
 		yawAxis.updateAxis(yaw);
+	}
+
+	void Input::resetPedalYaw()
+	{
+		yawAxis.reset();
+	}
+
+	void Input::stopPedalYaw()
+	{
+		yawAxis.stop();
+	}
+
+	void Input::startYawLeft()
+	{
+		yawAxis.keyDecrease();
+	}
+
+	void Input::startYawRight()
+	{
+		yawAxis.keyIncrease();
 	}
 
 	double Input::getThrottle()
@@ -211,4 +304,3 @@ namespace Aircraft
 }
 
 #endif // INPUT_H
-
