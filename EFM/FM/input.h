@@ -73,11 +73,11 @@ namespace Aircraft
 	{
 	public:
 		Input() : thrtAxis(0.015, -1, 1, 0, 1),
-				  pitchAxis(0.015, -1, 1, 0, 1),
-				  rollAxis(0.015, -1, 1, 0, 1),
-				  yawAxis(0.015, -1, 1, 0, 1),
-				  leftBrkAxis(0.02, 0, 1, 0, 0),
-				  rightBrkAxis(0.02, 0, 1, 0, 0)
+			pitchAxis(0.015, -1, 1, 0, 1),
+			rollAxis(0.015, -1, 1, 0, 1),
+			yawAxis(0.015, -1, 1, 0, 1),
+			leftBrkAxis(0.02, 0, 1, 0, 0),
+			rightBrkAxis(0.02, 0, 1, 0, 0)
 		{
 		}
 		~Input() {}
@@ -121,7 +121,7 @@ namespace Aircraft
 			return leftBrkAxis.getValue();
 		}
 
-		inline const double &setLeftBrk() const
+		inline const double& setLeftBrk() const
 		{
 			// Fade the brake linearly based on rudder position.
 			return (1.0 - clamp(yawAxis.getValue(), 0.0, 1.0)) * leftBrkAxis.getValue();
@@ -139,7 +139,7 @@ namespace Aircraft
 			return rightBrkAxis.getValue();
 		}
 
-		inline const double &setRightBrk() const
+		inline const double& setRightBrk() const
 		{
 			// Fade the brake linearly based on rudder position.
 			return (1.0 - clamp(yawAxis.getValue(), -1.0, 0.0)) * rightBrkAxis.getValue();

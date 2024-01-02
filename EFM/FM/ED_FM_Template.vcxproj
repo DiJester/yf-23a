@@ -170,6 +170,7 @@
     <ClInclude Include="aircraft.h" />
     <ClInclude Include="airframe.h" />
     <ClInclude Include="cockpit_base_api.h" />
+    <ClInclude Include="enginedata.h" />
     <ClInclude Include="force.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="maths.h" />

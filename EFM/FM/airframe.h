@@ -123,8 +123,8 @@ namespace Aircraft
 			const double tqSign = copysign(1.0, noseTq.y);
 			static constexpr double maxBrkOutSpd = 0.1; // m/s
 			const double weight = clamp(noseWhlGS / maxBrkOutSpd, 0.0, 1.0);
-			const double brkOutTq = lerpWeight(brkOutTq, 0.0, weight);
-			const double tqAftBrkOut = tqSign * std::max(abs(noseTq.y) - brkOutTq, 0.0);
+			const double breakOutTq = lerpWeight(brkOutTq, 0.0, weight);
+			const double tqAftBrkOut = tqSign * std::max(abs(noseTq.y) - breakOutTq, 0.0);
 			const double tqTotal = tqAftBrkOut - dmpTq;
 			noseWhlAngV += tqTotal * dt;
 			noseWhlAng += noseWhlAngV * dt;
