@@ -17,8 +17,8 @@ E:\Saved Games\DCS\Mods\aircraft\YF-23A Black Widow\EFM\FM\aircraft.cpp(435,47):
 E:\Saved Games\DCS\Mods\aircraft\YF-23A Black Widow\EFM\FM\aircraft.cpp(436,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 E:\Saved Games\DCS\Mods\aircraft\YF-23A Black Widow\EFM\FM\aircraft.cpp(437,49): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 E:\Saved Games\DCS\Mods\aircraft\YF-23A Black Widow\EFM\FM\aircraft.cpp(438,51): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A Black Widow\EFM\FM\input.h(127): warning C4172: returning address of local variable or temporary
 E:\Saved Games\DCS\Mods\aircraft\YF-23A Black Widow\EFM\FM\input.h(145): warning C4172: returning address of local variable or temporary
+E:\Saved Games\DCS\Mods\aircraft\YF-23A Black Widow\EFM\FM\input.h(127): warning C4172: returning address of local variable or temporary
   dllmain.cpp
      Creating library E:\Saved Games\DCS\Mods\aircraft\YF-23A Black Widow\EFM\..\bin\YF-23A.lib and object E:\Saved Games\DCS\Mods\aircraft\YF-23A Black Widow\EFM\..\bin\YF-23A.exp
   ED_FM_Template.vcxproj -> E:\Saved Games\DCS\Mods\aircraft\YF-23A Black Widow\bin\YF-23A.dll

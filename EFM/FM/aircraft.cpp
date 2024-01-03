@@ -16,6 +16,7 @@
 #include "input.h"
 #include "log.h"
 #include "enginedata.h"
+#include <WinUser.h>
 
 static Aircraft::World* world;
 static Aircraft::State* state = NULL;

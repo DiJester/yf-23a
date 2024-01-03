@@ -3,12 +3,11 @@
 
 #define private public
 #include "../FM/aircraft.h"
-#include "../FM/engine.h"
+//#include "../FM/engine.h"
 #include "../FM/force.h"
 #include "../FM/vec3.h"
 #include <iostream>
 #include <sstream>
-#include "../FM/log.h"
 #define FLOAT_TOLERANCE 0.001
 #define TARGET_TOLERANCE 0.1
 
@@ -41,6 +40,7 @@ namespace FMTests{
 			ed_fm_add_local_moment(moment.x,moment.y, moment.z);
 
 			ed_fm_release();
+			
 		}
 	};
 }
