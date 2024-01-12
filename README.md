@@ -7,7 +7,7 @@ The YF-23A is an American single-seat, twin-engine, supersonic stealth fighter a
 Formally designated as the YF-23A, two prototypes were built. The first prototype was painted charcoal gray and was nicknamed "Gray Ghost", which rolled out on 22 June 1990. The second prototype was painted in two shades of gray and nicknamed "Blackwidow II", which made its first flight on 26 October 1990.
 
 ### Specifications
-##### Aeroshape
+#### Aeroshape
 - Wing span: 13.29m (43.604ft)
 - Wing area: 88.257 m^2(950 ft^2)
 - Root chord: 12.23m (40.1 ft)
