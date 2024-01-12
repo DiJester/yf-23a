@@ -3,6 +3,7 @@ YF-23A mod for DCS world
 
 ### About YF-23
 The YF-23A is an American single-seat, twin-engine, supersonic stealth fighter aircraft technology demonstrator, built by Northrop/McDonnell Douglas, designed for the USAF. The design was a finalist in the USAF's Advanced Tactical Fighter (ATF) competition, battling the Lockheed YF-22 for a production contract.
+
 Formally designated as the YF-23A, two prototypes were built. The first prototype was painted charcoal gray and was nicknamed "Gray Ghost", which rolled out on 22 June 1990. The second prototype was painted in two shades of gray and nicknamed "Blackwidow II", which made its first flight on 26 October 1990.
 
 ### Specifications
