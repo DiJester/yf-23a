@@ -1,6 +1,12 @@
 // ED_FM_Template.cpp : Defines the exported functions for the DLL application.
 #include "stdafx.h"
+
+#ifdef FM_TESTS
+#include "../UnitTests/mockedfmapi.h"
+#else
 #include "aircraft.h"
+#endif
+
 #include "vec3.h"
 #include "force.h"
 #include "utilities.h"
@@ -521,7 +527,7 @@ double ed_fm_get_param(unsigned index)
 	case ED_FM_SUSPENSION_2_GEAR_POST_STATE:
 	case ED_FM_SUSPENSION_2_DOWN_LOCK:
 	case ED_FM_SUSPENSION_2_UP_LOCK:
-		return airFrame->getNoseGrPos();
+		return airFrame->getRightGrPos();
 	case ED_FM_SUSPENSION_2_RELATIVE_BRAKE_MOMENT:
 		return pow(input->setRightBrk(), 3.0);
 
