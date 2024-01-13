@@ -83,6 +83,7 @@
     <ClInclude Include="enginedata.h">
       <Filter>aircraft\engine</Filter>
     </ClInclude>
+    <ClInclude Include="mockedfmapi.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="aircraft">

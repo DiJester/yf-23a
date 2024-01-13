@@ -75,7 +75,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\..\bin\x86_64\vc100.debug</OutDir>
     <TargetName>YF-23A</TargetName>
     <OutDir>$(SolutionDir)..\bin</OutDir>
   </PropertyGroup>
@@ -174,6 +173,7 @@
     <ClInclude Include="force.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="maths.h" />
+    <ClInclude Include="mockedfmapi.h" />
     <ClInclude Include="units.h" />
     <ClInclude Include="utilities.h" />
     <ClInclude Include="vec3.h" />

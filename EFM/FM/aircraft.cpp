@@ -2,7 +2,7 @@
 #include "stdafx.h"
 
 #ifdef FM_TESTS
-#include "../UnitTests/mockedfmapi.h"
+#include "mockedfmapi.h"
 #else
 #include "aircraft.h"
 #endif
