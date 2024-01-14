@@ -17,7 +17,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace FMTests {
 	TEST_CLASS(AirFrameTests) {
 public:
-	TEST_METHOD(init) {
+	TEST_METHOD(initairframe) {
 		Aircraft::AirFrame airFrame = Aircraft::AirFrame();
 	}
 

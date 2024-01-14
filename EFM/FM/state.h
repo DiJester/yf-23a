@@ -97,21 +97,21 @@ namespace Aircraft
 	private:
 		double aoa = 0;
 		double aos = 0;
-		Vec3 angle = (0, 0, 0);
-		Vec3 angAcc = (0, 0, 0);
-		Vec3 angVelo = (0, 0, 0);
+		Vec3 angle = Vec3(0, 0, 0);
+		Vec3 angAcc = Vec3(0, 0, 0);
+		Vec3 angVelo = Vec3(0, 0, 0);
 
-		Vec3 localSpeed = (0, 0, 0);
-		Vec3 airspeed = (0, 0, 0);
-		Vec3 accel = (0, 0, 0);
+		Vec3 localSpeed = Vec3(0, 0, 0);
+		Vec3 airspeed = Vec3(0, 0, 0);
+		Vec3 accel = Vec3(0, 0, 0);
 
 		double mach = 0;
 		double dyPre = 0;
 		double mass = 0;
 
-		Vec3 cg = (0, 0, 0);
-		Vec3 moment = (0, 0, 0);
-		Vec3 force = (0, 0, 0);
+		Vec3 cg = Vec3(0, 0, 0);
+		Vec3 moment = Vec3(0, 0, 0);
+		Vec3 force = Vec3(0, 0, 0);
 	};
 
 	void State::addForce(const Force& force_)

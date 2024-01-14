@@ -157,12 +157,12 @@ namespace Aircraft
 		double getYawTrim() const { return yawTrim; }
 
 	private:
-		Axis thrtAxis;
-		Axis pitchAxis;
-		Axis rollAxis;
-		Axis yawAxis;
-		Axis leftBrkAxis;
-		Axis rightBrkAxis;
+		Axis thrtAxis = Axis();
+		Axis pitchAxis = Axis();
+		Axis rollAxis = Axis();
+		Axis yawAxis = Axis();
+		Axis leftBrkAxis = Axis();
+		Axis rightBrkAxis = Axis();
 
 		double throttle = 0;
 		double stickPitch = 0;

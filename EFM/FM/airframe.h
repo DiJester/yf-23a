@@ -225,14 +225,14 @@ namespace Aircraft
 
 		double noseWhlGS = 0.0;
 		double noseWhlComp = 0.0;
-		Force noseWhlForce = Force{};
+		Force noseWhlForce = Force();
 		double noseWhlAng = 0.0;
 		double noseWhlAngV = 0.0;
 		static constexpr double noseWhlMass = 10.0;
 		static constexpr double noseWhlDmp = 150;
 
 		static constexpr double brkOutTq = 200;
-		Vec3 pivotPos = Vec3{ 2.696969, -2.271201, 0.0 };
+		Vec3 pivotPos = Vec3( 2.696969, -2.271201, 0.0 );
 	};
 }
 

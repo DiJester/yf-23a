@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef MATHS_H
+#define MATHS_H
 //=========================================================================//
 //
 //		FILE NAME	: Maths.h
@@ -52,7 +55,7 @@ static double randomCentred()
 	return 2.0 * random() - 1.0;
 }
 
-const Vec3 rotateVectorIntoXYPlane(const Vec3& v)
+static Vec3 rotateVectorIntoXYPlane(const Vec3& v)
 {
 	Vec3 result;
 	double d = sqrt(v.x * v.x + v.z * v.z);
@@ -62,7 +65,7 @@ const Vec3 rotateVectorIntoXYPlane(const Vec3& v)
 	return result;
 }
 
-const Vec3 rotate(const Vec3& v, const double pitch, const double yaw)
+static Vec3 rotate(const Vec3& v, const double pitch, const double yaw)
 {
 	double sin_b = sin(yaw);
 	double cos_b = cos(yaw);
@@ -76,12 +79,12 @@ const Vec3 rotate(const Vec3& v, const double pitch, const double yaw)
 	return Vec3(res_x, res_y, res_z);
 }
 
-const Vec3 windAxisToBody(const Vec3& force, const double& alpha, const double& beta)
+static Vec3 windAxisToBody(const Vec3& force, const double& alpha, const double& beta)
 {
 	return rotate(force, -alpha, beta);
 }
 
-const Vec3 directionVector(const double pitch, const double yaw)
+static Vec3 directionVector(const double pitch, const double yaw)
 {
 	double cosPitch = cos(pitch);
 	double sinPitch = sin(pitch);
@@ -95,3 +98,5 @@ const Vec3 directionVector(const double pitch, const double yaw)
 
 	return normalize(newV);
 }
+
+#endif

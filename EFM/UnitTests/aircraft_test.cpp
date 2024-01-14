@@ -8,7 +8,7 @@
 
 #define private public
 #include "../FM/mockedfmapi.h"
-//#include "../FM/engine.h"
+#include "../FM/input.h"
 #include "../FM/force.h"
 #include "../FM/vec3.h"
 #include <iostream>
@@ -21,8 +21,8 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace FMTests {
 	TEST_CLASS(AircraftTests) {
 public:
-	TEST_METHOD(init) {
-		/*
+	TEST_METHOD(initaircraft) {
+		
 		ed_fm_set_plugin_data_install_path("../temp/test/");
 		ed_fm_set_atmosphere(10, 100, 340, 9.7, 19001, 1, 1, 1);
 		ed_fm_set_surface(1, 2, 1, 2, 3, 4);
@@ -31,7 +31,8 @@ public:
 		ed_fm_set_current_state_body_axis(0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.1, 0);
 		ed_fm_set_internal_fuel(1000.0);
 		Assert::AreEqual(1000.0, ed_fm_get_internal_fuel(), L"Internal fuel not filled correctly.");
-		ed_fm_set_command(2004, 0.8);
+		ed_fm_hot_start();
+		ed_fm_set_command(Aircraft::Control::ROLL, 0.5);
 		ed_fm_simulate(5);
 
 		double dMass = 0;
@@ -46,15 +47,6 @@ public:
 		ed_fm_add_local_moment(moment.x, moment.y, moment.z);
 
 		ed_fm_release();
-		*/
-		//Vec3 dCG = Vec3();
-		//Vec3 dMoment = Vec3();
-		ed_fm_set_plugin_data_install_path("../temp/test/");
-		ed_fm_release();
-
-		dylanAdd(1, 2);
-
-
 	}
 	};
 }

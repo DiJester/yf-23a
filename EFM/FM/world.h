@@ -50,19 +50,19 @@ namespace Aircraft
 		void setSurfHeight(double surfHeight_) { surfHeight = surfHeight_; }
 
 	private:
-		Vec3 wind = (0, 0, 0);
+		Vec3 wind = Vec3(0, 0, 0);
 		double atmTemp = 0; // Kelwins
 		double atmDensity = 0;
 		double atmPre = 0;
 		double soundSpeed = 0;
 		double altitude = 0;
 
-		Vec3 pos = (0, 0, 0);
-		Vec3 velocity = (0, 0, 0);
-		Vec3 direction = (0, 0, 0);
-		Vec3 globalDown = (0, 0, 0);
+		Vec3 pos = Vec3(0, 0, 0);
+		Vec3 velocity = Vec3(0, 0, 0);
+		Vec3 direction = Vec3(0, 0, 0);
+		Vec3 globalDown = Vec3(0, 0, 0);
 
-		Vec3 surfNorm = (0, 0, 0);
+		Vec3 surfNorm = Vec3(0, 0, 0);
 		double surfHeight = 0;
 	};
 };

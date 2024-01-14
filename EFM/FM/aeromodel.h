@@ -17,8 +17,8 @@ namespace Aircraft
 		AeroModel() {};
 		~AeroModel() {};
 
-		inline Vec3 getLift(double dyPre, double aoa, double mach);
-		inline Vec3 getDrag(double dyPre, double aoa, double mach);
+		inline double getLiftVal(double dyPre, double aoa, double mach);
+		inline double getDragVal(double dyPre, double aoa, double mach);
 		inline Force getAeroForce(double dyPre, double aoa, double mach);
 
 		inline Vec3 getPos();
@@ -47,22 +47,22 @@ namespace Aircraft
 		double cy = 0;
 
 		// aerodynamic center
-		Vec3 pos = (1.0, 0, 0);
+		Vec3 pos = Vec3(1.0, 0, 0);
 
 		// control surfaces
-		Vec3 leftAlrnPos = (0, 0, -5.0);
-		Vec3 rightAlrnPos = (0, 0, 5.0);
+		Vec3 leftAlrnPos = Vec3(0, 0, -5.0);
+		Vec3 rightAlrnPos = Vec3(0, 0, 5.0);
 		double alronArea = 5;
 
-		Vec3 leftElePos = (0, -8, -2.0);
-		Vec3 rightElePos = (0, -8, 2.0);
+		Vec3 leftElePos = Vec3(0, -8, -2.0);
+		Vec3 rightElePos = Vec3(0, -8, 2.0);
 		double eleArea = 2;
 
-		Vec3 rudderPos = (1, -5, 0);
+		Vec3 rudderPos = Vec3(1, -5, 0);
 		double rudderArea = 2;
 	};
 
-	Vec3 AeroModel::getLift(double dyPre, double aoa, double mach)
+	double AeroModel::getLiftVal(double dyPre, double aoa, double mach)
 	{
 		// double asMag = magnitude(airspeed);
 		// double mach = getMach(asMag);
@@ -71,7 +71,7 @@ namespace Aircraft
 		return cy * dyPre * wingArea;
 	}
 
-	Vec3 AeroModel::getDrag(double dyPre, double aoa, double mach)
+	double AeroModel::getDragVal(double dyPre, double aoa, double mach)
 	{
 		// double asMag = magnitude(airspeed);
 		// double mach = getMach(asMag);
@@ -85,7 +85,7 @@ namespace Aircraft
 		calAeroCoeffs(mach, aoa);
 		double lift = cy * dyPre * wingArea;
 		double drag = cx * dyPre * wingArea;
-		return Force((-drag, lift, 0), pos);
+		return Force(Vec3(-drag, lift, 0), pos);
 	}
 
 	void AeroModel::calAeroCoeffs(double mach, double aoa)
@@ -136,27 +136,27 @@ namespace Aircraft
 
 	Force AeroModel::getLeftAlrnForce(double dyPre, double stickRoll)
 	{
-		return Force((0, 0.05 * cy * stickRoll * dyPre * alronArea, 0), leftAlrnPos);
+		return Force(Vec3(0, 0.05 * cy * stickRoll * dyPre * alronArea, 0), leftAlrnPos);
 	}
 
 	Force AeroModel::getRightAlrnForce(double dyPre, double stickRoll)
 	{
-		return Force((0, -0.05 * cy * stickRoll * dyPre * alronArea, 0), rightAlrnPos);
+		return Force(Vec3(0, -0.05 * cy * stickRoll * dyPre * alronArea, 0), rightAlrnPos);
 	}
 
 	Force AeroModel::getLeftEleForce(double dyPre, double stickPitch)
 	{
-		return Force((0, 0.05 * stickPitch * dyPre * eleArea, 0), leftElePos);
+		return Force(Vec3(0, 0.05 * stickPitch * dyPre * eleArea, 0), leftElePos);
 	}
 
 	Force AeroModel::getRightEleForce(double dyPre, double stickPitch)
 	{
-		return Force((0, 0.05 * stickPitch * dyPre * eleArea, 0), rightElePos);
+		return Force(Vec3(0, 0.05 * stickPitch * dyPre * eleArea, 0), rightElePos);
 	}
 
 	Force AeroModel::getRudderForce(double dyPre, double stickRaw)
 	{
-		return Force((0, 0, 0.05 * stickRaw * dyPre * eleArea), rudderPos);
+		return Force(Vec3(0, 0, 0.05 * stickRaw * dyPre * eleArea), rudderPos);
 	}
 }
 

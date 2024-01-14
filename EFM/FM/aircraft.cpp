@@ -115,6 +115,7 @@ void ed_fm_simulate(double dt)
 	LOG("aircraft simulate...\n");
 	Vec3 airspeed = state->getAirspeed();
 	double throttle = input->getThrottle();
+	printf("throttle values: %f \n", throttle);
 
 	// Engine thrust
 	Force thrustL = engineL->getThrust(throttle);
@@ -171,7 +172,7 @@ void ed_fm_set_atmosphere(double h,		  // altitude above sea level
 	double wind_vz  // components of velocity vector, including turbulence in world coordinate system
 )
 {
-	world->setWind((wind_vx, wind_vy, wind_vz));
+	world->setWind(Vec3(wind_vx, wind_vy, wind_vz));
 	world->setAtmDensity(ro);
 	world->setAtmPre(p);
 	world->setAltitude(h);
@@ -189,7 +190,7 @@ void ed_fm_set_current_mass_state(double mass,
 	double moment_of_inertia_z)
 {
 	state->setMass(mass);
-	state->setCg((center_of_mass_x, center_of_mass_y, center_of_mass_z));
+	state->setCg(Vec3(center_of_mass_x, center_of_mass_y, center_of_mass_z));
 }
 /*
 called before simulation to set up your environment for the next step
@@ -215,8 +216,8 @@ void ed_fm_set_current_state(double ax,			  // linear acceleration component in 
 	double quaternion_w  // orientation quaternion components in world coordinate system
 )
 {
-	world->setPos((px, py, pz));
-	world->setVelocity((vx, vy, vz));
+	world->setPos(Vec3(px, py, pz));
+	world->setVelocity(Vec3(vx, vy, vz));
 	Vec3 direction;
 
 	double x = quaternion_x;
@@ -279,12 +280,12 @@ void ed_fm_set_current_state_body_axis(double ax,	   // linear acceleration comp
 {
 	state->setAoa(common_angle_of_attack);
 	state->setAos(common_angle_of_slide);
-	state->setAngle((roll, yaw, pitch));
-	state->setAngVelo((omegax, omegay, omegaz));
-	state->setAngAcc((omegadotx, omegadoty, omegadotz));
-	state->setLocalSpeed((vx, vy, vz));
-	state->setAirspeed((vx - wind_vx, vy - wind_vy, vz - wind_vz));
-	state->setAccel((ax, ay, az));
+	state->setAngle(Vec3(roll, yaw, pitch));
+	state->setAngVelo(Vec3(omegax, omegay, omegaz));
+	state->setAngAcc(Vec3(omegadotx, omegadoty, omegadotz));
+	state->setLocalSpeed(Vec3(vx, vy, vz));
+	state->setAirspeed(Vec3(vx - wind_vx, vy - wind_vy, vz - wind_vz));
+	state->setAccel(Vec3(ax, ay, az));
 }
 /*
 input handling
@@ -545,16 +546,29 @@ double ed_fm_get_param(unsigned index)
 void ed_fm_cold_start()
 {
 	LOG("aircraft cold start...\n");
+	airFrame->setNoseGrPos(1);
+	airFrame->setLeftGrPos(1);
+	airFrame->setRightGrPos(1);
 }
 
 void ed_fm_hot_start()
 {
 	LOG("aircraft hot start...\n");
+	airFrame->setNoseGrPos(1);
+	airFrame->setLeftGrPos(1);
+	airFrame->setRightGrPos(1);
+	input->setThrt(0.25);
+	fuelSys->setIgnition(true);
 }
 
 void ed_fm_hot_start_in_air()
 {
 	LOG("aircraft start in air...\n");
+	airFrame->setNoseGrPos(0);
+	airFrame->setLeftGrPos(0);
+	airFrame->setRightGrPos(0);
+	input->setThrt(0.75);
+	fuelSys->setIgnition(true);
 }
 
 bool ed_fm_add_local_force_component(double& x, double& y, double& z, double& pos_x, double& pos_y, double& pos_z)
@@ -593,6 +607,7 @@ void ed_fm_set_plugin_data_install_path(const char* path)
 	g_safeToRun = 1;
 
 	init();
+	aircraftInited = true;
 }
 
 void ed_fm_release()

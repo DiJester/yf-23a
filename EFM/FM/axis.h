@@ -16,6 +16,13 @@ public:
 		linear(linear)
 	{
 	}
+	Axis() : sensitivity(0),
+		min(0),
+		max(0),
+		resetVal(0),
+		linear(0)
+	{
+	}
 	~Axis() {}
 	inline void update();
 	inline void updateAxis(double axis);

@@ -29,12 +29,12 @@ namespace Aircraft
 
 	private:
 		double maxThrustVal = ENGINE_THRUST_MAX;
-		Vec3 pos = (0, 0, 0);
+		Vec3 pos = Vec3(0, 0, 0);
 	};
 
 	Force Engine::getThrust(double throttle)
 	{
-		return Force((throttle * maxThrustVal, 0, 0), pos);
+		return Force(Vec3(-throttle * maxThrustVal, 0, 0), pos);
 	}
 
 	double Engine::getThrustVal(double throttle)

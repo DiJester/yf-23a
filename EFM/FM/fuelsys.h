@@ -6,6 +6,7 @@
 
 namespace Aircraft
 {
+	static double FUEL_FLOW = 500;
 	class FuelSys
 	{
 	public:
@@ -30,11 +31,18 @@ namespace Aircraft
 
 		void setPreInterFuel() { preInterFuel = internalFuel; }
 
+		bool hasFuel() const { return internalFuel > 0.0; }
+
+		bool getIgnition() const { return ignition; }
+		void setIgnition(bool ignition_) { ignition = ignition_; }
+
 	private:
 		double internalFuel = 0;
 		double preInterFuel = 0;
 		double fuelFlow = 0;
-		Vec3 pos = (0, 0, 0);
+		Vec3 pos = Vec3(0, 0, 0);
+
+		bool ignition = false;
 	};
 
 	void FuelSys::setInternalFuel(double fuel)
@@ -59,6 +67,11 @@ namespace Aircraft
 
 	void FuelSys::simulate(double dt, double throttle)
 	{
+		if (hasFuel() && ignition)
+		{
+			setFuelFlow(FUEL_FLOW);
+		}
+
 		double fuelCons = fuelFlow * throttle * dt;
 		if (fuelCons > internalFuel)
 		{
