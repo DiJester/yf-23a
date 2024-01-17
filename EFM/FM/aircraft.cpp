@@ -35,6 +35,9 @@ static Aircraft::AirFrame* airFrame = NULL;
 static HWND window = NULL;
 static bool aircraftInited = false;
 
+static void init();
+static void cleanup();
+
 void init()
 {
 	LOG("aircraft init...\n");
@@ -422,6 +425,17 @@ double ed_fm_get_external_fuel()
 
 void ed_fm_set_draw_args(EdDrawArgument* drawargs, size_t size)
 {
+	if (aircraftInited) {
+		airFrame->setNoseGrPos(drawargs[0].f);
+		airFrame->setLeftGrPos(drawargs[3].f);
+		airFrame->setRightGrPos(drawargs[5].f);
+	}
+	else {
+		drawargs[0].f = airFrame->getNoseGrPos();
+		drawargs[3].f = airFrame->getLeftGrPos();
+		drawargs[5].f = airFrame->getRightGrPos();
+	}
+
 	drawargs[28].f = input->getThrottle();
 	drawargs[29].f = input->getThrottle();
 
@@ -457,7 +471,7 @@ void ed_fm_configure(const char* cfg_path)
 double test_gear_state = 0;
 double ed_fm_get_param(unsigned index)
 {
-	double throttle = input->getThrottle();
+	double throttle = input == NULL ? input->getThrottle() : 0;
 	switch (index)
 	{
 		// APU
@@ -531,13 +545,17 @@ double ed_fm_get_param(unsigned index)
 		return airFrame->getRightGrPos();
 	case ED_FM_SUSPENSION_2_RELATIVE_BRAKE_MOMENT:
 		return pow(input->setRightBrk(), 3.0);
-
 	case ED_FM_STICK_FORCE_CENTRAL_ROLL: // i.e. trimmered position where force feeled by pilot is zero
 		return input->getRollTrim();
 	case ED_FM_CAN_ACCEPT_FUEL_FROM_TANKER:
 		return 1000.0;
+	case ED_FM_FUEL_INTERNAL_FUEL:
+	case ED_FM_FUEL_TOTAL_FUEL:
+		return fuelSys->getInternalFuel();
+	case ED_FM_OXYGEN_SUPPLY:
+		return 1000;
 	case ED_FM_ANTI_SKID_ENABLE:
-		break;
+		return true;
 	}
 
 	return 0;
