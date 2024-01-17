@@ -104,6 +104,7 @@ namespace Aircraft
 			updateStabilizer(dt, pitchTrim);
 			updateActEle(dt, mach, pitch);
 			updateActLeftAlrn(dt, roll, rollTrim);
+			updateActRightAlrn(dt, roll, rollTrim);
 			updateActRudder(dt, yaw, yawDamper, yawTrim);
 		}
 
