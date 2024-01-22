@@ -84,6 +84,9 @@
       <Filter>aircraft\engine</Filter>
     </ClInclude>
     <ClInclude Include="mockedfmapi.h" />
+    <ClInclude Include="loghelper.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="aircraft">

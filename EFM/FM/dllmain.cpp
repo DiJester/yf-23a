@@ -13,6 +13,7 @@ FILE* g_log = NULL;
 int g_safeToRun = 0;
 bool g_logging = false;
 bool g_disableRadio = false;
+bool logConsole = false;
 
 BOOL APIENTRY DllMain(HMODULE hModule,
 	DWORD ul_reason_for_call,
@@ -22,6 +23,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	{
 	case DLL_PROCESS_ATTACH:
 #ifdef DEBUG_CONSOLE
+		logConsole = true;
 		if (AllocConsole())
 		{
 			freopen_s(&stream, "CONOUT$", "w", stdout);

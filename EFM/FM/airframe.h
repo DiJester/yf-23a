@@ -7,6 +7,7 @@
 #include "force.h"
 #include "actuator.h"
 #include <algorithm>
+#include "log.h"
 
 namespace Aircraft
 {
@@ -33,6 +34,7 @@ namespace Aircraft
 			double input = pitch + eleZeroForceDflt;
 			leftElePos = actLeftEle.inputUpdate(input, dt);
 			rightElePos = actRightEle.inputUpdate(input, dt);
+			LOG("update elevator, left elevator postion: %f, right elevator postion: %f \n", leftElePos,rightElePos);
 		}
 
 		double getStabilizer() const { return stabilizer; }
@@ -40,6 +42,7 @@ namespace Aircraft
 		void updateStabilizer(double dt, double ptichTrim)
 		{
 			stabilizer = toRad((ptichTrim - 1.0) / (-2.0) * (-13.25) + 12.25);
+			LOG("update stabilizer, stabilizer position: %f \n", stabilizer);
 		}
 
 		double getSpdBrkPos() const { return spdBrkPos; }
@@ -49,18 +52,21 @@ namespace Aircraft
 		{
 			double input = roll + rollTrim;
 			leftAlrnPos = actLeftAlrn.inputUpdate(-input, dt);
+			LOG("update left alieron, left alieron postion: %f \n", leftAlrnPos);
 		}
 
 		void updateActRightAlrn(double dt, double roll, double rollTrim)
 		{
 			double input = roll + rollTrim;
 			rightAlrnPos = actRightAlrn.inputUpdate(input, dt);
+			LOG("update right alieron, right alieron postion: %f \n", rightAlrnPos);
 		}
 
 		void updateActRudder(double dt, double yaw, double yawDamper, double yawTrim)
 		{
 			double input = yaw + yawDamper + yawTrim;
 			rudderPos = actRudder.inputUpdate(input, dt);
+			LOG("update rudder, rudder postion: %f \n", rudderPos);
 		}
 
 		double getLeftAlrnPos() const { return leftAlrnPos; }
@@ -100,6 +106,8 @@ namespace Aircraft
 
 		void simulate(double dt, double mach, double pitch, double pitchTrim, double roll, double rollTrim, double yaw, double yawDamper, double yawTrim)
 		{
+			LOG("airframe simulation, dt: %f, mach: %f, pitch: %f, pitchTrim: %f, roll: %f, rollTrim: %f, yaw: %f, yaw damper: %f, yaw trim: %f \n",
+			 dt, mach, pitch, pitchTrim, roll, rollTrim, yaw, yawDamper, yawTrim)
 			updateWheels(dt);
 			updateStabilizer(dt, pitchTrim);
 			updateActEle(dt, mach, pitch);
@@ -129,6 +137,8 @@ namespace Aircraft
 			const double tqTotal = tqAftBrkOut - dmpTq;
 			noseWhlAngV += tqTotal * dt;
 			noseWhlAng += noseWhlAngV * dt;
+			LOG("update wheels: left wheel speed: %f, right wheel speed: %f, nose wheel velocity: %f, nose wheel angle: %f \n",
+				leftWhlSpd, rightWhlSpd, noseWhlAngV, noseWhlAng);
 		}
 
 		double getLeftGrPos() const { return leftGrPos; }

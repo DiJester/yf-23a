@@ -41,9 +41,9 @@ namespace Aircraft
 		factor = factor;
 	}
 
-	double Actuator::inputUpdate(double targetPos, double dt)
+	double Actuator::inputUpdate(double targetPos_, double dt)
 	{
-		targetPos = targetPos;
+		targetPos = targetPos_;
 		physicsUpdate(dt);
 		return pos;
 	}

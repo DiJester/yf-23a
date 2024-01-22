@@ -8,6 +8,7 @@
 #include "utilities.h"
 #include "aeromodeldata.h"
 #include "force.h"
+#include "log.h"
 
 namespace Aircraft
 {
@@ -98,6 +99,7 @@ namespace Aircraft
 
 		calCy(aoa);
 		calCx();
+		LOG("calculated aero coefficients: CyAlph: %f, CxZero: %f, CyMax: %f, B: %f, B4: %f, Cy: %f, Cx: %f \n", cyAlpha, cxZero, cyMax, b, b4, cy, cx);
 	}
 
 	void AeroModel::calCy(double aoa)

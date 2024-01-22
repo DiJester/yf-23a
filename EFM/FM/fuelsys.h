@@ -84,7 +84,7 @@ namespace Aircraft
 
 	double FuelSys::getFuelQtyDelta() const
 	{
-		return preInterFuel - internalFuel;
+		return internalFuel - preInterFuel;
 	}
 
 }

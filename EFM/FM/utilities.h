@@ -1,6 +1,7 @@
 #pragma once
 
 #include "vec3.h"
+#include <iostream>
 
 struct Matrix33
 {
@@ -62,4 +63,13 @@ double lerp(double* x, double* f, unsigned sz, double t)
 		}
 	}
 	return f[sz - 1];
+}
+
+void replaceAll(char* arr, char src, char dest) {
+	for (int i = 0; i < strlen(arr); i++)
+	{
+		if (arr[i] == src) {
+			arr[i] = dest;
+		}
+	}
 }

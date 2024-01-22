@@ -40,7 +40,7 @@ static void cleanup();
 
 void init()
 {
-	LOG("aircraft init...\n");
+	LOGINFO("aircraft init...\n");
 
 	srand(741);
 	world = new Aircraft::World;
@@ -55,12 +55,13 @@ void init()
 	airFrame = new Aircraft::AirFrame;
 
 	window = GetActiveWindow();
-	printf("Have window: %p\n", window);
-	LOG("aircraft init complete \n");
+	LOGINFO("Have window: %p\n", window);
+	LOGINFO("aircraft init complete \n");
 }
 
 void cleanup()
 {
+	printf("clean up is invoked\n");
 	delete world;
 	delete state;
 	delete aeroModel;
@@ -83,6 +84,7 @@ void cleanup()
 
 void ed_fm_add_local_force(double& x, double& y, double& z, double& pos_x, double& pos_y, double& pos_z)
 {
+	LOGINFO("ed_fm_add_local_force invoked \n");
 	x = state->getForce().x;
 	y = state->getForce().y;
 	z = state->getForce().z;
@@ -90,6 +92,8 @@ void ed_fm_add_local_force(double& x, double& y, double& z, double& pos_x, doubl
 	pos_x = state->getCg().x;
 	pos_y = state->getCg().y;
 	pos_z = state->getCg().z;
+	LOGINFO("ed_fm_add_local_force, force{x: %f, y: %f, z: %f}, force pos {x: %f, y: %f, z: %f}\n",
+		x, y, z, pos_x, pos_y, pos_z);
 }
 
 void ed_fm_add_global_force(double& x, double& y, double& z, double& pos_x, double& pos_y, double& pos_z)
@@ -102,20 +106,25 @@ void ed_fm_add_global_moment(double& x, double& y, double& z)
 
 void ed_fm_add_local_moment(double& x, double& y, double& z)
 {
+	LOGINFO("ed_fm_add_local_moment invoked \n");
 	x = state->getMoment().x;
 	y = state->getMoment().y;
 	z = state->getMoment().z;
+	LOGINFO("ed_fm_add_local_moment, moment{x: %f, y: %f, z: %f}\n",
+		x, y, z);
 }
 
 void ed_fm_simulate(double dt)
 {
+	LOGINFO("ed_fm_simulate invoked \n");
 	if (!aircraftInited)
 	{
+		LOGINFO("aircraft not initialized, init in simulate func\n");
 		init();
 		aircraftInited = true;
 	}
 
-	LOG("aircraft simulate...\n");
+	LOGINFO("aircraft simulate...\n");
 	Vec3 airspeed = state->getAirspeed();
 	double throttle = input->getThrottle();
 	printf("throttle values: %f \n", throttle);
@@ -139,7 +148,7 @@ void ed_fm_simulate(double dt)
 	double rudderYaw = input->getPedalYaw();
 	double yawDamper = input->getYawDamper();
 	double yawTrim = input->getYawTrim();
-	LOG("aircraft stick roll: %f\n", stickRoll);
+	LOGINFO("aircraft stick roll: %f\n", stickRoll);
 
 	airFrame->simulate(dt, mach, stickPitch, pitchTrim, stickRoll, rollTrim, rudderYaw, yawDamper, yawTrim);
 
@@ -162,7 +171,7 @@ void ed_fm_simulate(double dt)
 	state->addForce(rudderF);
 
 	fuelSys->simulate(dt, input->getThrottle());
-	LOG("aircraft simulate complete\n");
+	LOGINFO("aircraft simulate complete\n");
 }
 
 void ed_fm_set_atmosphere(double h,		  // altitude above sea level
@@ -175,6 +184,8 @@ void ed_fm_set_atmosphere(double h,		  // altitude above sea level
 	double wind_vz  // components of velocity vector, including turbulence in world coordinate system
 )
 {
+	LOGINFO("ed_fm_set_atmosphere invoked, t: %f, a: %f, ro: %f, p: %f, wind {vx: %f, vy: %f, vz: %f} \n",
+		t, a, ro, p, wind_vx, wind_vy, wind_vz);
 	world->setWind(Vec3(wind_vx, wind_vy, wind_vz));
 	world->setAtmDensity(ro);
 	world->setAtmPre(p);
@@ -192,6 +203,8 @@ void ed_fm_set_current_mass_state(double mass,
 	double moment_of_inertia_y,
 	double moment_of_inertia_z)
 {
+	LOGINFO("ed_fm_set_current_mass_state invoked, cg {x: %f, y: %f, z: %f}, moment_of_intertia {x: %f, y: %f, z: %f}\n",
+		center_of_mass_x, center_of_mass_y, center_of_mass_z, moment_of_inertia_x, moment_of_inertia_y, moment_of_inertia_z);
 	state->setMass(mass);
 	state->setCg(Vec3(center_of_mass_x, center_of_mass_y, center_of_mass_z));
 }
@@ -219,6 +232,10 @@ void ed_fm_set_current_state(double ax,			  // linear acceleration component in 
 	double quaternion_w  // orientation quaternion components in world coordinate system
 )
 {
+	LOGINFO("ed_fm_set_current_state invoked, linear acceleration{x: %f, y: %f, z: %f}, linear velocity{x: %f, y: %f, z: %f},  center of the body pos {x: %f, y: %f, z: %f}, angular accelearation {x: %f, y: %f, z: %f}, angular velocity{x: %f, y: %f, z: %f}, orientation quaternion {x: %f, y: %f, z: %f, w: %f} \n",
+		ax, ay, az, vx, vy, vz, px, py, pz, omegadotx, omegadoty, omegadotz, omegax, omegay, omegaz,
+		quaternion_x, quaternion_y, quaternion_z, quaternion_w);
+
 	world->setPos(Vec3(px, py, pz));
 	world->setVelocity(Vec3(vx, vy, vz));
 	Vec3 direction;
@@ -281,6 +298,9 @@ void ed_fm_set_current_state_body_axis(double ax,	   // linear acceleration comp
 	double common_angle_of_slide	  // AoS radians
 )
 {
+	LOGINFO("ed_fm_set_current_state_body_axis invoked, linear acceleration{x: %f, y: %f, z: %f}, linear velocity{x: %f, y: %f, z: %f},  wind linear velocity {x: %f, y: %f, z: %f}, angular accelearation {x: %f, y: %f, z: %f}, angular velocity{x: %f, y: %f, z: %f}, yaw: %f, pitch: %f, roll: %f, AoA: %f, AoS: %f \n",
+		ax, ay, az, vx, vy, vz, wind_vx, wind_vy, wind_vz, omegadotx, omegadoty, omegadotz, omegax, omegay, omegaz,
+		yaw, pitch, roll, common_angle_of_attack, common_angle_of_slide);
 	state->setAoa(common_angle_of_attack);
 	state->setAos(common_angle_of_slide);
 	state->setAngle(Vec3(roll, yaw, pitch));
@@ -296,6 +316,7 @@ input handling
 void ed_fm_set_command(int command,
 	float value)
 {
+	printf("ed_fm_set_command invoked, command: %d, value: %f \n", command, value);
 	switch (command)
 	{
 	case Aircraft::Control::THROTTLE:
@@ -380,6 +401,7 @@ bool ed_fm_change_mass(double& delta_mass,
 	double& delta_mass_moment_of_inertia_y,
 	double& delta_mass_moment_of_inertia_z)
 {
+	LOGINFO("ed_fm_change_mass invoked \n");
 	const Vec3& fuelSysPos = fuelSys->getPos();
 	delta_mass = fuelSys->getFuelQtyDelta();
 	fuelSys->setPreInterFuel();
@@ -387,6 +409,12 @@ bool ed_fm_change_mass(double& delta_mass,
 	delta_mass_pos_x = fuelSysPos.x;
 	delta_mass_pos_y = fuelSysPos.y;
 	delta_mass_pos_z = fuelSysPos.z;
+	LOGINFO("ed_fm_change_mass, delta mass: %f, delta mass pos {x: %f, y: %f, z: %f} \n",
+		delta_mass, delta_mass_pos_x, delta_mass_pos_y, delta_mass_pos_z);
+
+	if (delta_mass == 0) {
+		return false;
+	}
 
 	return true;
 }
@@ -396,14 +424,18 @@ bool ed_fm_change_mass(double& delta_mass,
 */
 void ed_fm_set_internal_fuel(double fuel)
 {
+	LOGINFO("ed_fm_set_internal_fuel invoked \n");
 	fuelSys->setInternalFuel(fuel);
+	LOGINFO("ed_fm_set_internal_fuel, internal fuel: %f \n", fuel);
 }
 /*
 	get internal fuel volume
 */
 double ed_fm_get_internal_fuel()
 {
+	LOGINFO("ed_fm_get_internal_fuel invoked \n");
 	return fuelSys->getInternalFuel();
+	LOGINFO("ed_fm_get_internal_fuel, internal fuel: %f \n", fuelSys->getInternalFuel());
 }
 /*
 	set external fuel volume for each payload station , called for weapon init and on reload
@@ -414,17 +446,22 @@ void ed_fm_set_external_fuel(int station,
 	double y,
 	double z)
 {
+	LOGINFO("ed_fm_set_external_fuel invoked, station: %d, fuel: %f, pos:{x: %f, y: %f, z: %f} \n",
+		station, fuel, x, y, z);
 }
 /*
 	get external fuel volume
 */
 double ed_fm_get_external_fuel()
 {
+	LOGINFO("ed_fm_get_external_fuel invoked \n");
 	return 0;
 }
 
 void ed_fm_set_draw_args(EdDrawArgument* drawargs, size_t size)
 {
+	LOGINFO("ed_fm_set_draw_args invoked, draw arg size: %lld \n", size);
+
 	if (aircraftInited) {
 		airFrame->setNoseGrPos(drawargs[0].f);
 		airFrame->setLeftGrPos(drawargs[3].f);
@@ -466,12 +503,14 @@ void ed_fm_set_draw_args(EdDrawArgument* drawargs, size_t size)
 
 void ed_fm_configure(const char* cfg_path)
 {
+	LOGINFO("ed_fm_configure invoked, cfg path: %s \n", cfg_path);
 }
 
 double test_gear_state = 0;
 double ed_fm_get_param(unsigned index)
 {
-	double throttle = input == NULL ? input->getThrottle() : 0;
+	LOGINFO("ed_fm_get_param invoked, index: %u \n", index);
+	double throttle = input->getThrottle();
 	switch (index)
 	{
 		// APU
@@ -563,7 +602,7 @@ double ed_fm_get_param(unsigned index)
 
 void ed_fm_cold_start()
 {
-	LOG("aircraft cold start...\n");
+	LOGINFO("aircraft cold start...\n");
 	airFrame->setNoseGrPos(1);
 	airFrame->setLeftGrPos(1);
 	airFrame->setRightGrPos(1);
@@ -571,7 +610,7 @@ void ed_fm_cold_start()
 
 void ed_fm_hot_start()
 {
-	LOG("aircraft hot start...\n");
+	LOGINFO("aircraft hot start...\n");
 	airFrame->setNoseGrPos(1);
 	airFrame->setLeftGrPos(1);
 	airFrame->setRightGrPos(1);
@@ -581,7 +620,7 @@ void ed_fm_hot_start()
 
 void ed_fm_hot_start_in_air()
 {
-	LOG("aircraft start in air...\n");
+	LOGINFO("aircraft start in air...\n");
 	airFrame->setNoseGrPos(0);
 	airFrame->setLeftGrPos(0);
 	airFrame->setRightGrPos(0);
@@ -591,51 +630,64 @@ void ed_fm_hot_start_in_air()
 
 bool ed_fm_add_local_force_component(double& x, double& y, double& z, double& pos_x, double& pos_y, double& pos_z)
 {
+	LOGINFO("ed_fm_add_local_force_component invoked\n");
 	return false;
 }
 
 bool ed_fm_add_global_force_component(double& x, double& y, double& z, double& pos_x, double& pos_y, double& pos_z)
 {
+	LOGINFO("ed_fm_add_global_force_component invoked\n");
 	return false;
 }
 
 bool ed_fm_add_local_moment_component(double& x, double& y, double& z)
 {
+	LOGINFO("ed_fm_add_local_moment_component invoked\n");
 	return false;
 }
 
 bool ed_fm_add_global_moment_component(double& x, double& y, double& z)
 {
+	LOGINFO("ed_fm_add_global_moment_component invoked\n");
 	return false;
 }
 
 void ed_fm_set_plugin_data_install_path(const char* path)
 {
+	printf("ed_fm_set_plugin_data_install_path invoked, install path: %s\n", path);
 #ifdef LOGGING
 	char logFile[200];
 	sprintf_s(logFile, 200, "%s/efm_log.txt", path);
-	fopen_s(&g_log, logFile, "a+");
+	replaceAll(logFile, '\\', '/');
+	errno_t errNo = fopen_s(&g_log, logFile, "w+");
+	if (errNo != 0) {
+		char errMsg[200];
+		sprintf_s(errMsg, 200, "cannot open file: %s,  error: %d\n", logFile, errNo);
+		OutputDebugStringA(errMsg);
+		return;
+	}
 #endif
-	printf("%s\n", srcvers);
-
 	LOG_BREAK();
-	LOG("Begin Log, %s\n", srcvers);
-	LOG("Initializing Components...\n");
+	LOGINFO("Begin Log, %s\n", srcvers);
+	LOGINFO("Initializing Components...\n");
 
 	g_safeToRun = 1;
 
 	init();
 	aircraftInited = true;
+	LOGINFO("Aircraft %s inited, %d\n", srcvers, aircraftInited);
+	LOGINFO("Log status, g_log is null: %d\n", g_log == NULL);
 }
 
 void ed_fm_release()
 {
+	LOGINFO("ed_fm_release invoked\n");
 	cleanup();
 	aircraftInited = false;
 	g_safeToRun = false;
 #ifdef LOGGING
-	LOG("Releasing Components...\n");
-	LOG("Closing Log...\n");
+	LOGINFO("Releasing Components...\n");
+	LOGINFO("Closing Log...\n");
 	if (g_log)
 	{
 		fclose(g_log);
@@ -646,12 +698,13 @@ void ed_fm_release()
 
 bool ed_fm_enable_debug_info()
 {
-	return false;
+	LOGINFO("ed_fm_enable_debug_info invoked\n");
+	return true;
 }
 
 void ed_fm_suspension_feedback(int idx, const ed_fm_suspension_info* info)
 {
-
+	LOGINFO("ed_fm_suspension_feedback invoked, index: %d \n", idx);
 	if (idx == 0)
 	{
 		airFrame->setNoseWhlGS(info->wheel_speed_X);
@@ -703,7 +756,8 @@ void ed_fm_set_surface(
 	double normal_z	 // components of normal vector to surface
 )
 {
-	printf("Type: %d\n", surface_type);
+	LOGINFO("ed_fm_set_surface invoked, hieght: %f, height with obj: %f, surface type: %d, surface norm:{x: %f, y: %f, z: %f} \n",
+		h, h_obj, surface_type, normal_x, normal_y, normal_z);
 	world->setSurfHeight(world->getPos().y - h_obj);
 	world->setSurfNorm(Vec3(normal_x, normal_y, normal_z));
 }

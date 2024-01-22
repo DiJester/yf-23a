@@ -1,0 +1,40 @@
+[2024-01-21 23:39:01] ===================
+[2024-01-21 23:39:01] [INFO] Begin Log, YF-23A Version 0.0.1
+[2024-01-21 23:39:01] [INFO] Initializing Components...
+[2024-01-21 23:39:01] [INFO] aircraft init...
+[2024-01-21 23:39:01] [INFO] Have window: 0000000000000000
+[2024-01-21 23:39:01] [INFO] aircraft init complete 
+[2024-01-21 23:39:01] [INFO] Aircraft YF-23A Version 0.0.1 inited, 1
+[2024-01-21 23:39:01] [INFO] Log status, g_log is null: 0
+[2024-01-21 23:39:01] [INFO] ed_fm_set_atmosphere invoked, t: 100.000000, a: 340.000000, ro: 9.700000, p: 19001.000000, wind {vx: 1.000000, vy: 1.000000, vz: 1.000000} 
+[2024-01-21 23:39:01] [INFO] ed_fm_set_surface invoked, hieght: 1.000000, height with obj: 2.000000, surface type: 1, surface norm:{x: 2.000000, y: 3.000000, z: 4.000000} 
+[2024-01-21 23:39:01] [INFO] ed_fm_set_current_state invoked, linear acceleration{x: 0.000000, y: 0.000000, z: 0.000000}, linear velocity{x: 0.000000, y: 0.000000, z: 0.000000},  center of the body pos {x: 2.000000, y: 2.000000, z: 2.000000}, angular accelearation {x: 0.000000, y: 0.000000, z: 0.000000}, angular velocity{x: 0.000000, y: 0.000000, z: 0.000000}, orientation quaternion {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000} 
+[2024-01-21 23:39:01] [INFO] ed_fm_set_current_mass_state invoked, cg {x: 0.000000, y: 0.000000, z: 0.000000}, moment_of_intertia {x: 0.000000, y: 0.000000, z: 0.000000}
+[2024-01-21 23:39:01] [INFO] ed_fm_set_current_state_body_axis invoked, linear acceleration{x: 0.000000, y: 0.000000, z: 0.000000}, linear velocity{x: 0.000000, y: 0.000000, z: 0.000000},  wind linear velocity {x: 1.000000, y: 1.000000, z: 1.000000}, angular accelearation {x: 0.000000, y: 0.000000, z: 0.000000}, angular velocity{x: 0.000000, y: 0.000000, z: 0.000000}, yaw: 0.000000, pitch: 0.000000, roll: 0.000000, AoA: 0.100000, AoS: 0.000000 
+[2024-01-21 23:39:01] [INFO] ed_fm_set_internal_fuel invoked 
+[2024-01-21 23:39:01] [INFO] ed_fm_set_internal_fuel, internal fuel: 1000.000000 
+[2024-01-21 23:39:01] [INFO] ed_fm_get_internal_fuel invoked 
+[2024-01-21 23:39:01] [INFO] aircraft hot start...
+[2024-01-21 23:39:01] [INFO] ed_fm_simulate invoked 
+[2024-01-21 23:39:01] [INFO] aircraft simulate...
+[2024-01-21 23:39:01] calculated aero coefficients: CyAlph: 0.077000, CxZero: 0.016500, CyMax: 1.600000, B: 0.100000, B4: 0.032000, Cy: 0.441210, Cx: 0.070679 
+[2024-01-21 23:39:01] [INFO] aircraft stick roll: 0.500000
+[2024-01-21 23:39:01] airframe simulation, dt: 5.000000, mach: 0.005413, pitch: -0.300000, pitchTrim: 0.000000, roll: 0.500000, rollTrim: 0.000000, yaw: 0.100000, yaw damper: 0.000000, yaw trim: 0.000000 
+[2024-01-21 23:39:01] update wheels: left wheel speed: 0.000000, right wheel speed: 0.000000, nose wheel velocity: 0.000000, nose wheel angle: 0.000000 
+[2024-01-21 23:39:01] update stabilizer, stabilizer position: 0.098175 
+[2024-01-21 23:39:01] update elevator, left elevator postion: -0.132654, right elevator postion: -0.132654 
+[2024-01-21 23:39:01] update left alieron, left alieron postion: -0.500000 
+[2024-01-21 23:39:01] update right alieron, right alieron postion: 0.500000 
+[2024-01-21 23:39:01] update rudder, rudder postion: 0.100000 
+[2024-01-21 23:39:01] [INFO] aircraft simulate complete
+[2024-01-21 23:39:01] [INFO] ed_fm_change_mass invoked 
+[2024-01-21 23:39:01] [INFO] ed_fm_change_mass, delta mass: -625.000000, delta mass pos {x: 0.000000, y: 0.000000, z: 0.000000} 
+[2024-01-21 23:39:01] [INFO] ed_fm_add_local_force invoked 
+[2024-01-21 23:39:01] [INFO] ed_fm_add_local_force, force{x: -80029.823116, y: 185.295559, z: 0.145500}, force pos {x: 0.000000, y: 0.000000, z: 0.000000}
+[2024-01-21 23:39:01] [INFO] ed_fm_add_local_moment invoked 
+[2024-01-21 23:39:01] [INFO] ed_fm_add_local_moment, moment{x: 7.297007, y: -0.145500, z: 186.168559}
+[2024-01-21 23:39:01] [INFO] ed_fm_set_draw_args invoked, draw arg size: 500 
+[2024-01-21 23:39:01] [INFO] ed_fm_get_param invoked, index: 103 
+[2024-01-21 23:39:01] [INFO] ed_fm_release invoked
+[2024-01-21 23:39:01] [INFO] Releasing Components...
+[2024-01-21 23:39:01] [INFO] Closing Log...

@@ -107,7 +107,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ED_FM_TEMPLATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ED_FM_TEMPLATE_EXPORTS;DEBUG_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -172,6 +172,7 @@
     <ClInclude Include="enginedata.h" />
     <ClInclude Include="force.h" />
     <ClInclude Include="log.h" />
+    <ClInclude Include="loghelper.h" />
     <ClInclude Include="maths.h" />
     <ClInclude Include="mockedfmapi.h" />
     <ClInclude Include="units.h" />
