@@ -59,4 +59,4 @@ Formally designated as the YF-23A, two prototypes were built. The first prototyp
   - Weird behavior on ground taxi.
 
 ## Installation
-Download the zip and extract to `C:\Users\{username}\Saved Games\DCS\Mods\aircraft` folder
+Download the zip file and extract to `C:\Users\{username}\Saved Games\DCS\Mods\aircraft` folder.
