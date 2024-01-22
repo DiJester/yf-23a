@@ -44,3 +44,6 @@ Formally designated as the YF-23A, two prototypes were built. The first prototyp
   - Compressors: burn-resistant titanium alloy
   - Combustor: high-cobalt
   - Turbine: Nickel (Ni)-based single-crystal superalloys
+
+### Installation
+Download the zip and extract to `C:\Users\{username}\Saved Games\DCS\Mods\aircraft` folder
