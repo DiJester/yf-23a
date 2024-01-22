@@ -1,5 +1,5 @@
 # YF-23A
-YF-23A mod for DCS world
+YF-23A mod for DCS world. Version 0.0.1.
 
 ### About YF-23
 The YF-23 is an American single-seat, twin-engine, supersonic stealth fighter aircraft technology demonstrator, built by Northrop/McDonnell Douglas, designed for the USAF. The design was a finalist in the USAF's Advanced Tactical Fighter (ATF) competition, battling the Lockheed YF-22 for a production contract.
@@ -47,6 +47,7 @@ Formally designated as the YF-23A, two prototypes were built. The first prototyp
 
 ### Features
   - Basic flight control input.
+  - SFM flight model.
   - F15C HUD.
   - Armament:
     -  2 * AIM-9X
