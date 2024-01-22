@@ -230,7 +230,7 @@ F_23A = {
 
 	Pylons             = {
 
-		pylon(1, 1, 1.663000, -0.968000, -1,
+		pylon(1, 1, 1.663000, -0.6, -0.25,
 			{
 				use_full_connector_position = true,
 				arg                         = 310,
@@ -241,7 +241,7 @@ F_23A = {
 				{ CLSID = "{5CE2FF2A-645A-4197-B48D-8720AC69394F}", arg_increment = 0.0 }, --aim 9X
 			}
 		),
-		pylon(2, 1, -2.037000, -0.968000, -2.986000,
+		pylon(2, 1, -2.037000, -0.6, -1,
 			{
 				use_full_connector_position = true,
 				arg                         = 311,
@@ -251,7 +251,7 @@ F_23A = {
 				{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}", arg_increment = 0.0 }, --AIM-120C
 			}
 		),
-		pylon(3, 1, -2.037000, -0.968000, 1.493000,
+		pylon(3, 1, -2.037000, -0.6, 0.5,
 			{
 				use_full_connector_position = true,
 				arg                         = 312,
@@ -262,7 +262,7 @@ F_23A = {
 			}
 		),
 
-		pylon(4, 1, -2.037000, -0.968000, -1.493000,
+		pylon(4, 1, -2.037000, -0.6, -0.5,
 			{
 				use_full_connector_position = true,
 				arg                         = 314,
@@ -272,7 +272,7 @@ F_23A = {
 				{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}", arg_increment = 0.0 }, --AIM-120C
 			}
 		),
-		pylon(5, 1, -2.037000, -0.968000, 2.986000,
+		pylon(5, 1, -2.037000, -0.6, 1,
 			{
 				use_full_connector_position = true,
 				arg                         = 315,
@@ -282,7 +282,7 @@ F_23A = {
 				{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}", arg_increment = 0.0 }, --AIM-120C
 			}
 		),
-		pylon(6, 1, 1.663000, -0.968000, 1,
+		pylon(6, 1, 1.663000, -0.6, 0.25,
 			{
 				use_full_connector_position = true,
 				arg                         = 316,
