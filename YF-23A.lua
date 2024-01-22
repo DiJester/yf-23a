@@ -230,7 +230,7 @@ F_23A = {
 
 	Pylons             = {
 
-		pylon(1, 1, 1.663000, -0.968000, -2.986000,
+		pylon(1, 1, 1.663000, -0.968000, -1,
 			{
 				use_full_connector_position = true,
 				arg                         = 310,
@@ -282,7 +282,7 @@ F_23A = {
 				{ CLSID = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}", arg_increment = 0.0 }, --AIM-120C
 			}
 		),
-		pylon(6, 1, 1.663000, -0.968000, 2.986000,
+		pylon(6, 1, 1.663000, -0.968000, 1,
 			{
 				use_full_connector_position = true,
 				arg                         = 316,
