@@ -46,4 +46,4 @@ Formally designated as the YF-23A, two prototypes were built. The first prototyp
   - Turbine: Nickel (Ni)-based single-crystal superalloys
 
 ### Installation
-Download the zip and extract to `C:\Users\{username}\Saved Games\DCS\Mods\aircraft` folder
+Download the zip file and extract to `C:\Users\{username}\Saved Games\DCS\Mods\aircraft` folder.
