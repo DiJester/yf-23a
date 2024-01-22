@@ -44,3 +44,16 @@ Formally designated as the YF-23A, two prototypes were built. The first prototyp
   - Compressors: burn-resistant titanium alloy
   - Combustor: high-cobalt
   - Turbine: Nickel (Ni)-based single-crystal superalloys
+
+### Features
+  - Basic flight control input.
+  - F15C HUD.
+  - Armament:
+    -  2 * AIM-9X
+    -  4 * AIM-120C
+    -  M61A1 Vulcan 20mm gun, 480 rounds
+### Knwon Issues
+  - No exterior lights
+  - Incorrect weapon bay modeling.
+  - Weird behavior on ground taxi.
+
