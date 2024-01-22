@@ -50,10 +50,10 @@ Formally designated as the YF-23A, two prototypes were built. The first prototyp
   - SFM flight model.
   - F15C HUD.
   - Armament:
-    -  2 * AIM-9X
+    -  2 * AIM-9X/AIM-9M
     -  4 * AIM-120C
     -  M61A1 Vulcan 20mm gun, 480 rounds
-### Knwon Issues
+### Known Issues
   - No exterior lights
   - Incorrect weapon bay modeling.
   - Weird behavior on ground taxi.
