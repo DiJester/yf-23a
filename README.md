@@ -35,7 +35,7 @@ Formally designated as the YF-23A, two prototypes were built. The first prototyp
 ##### Performance
  - Maximum thrust:
    - \>26,000 lbf (116 kN) (military/intermediate power) This data is a design indicator
-   - \>35,000 lbf (156 kN) (with afterburner)[N 1]
+   - \>35,000 lbf (156 kN) (with afterburner)
  - Turbine inlet temperature: 3,000 °F (1,649 °C; 1,922 K)
  - Thrust-to-weight ratio: 6.7:1 (intermediate), 9.0:1 (afterburning)
  - Overall pressure ratio: >=35:1
