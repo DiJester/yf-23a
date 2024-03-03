@@ -1,27 +1,27 @@
 ﻿D:\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(499,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
   stdafx.cpp
   aircraft.cpp
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\vec3.h(174,4): warning C4244: 'initializing': conversion from 'const double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\vec3.h(174,12): warning C4244: 'initializing': conversion from 'const double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\vec3.h(174,20): warning C4244: 'initializing': conversion from 'const double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(471,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(472,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(473,42): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(476,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(477,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(486,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(487,55): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(488,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(489,55): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(490,45): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(491,49): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(492,51): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(493,47): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(494,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(495,49): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\aircraft.cpp(496,51): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\input.h(127): warning C4172: returning address of local variable or temporary
-E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\FM\input.h(145): warning C4172: returning address of local variable or temporary
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\vec3.h(174,4): warning C4244: 'initializing': conversion from 'const double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\vec3.h(174,12): warning C4244: 'initializing': conversion from 'const double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\vec3.h(174,20): warning C4244: 'initializing': conversion from 'const double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(471,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(472,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(473,42): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(476,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(477,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(486,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(487,55): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(488,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(489,55): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(490,45): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(491,49): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(492,51): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(493,47): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(494,53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(495,49): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\aircraft.cpp(496,51): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\input.h(127): warning C4172: returning address of local variable or temporary
+E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\FM\input.h(145): warning C4172: returning address of local variable or temporary
   dllmain.cpp
-     Creating library E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\..\bin\YF-23A.lib and object E:\Saved Games\DCS\Mods\aircraft\YF-23A\EFM\..\bin\YF-23A.exp
-  ED_FM_Template.vcxproj -> E:\Saved Games\DCS\Mods\aircraft\YF-23A\bin\YF-23A.dll
+     Creating library E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\..\bin\YF-23A.lib and object E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\EFM\..\bin\YF-23A.exp
+  ED_FM_Template.vcxproj -> E:\Saved Games\DCS\Mods\aircraft\.back\YF-23A\bin\YF-23A.dll

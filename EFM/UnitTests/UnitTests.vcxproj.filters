@@ -3,5 +3,6 @@
   <ItemGroup>
     <ClCompile Include="aircraft_test.cpp" />
     <ClCompile Include="airframe_test.cpp" />
+    <ClCompile Include="engine_test.cpp" />
   </ItemGroup>
 </Project>

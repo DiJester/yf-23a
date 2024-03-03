@@ -108,6 +108,25 @@ double getGamma(double temp, int opt) {
 	return gamma;
 }
 
+/**
+ * /* Utility to get the corrected airflow per area given the Mach number
+ *
+ * @param mach  Mach number
+ * @param gamma Ratio of specific heats
+ *
+ * @return Airflow per unit area
+ */
+double getAirflowPerArea(double mach, double gamma) {
+	double number;
+	double fac1;
+	double fac2;
+	fac2 = (gamma + 1.0) / (2.0 * (gamma - 1.0));
+	fac1 = pow(1.0 + 0.5 * (gamma - 1.0) * mach * mach, fac2);
+	number = 0.50161 * sqrt(gamma) * mach / fac1;
+	return number;
+}
+
+
 double getMach(int sub, double correctedAirflow, double gamma) {
 	/* Utility to get the Mach number given the corrected airflow per area */
 	double number;               /* iterate for mach number */
@@ -148,24 +167,6 @@ double getMach(int sub, double correctedAirflow, double gamma) {
 		}
 		number = macho;
 	}
-	return number;
-}
-
-/**
- * /* Utility to get the corrected airflow per area given the Mach number
- *
- * @param mach  Mach number
- * @param gamma Ratio of specific heats
- *
- * @return Airflow per unit area
- */
-double getAirflowPerArea(double mach, double gamma) {
-	double number;
-	double fac1;
-	double fac2;
-	fac2 = (gamma + 1.0) / (2.0 * (gamma - 1.0));
-	fac1 = pow(1.0 + 0.5 * (gamma - 1.0) * mach * mach, fac2);
-	number = 0.50161 * sqrt(gamma) * mach / fac1;
 	return number;
 }
 

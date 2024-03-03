@@ -87,6 +87,9 @@
     <ClInclude Include="loghelper.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="engine2.h">
+      <Filter>aircraft\engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="aircraft">

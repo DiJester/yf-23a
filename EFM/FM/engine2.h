@@ -81,8 +81,6 @@ namespace Aircraft
         double fconv = 1;
         // mass (lbs - kg) conversion factor
         double mconv1 = 1;
-        // dynamic pressure. q0 = gamma/2 * mach * mach * ps0
-        double q0;
         // gamma option. correspond to Gamma/Gam(T) options in flight panel UI
         int gamopt = 1;
 
@@ -305,6 +303,7 @@ namespace Aircraft
 
     void inline Engine2::simulate(double dt, double throttle, double ps0_, double ts0_, double alt_, double u0d_) {
         fireflag = 0;
+        throtl = throttle;
         getFreeStream(ps0_, ts0_, alt_, u0d_);
         getThermo();
         a8 = a8d * sqrt(trat[NOZZLE_ENTRY]) / pressureRatio[NOZZLE_ENTRY];
@@ -342,6 +341,7 @@ namespace Aircraft
         a4 = 0.472;
         a4p = 1.524;
         ac = 0.9 * a2;
+        weight = 3902;
 
         efficiency[COMP_ENTRY] = 1.0;
         pressureRatio[COMP_ENTRY] = 1.0;
