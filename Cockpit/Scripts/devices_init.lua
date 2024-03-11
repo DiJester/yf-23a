@@ -1,6 +1,7 @@
 mount_vfs_texture_archives("Bazar/Textures/AvionicsCommon")
 -- mount_vfs_texture_archives(LockOn_Options.script_path.."../Resources/Model/Textures/WunderluftTextures")
 
+dofile(LockOn_Options.script_path .. "rudder.lua")
 dofile(LockOn_Options.script_path .. "devices.lua")
 dofile(LockOn_Options.common_script_path .. "tools.lua")
 dofile(LockOn_Options.script_path .. "materials.lua")
