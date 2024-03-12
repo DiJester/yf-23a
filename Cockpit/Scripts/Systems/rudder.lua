@@ -27,11 +27,7 @@ dev:listen_command(Keys.RightRudderStop)
 
 
 function update()
-	get_base_sensor_data()
-
-	if Sensor_Data_Mod.nose_wow == 1 then
-		print_message_to_user("nose_wheel_down")
-	end
+	--get_base_sensor_data()
 
 	rudder()
 end
