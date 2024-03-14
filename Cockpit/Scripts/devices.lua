@@ -4,6 +4,7 @@ local function counter()
     return count
 end
 -------DEVICE ID-------
-devices           = {}
-devices['DEMO']   = counter()
-devices['RUDDER'] = counter()
+devices            = {}
+devices['DEMO']    = counter()
+devices['RUDDER']  = counter()
+devices['RUDDER2'] = counter()
