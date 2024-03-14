@@ -1,19 +1,13 @@
+local cscripts = folder.."../../../Cockpit/Scripts/"
+dofile(cscripts.."devices.lua")
+dofile(cscripts.."command_defs.lua")
+
 local res = external_profile("Config/Input/Aircrafts/base_joystick_binding.lua")
 ignore_features(res.keyCommands,{
 "dragchute"
 })
 
-
 local SelectAll      = 10003
-
-
-
-
-
-
-
-
-
 
 join(res.keyCommands,{
 {down = iCommandPlaneAutopilot, name = _('Autopilot - Attitude Hold'), category = _('Autopilot')},
@@ -97,6 +91,8 @@ join(res.axisCommands,{
 {action = iCommandLeftWheelBrake,	name = _('Wheel Brake Left')},
 {action = iCommandRightWheelBrake,	name = _('Wheel Brake Right')},
 
+{action = device_commands.rudder_axis_left, cockpit_device_id = devices.RUDDER2,       name = _('Rudder - Left (Dual-Axis)'),      category = {_('Flight Control'), _('Accessibility')}},
+{action = device_commands.rudder_axis_right, cockpit_device_id = devices.RUDDER2,      name = _('Rudder - Right (Dual-Axis)'),     category = {_('Flight Control'), _('Accessibility')}},
 
 --SU-57 Custom commands--
 {down = SelectRight3,                name = _('Weapon Bay Door 3'),            category = _('SU-57 HOTAS')},
@@ -106,14 +102,8 @@ join(res.axisCommands,{
 {down = SelectCenter7,               name = _('Weapon Bay Door 7'),            category = _('SU-57 HOTAS')},
 {down = SelectLeft8,                 name = _('Weapon Bay Door 8'),            category = _('SU-57 HOTAS')},
 
-
 {down = SelectAll,                  name = _('Weapon Bay Doors 3,4,5,6,7,8'), category = _('SU-57 HOTAS')},
 {down = SelectStep,                 name = _('Weapon Bay Door  Toggle'),      category =  _('SU-57 HOTAS')}, 
-
-
-
-
-
 
 })
 return res
