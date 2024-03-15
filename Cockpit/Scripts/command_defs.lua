@@ -6,7 +6,7 @@ local function __custom_counter()
 end
 
 
-Keys = {
+Keys          = {
     LeftRudderStart = 201,
     LeftRudderStop = 202,
     RightRudderStart = 203,
@@ -20,3 +20,17 @@ Keys = {
     PlaneThrustRight = 2006,
 
 }
+
+start_command = 3000
+local __count = start_command - 1
+local function __counter()
+    __count = __count + 1
+    return __count
+end
+
+device_commands =
+{
+    rudder_axis_left  = __counter(),
+    rudder_axis_right = __counter(),
+}
+
