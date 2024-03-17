@@ -7,23 +7,23 @@ local dev              = GetSelf()
 local update_time_step = 0.016 --update will be called 60 times per second
 make_default_activity(update_time_step)
 
-local mod_rudder        = 0
-local des_rudder_ground = 0
-local mod_rudder_ground = 0
+local key_rudder_dir     = 0
 
-local key_rudder_active = 0
-local key_rudder_dir    = 0
+local key_input_rudder   = 0
+local axis_input_rudder  = 0
+local input_rudder       = 0
 
-local input_rudder      = 0
+local auth_rudder        = 1
+local rudder_limit_gs    = 5.0
+local rudder_maneu_speed = 0.032
+local rudder_neu_speed   = 0.06
 
-local auth_rudder       = 1
 
-dev:listen_command(Keys.PlaneYawAxis)
-dev:listen_command(Keys.LeftRudderStart)
-dev:listen_command(Keys.LeftRudderStop)
-dev:listen_command(Keys.RightRudderStart)
-dev:listen_command(Keys.RightRudderStop)
-
+dev:listen_command(device_commands.rudder_axis_mod)
+dev:listen_command(device_commands.left_rudder_start)
+dev:listen_command(device_commands.left_rudder_stop)
+dev:listen_command(device_commands.right_rudder_start)
+dev:listen_command(device_commands.right_rudder_stop)
 
 
 function update()
@@ -37,53 +37,62 @@ function post_initialize()
 end
 
 function SetCommand(command, value)
-	if command == Keys.PlaneYawAxis then
-		key_rudder_active = 0
-		if Sensor_Data_Mod.nose_wow == 1 then
-			input_rudder      = value
-			des_rudder_ground = round(value, 2)
-		else
-			input_rudder = value
-			des_rudder_ground = 0
-		end
-	elseif command == Keys.LeftRudderStart then
-		key_rudder_dir = -0.01
-		input_rudder = -1
-	elseif command == Keys.RightRudderStart then
-		key_rudder_dir = 0.01
-		input_rudder = 1
-	elseif command == Keys.RightRudderStop or command == Keys.LeftRudderStop then
+	print_message_to_user("detected command" .. command .. "value" .. value)
+	if command == device_commands.rudder_axis_mod then
+		print_message_to_user("rudder_axis_mod" .. value)
+		axis_input_rudder = value
+	elseif command == device_commands.left_rudder_start then
+		print_message_to_user("left_rudder_start")
+		key_rudder_dir = -1
+	elseif command == device_commands.right_rudder_start then
+		print_message_to_user("right_rudder_start")
+
+		key_rudder_dir = 1
+	elseif command == device_commands.left_rudder_stop or command == device_commands.right_rudder_stop then
+		print_message_to_user("rudder_stop")
 		key_rudder_dir = 0
-		key_rudder_active = 1
-		input_rudder = 0
 	end
 end
 
 function rudder()
-	if (des_rudder_ground > 0.99 or des_rudder_ground < -0.99) and key_rudder_dir ~= 0 then
-
-	elseif key_rudder_dir ~= 0 then
-		des_rudder_ground = des_rudder_ground + key_rudder_dir
-	elseif key_rudder_dir == 0 and des_rudder_ground ~= 0 and key_rudder_active == 1 then
-		if des_rudder_ground < 0 then
-			des_rudder_ground = des_rudder_ground + 0.01
-		elseif des_rudder_ground > 0 then
-			des_rudder_ground = des_rudder_ground - 0.01
-		end
+	local keyRudderMag = math.abs(key_input_rudder)
+	local keyRudderSign = 1
+	if key_input_rudder < 0 or (key_input_rudder == 0 and key_rudder_dir == -1) then
+		keyRudderSign = -1
 	end
 
-	if Sensor_Data_Mod.nose_wow == 1 then
-		if des_rudder_ground == mod_rudder_ground then
-
-		elseif des_rudder_ground > mod_rudder_ground then
-			mod_rudder_ground = mod_rudder_ground + 0.01
-		elseif des_rudder_ground < mod_rudder_ground then
-			mod_rudder_ground = mod_rudder_ground - 0.01
-		end
-
-		dispatch_action(nil, Keys.PlaneYawAxis, mod_rudder_ground)
+	if isNeutralizing(key_rudder_dir, key_input_rudder) then
+		keyRudderMag = clamp(keyRudderMag - rudder_neu_speed, 0, 1)
 	else
-		dispatch_action(nil, Keys.PlaneYawAxis, (input_rudder * auth_rudder) + mod_rudder)
+		keyRudderMag = clamp(keyRudderMag + rudder_maneu_speed, -1, 1)
+	end
+
+	key_input_rudder = keyRudderMag * keyRudderSign
+	input_rudder = clamp(axis_input_rudder + key_input_rudder, -1, 1)
+
+	if input_rudder ~= 0 then
+		local gs = GetGroundSpeed()
+		if gs <= rudder_limit_gs then
+			auth_rudder = gs * gs / (rudder_limit_gs * rudder_limit_gs)
+		else
+			auth_rudder = 1
+		end
+		dispatch_action(nil, Keys.PlaneYawAxis, input_rudder * auth_rudder)
+	end
+end
+
+function isNeutralizing(keyRudderDir, keyRudderInput)
+	if keyRudderInput ~= 0 then
+		local result = keyRudderDir * keyRudderInput
+		if result <= 0 then
+			return true
+		else
+			return false
+		end
+	elseif keyRudderDir ~= 0 then
+		return false
+	else
+		return true
 	end
 end
 

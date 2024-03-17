@@ -8,7 +8,7 @@ attributes = {
 }
 
 creators = {}
-creators[devices.DEMO] = { 'avLuaDevice', LockOn_Options.script_path .. 'Systems/demo.lua' }
+--creators[devices.DEMO] = { 'avLuaDevice', LockOn_Options.script_path .. 'Systems/demo.lua' }
 creators[devices.RUDDER] = { 'avLuaDevice', LockOn_Options.script_path .. 'Systems/rudder.lua' }
 ---------------------------------------------
 dofile(LockOn_Options.common_script_path .. "KNEEBOARD/declare_kneeboard_device_left.lua")

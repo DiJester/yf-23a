@@ -5,5 +5,5 @@ local function counter()
 end
 -------DEVICE ID-------
 devices           = {}
-devices['DEMO']   = counter()
+--devices['DEMO']   = counter()
 devices['RUDDER'] = counter()
