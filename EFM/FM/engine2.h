@@ -48,6 +48,7 @@ namespace Aircraft
         inline void setPos(Vec3& pos_);
         inline double getThrustVal();
         inline double getFuelRate();
+        inline int getFireFlag();
 
     private:
         // specific energy, energy per mass. const value 1718 ft^2/s^2
@@ -75,12 +76,18 @@ namespace Aircraft
         double alt;
         // altitude (ft - m) conversion factor, m to ft
         double lconv1 = 1;
-        // airspeed (km/h - ft/sec) conversion factor
+        // airspeed (ft/sec - km/h) conversion factor
         double lconv2 = 1;
         // thrust force (lbs - N) conversion factor
         double fconv = 1;
         // mass (lbs - kg) conversion factor
         double mconv1 = 1;
+        // pressure (lbf/sq - Kpa) conversion factor
+        double pconv = 1;
+        // temperature (K - C) conversion
+        double tref = 273.1;
+        // temperature (F - K/C) conversion
+        double tconv = 1;
         // gamma option. correspond to Gamma/Gam(T) options in flight panel UI
         int gamopt = 1;
 
@@ -160,7 +167,7 @@ namespace Aircraft
         // engine thermal efficiency
         double eteng;
 
-        // 9.81 m/s^2 in metric, 32.2 ft/s^2 in imperial/percent
+        // gravity. 9.81 m/s^2 in metric, 32.2 ft/s^2 in imperial/percent
         double g0;
 
         double uexit;
@@ -229,7 +236,7 @@ namespace Aircraft
         // nozzle temperature limit
         double tnozl;
 
-        // temp limits exceeded flag. If set, show temp limits exceeded alert.
+        // temp limits exceeded flag.
         int fireflag;
 
         // engine weight
@@ -294,15 +301,25 @@ namespace Aircraft
         // engine mount position
         Vec3 pos = Vec3(0, 0, 0);
 
-        // init engine spec
         inline void init();
         inline void getFreeStream(double ps0_, double ts0_, double alt_, double u0d_);
         inline void getThermo();
         inline void getPerform();
     };
 
+    /**
+     * simulate() eninge simulate function.
+     * the calculations are based on imperial system.
+     * @param dt simulate time step
+     * @param throttle throttle input, 0 to 100
+     * @param ps0_ atmosphere pressure (KPa)
+     * @param ts0_ atmosphere temperature (Celcius)
+     * @param alt_ altitude (m)
+     * @param u0d_ airspeed (km/h)
+     * **/
     void inline Engine2::simulate(double dt, double throttle, double ps0_, double ts0_, double alt_, double u0d_) {
         fireflag = 0;
+        abflag = 1;
         throtl = throttle;
         getFreeStream(ps0_, ts0_, alt_, u0d_);
         getThermo();
@@ -310,12 +327,18 @@ namespace Aircraft
         getPerform();
     }
 
+    /**
+     * init() intialize engine specifications
+     * **/
     void inline Engine2::init() {
-        /* Metric Units */
+        /* Imprial to Metric conversion factors */
         lconv1 = 0.3048;
         lconv2 = 1.609;
         fconv = 4.448;
-        mconv1 = 0.04536;
+        mconv1 = 0.4536;
+        pconv = 6.891;
+        tref = 273.1;
+        tconv = 0.555555;
 
         g0 = 32.2;
 
@@ -338,7 +361,6 @@ namespace Aircraft
         acore = 6.711;
         a2 = acore;
         diameng = sqrt(4 * a2 / PI);
-        a4 = 0.472;
         a4p = 1.524;
         ac = 0.9 * a2;
         weight = 3902;
@@ -353,14 +375,12 @@ namespace Aircraft
         efficiency[FAN_EXIT] = 1.0;
 
         fuelHeatValue = 18600;
-        acore = 2.0;
 
-        a8 = 0.7;
-        a8d = 1.524;
+        a8 = 1.5035;
+        a8d = 1.144785;
         a8max = 0.335;
         a8rat = 0.335;
-        a4 = 0.418;
-
+        a4 = 0.38991436;
         tinlt = 900;
         tfan = 1500;
         tcomp = 1500;
@@ -382,16 +402,18 @@ namespace Aircraft
     }
 
     /**
-     * getFreeStream()
-     * @param ps0_ atmosphere pressure
-     * @param ts0_ atmosphere temperature
-     * @param alt_ altitude
-     * @param u0d_ airspeed
+     * getFreeStream() calculates freestream's temperature, pressure, etc.
+     * @param ps0_ atmosphere pressure (KPa)
+     * @param ts0_ atmosphere temperature (C)
+     * @param alt_ altitude (m)
+     * @param u0d_ airspeed (km/h)
      * **/
     void inline Engine2::getFreeStream(double ps0_, double ts0_, double alt_, double u0d_) {
-        ps0 = ps0_ * 144;
-        alt = alt_ * lconv1;
-        ts0 = ts0_;
+        ps0_ = ps0_ / pconv; // KPa to lbf/in2 (lbf/sq)
+        ps0 = ps0_ * 144;    //lbf/in2 to lbf/ft2
+        alt = alt_ * lconv1; // m to ft
+        ts0 = ts0_ + tref;   // C to K
+        ts0 = ts0 / tconv;   // K to F
 
         a0 = sqrt(gama * rgas * ts0);
         u0 = u0d_ / lconv2 * 5280 / 3600;
@@ -415,6 +437,9 @@ namespace Aircraft
         psout = ps0;
     }
 
+    /**
+     * getThermo() calcluates thermal values
+     * */
     void inline Engine2::getThermo() {
         double dela;
         double t5t4n;
@@ -531,7 +556,7 @@ namespace Aircraft
     }
 
     /**
-     *  determines engine performance
+     *  getPerform() calculates engine performance
      * **/
     void inline Engine2::getPerform() {
         double fac1;
@@ -557,10 +582,10 @@ namespace Aircraft
 
          /* airflow determined at choked nozzle exit */
         pt[NOZZLE_THROAT] = epr * pressureRatio[COMP_ENTRY] * pt[FREESTREAM];
-        eair = getAirflowPerArea(1.0, game) * 144 * a8 * pt[NOZZLE_THROAT] / 14.7 /
-            sqrt(etr * tt[FREESTREAM] / 518);
-        m2 = getMach(0, eair * sqrt(tt[FREESTREAM] / 518) /
-            (pressureRatio[COMP_ENTRY] * pt[FREESTREAM] / 14.7 * acore * 144.), gama);
+        eair = getAirflowPerArea(1.0, game) * 144.0 * a8 * pt[NOZZLE_THROAT] / 14.7 /
+            sqrt(etr * tt[FREESTREAM] / 518.0);
+        m2 = getMach(0, eair * sqrt(tt[FREESTREAM] / 518.0) /
+            (pressureRatio[COMP_ENTRY] * pt[FREESTREAM] / 14.7 * acore * 144.0), gama);
         npr = pt[NOZZLE_THROAT] / ps0;
         uexit = sqrt(2.0 * rgas / fac1 * etr * tt[FREESTREAM] * efficiency[NOZZLE_ENTRY] *
             (1.0 - pow(1.0 / npr, fac1)));
@@ -655,14 +680,22 @@ namespace Aircraft
     }
 
     /**
-     * getThrustVal returns engine net thrust in N
+     * getFireFlag() returns engine fire flag
+     * **/
+    inline int Engine2::getFireFlag() {
+        return fireflag;
+    }
+
+
+    /**
+     * getThrustVal() returns engine net thrust in N
      * **/
     inline double Engine2::getThrustVal() {
         return fnlb * fconv;
     }
 
     /**
-     * getFuelRate returns engine fuel rate in kg/hr
+     * getFuelRate() returns engine fuel rate in kg/hr
      * **/
     inline double Engine2::getFuelRate() {
         return flflo * mconv1;
