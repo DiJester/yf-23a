@@ -20,10 +20,10 @@ local rudder_neu_speed   = 0.06
 
 
 dev:listen_command(device_commands.rudder_axis_mod)
-dev:listen_command(device_commands.left_rudder_start)
-dev:listen_command(device_commands.left_rudder_stop)
-dev:listen_command(device_commands.right_rudder_start)
-dev:listen_command(device_commands.right_rudder_stop)
+dev:listen_command(Keys.LeftRudderStart)
+dev:listen_command(Keys.LeftRudderStop)
+dev:listen_command(Keys.RightRudderStart)
+dev:listen_command(Keys.RightRudderStop)
 
 
 function update()
@@ -37,19 +37,13 @@ function post_initialize()
 end
 
 function SetCommand(command, value)
-	print_message_to_user("detected command" .. command .. "value" .. value)
 	if command == device_commands.rudder_axis_mod then
-		print_message_to_user("rudder_axis_mod" .. value)
 		axis_input_rudder = value
-	elseif command == device_commands.left_rudder_start then
-		print_message_to_user("left_rudder_start")
+	elseif command == Keys.LeftRudderStart then
 		key_rudder_dir = -1
-	elseif command == device_commands.right_rudder_start then
-		print_message_to_user("right_rudder_start")
-
+	elseif command == Keys.RightRudderStart then
 		key_rudder_dir = 1
-	elseif command == device_commands.left_rudder_stop or command == device_commands.right_rudder_stop then
-		print_message_to_user("rudder_stop")
+	elseif command == Keys.LeftRudderStop or command == Keys.RightRudderStop then
 		key_rudder_dir = 0
 	end
 end

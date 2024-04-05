@@ -7,18 +7,22 @@ end
 
 
 Keys = {
-    LeftRudderStart = 201,
-    LeftRudderStop = 202,
-    RightRudderStart = 203,
-    RightRudderStop = 204,
+    -- iComandPlaneLeftRudderStart    = 201,
+    -- iComandPlaneLeftRudderStop     = 202,
+    -- iComandPlaneRightRudderStart   = 203,
+    -- iComandPlaneRightRudderStop    = 204,
 
-    PowerOnOff = 315,
+    PowerOnOff        = 315,
 
-    PlaneYawAxis = 2003,
+    PlaneYawAxis      = 2003,
     PlaneThrustCommon = 2004,
-    PlaneThrustLeft = 2005,
-    PlaneThrustRight = 2006,
+    PlaneThrustLeft   = 2005,
+    PlaneThrustRight  = 2006,
 
+    LeftRudderStart   = __custom_counter(),
+    LeftRudderStop    = __custom_counter(),
+    RightRudderStart  = __custom_counter(),
+    RightRudderStop   = __custom_counter(),
 }
 
 
@@ -31,12 +35,6 @@ end
 
 device_commands =
 {
-    Button_Test        = __counter(),
-    rudder_axis_mod    = __counter(),
-    rudder_axis_left   = __counter(),
-    rudder_axis_right  = __counter(),
-    left_rudder_start  = __counter(),
-    left_rudder_stop   = __counter(),
-    right_rudder_start = __counter(),
-    right_rudder_stop  = __counter(),
+    Button_Test     = __counter(),
+    rudder_axis_mod = __counter(),
 }
