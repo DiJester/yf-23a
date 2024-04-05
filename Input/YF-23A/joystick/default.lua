@@ -2,14 +2,14 @@ local cscripts = folder .. "../../../Cockpit/Scripts/"
 dofile(cscripts .. "devices.lua")
 dofile(cscripts .. "command_defs.lua")
 
---dofile(folder .. "../inpututils.lua")
+dofile(folder .. "../inpututils.lua")
 
 local res = external_profile("Config/Input/Aircrafts/base_joystick_binding.lua")
 ignore_features(res.keyCommands, {
     "dragchute", "shiptakeoff", "a2g"
 })
---Ignore_names(res.keyCommands, { _('Aircraft Rudder Left'), _('Aircraft Rudder Right') })
---Ignore_names(res.axisCommands, { _('Rudder') })
+Ignore_names(res.keyCommands, { _('Aircraft Rudder Left'), _('Aircraft Rudder Right') })
+Ignore_names(res.axisCommands, { _('Rudder') })
 
 join(res.keyCommands, {
     { down = iCommandPlaneAutopilot,                         name = _('Autopilot - Attitude Hold'),                         category = _('Autopilot') },
@@ -30,9 +30,9 @@ join(res.keyCommands, {
     { down = iCommandPlaneWheelBrakeLeftOn,                  up = iCommandPlaneWheelBrakeLeftOff,                           name = _('Wheel Brake Left On/Off'),     category = _('Systems') },
     { down = iCommandPlaneWheelBrakeRightOn,                 up = iCommandPlaneWheelBrakeRightOff,                          name = _('Wheel Brake Right On/Off'),    category = _('Systems') },
     { down = iCommandPlaneFSQuantityIndicatorSelectorMAIN,   name = _('Fuel Quantity Selector'),                            category = _('Systems') },
-    { down = iCommandPlaneFSQuantityIndicatorTest,           up = iCommandPlaneFSQuantityIndicatorTest,                     value_down = 1,                          value_up = 0,                            name = _('Fuel Quantity Test'),                category = _('Systems') },
-    { down = iCommandPlaneFSQuantityIndicatorSelectorINT,    up = iCommandPlaneFSQuantityIndicatorSelectorINT,              value_down = 1,                          value_up = 0,                            name = _('Bingo Fuel Index, CW'),              category = _('Systems') },
-    { down = iCommandPlaneFSQuantityIndicatorSelectorINT,    up = iCommandPlaneFSQuantityIndicatorSelectorINT,              value_down = -1,                         value_up = 0,                            name = _('Bingo Fuel Index, CCW'),             category = _('Systems') },
+    { down = iCommandPlaneFSQuantityIndicatorTest,           up = iCommandPlaneFSQuantityIndicatorTest,                     value_down = 1,                          value_up = 0,                                  name = _('Fuel Quantity Test'),    category = _('Systems') },
+    { down = iCommandPlaneFSQuantityIndicatorSelectorINT,    up = iCommandPlaneFSQuantityIndicatorSelectorINT,              value_down = 1,                          value_up = 0,                                  name = _('Bingo Fuel Index, CW'),  category = _('Systems') },
+    { down = iCommandPlaneFSQuantityIndicatorSelectorINT,    up = iCommandPlaneFSQuantityIndicatorSelectorINT,              value_down = -1,                         value_up = 0,                                  name = _('Bingo Fuel Index, CCW'), category = _('Systems') },
     { down = iCommandPlaneAntiCollisionLights,               name = _('Anti-collision lights'),                             category = _('Systems') },
 
     -- Modes
@@ -41,7 +41,7 @@ join(res.keyCommands, {
     { down = iCommandPlaneModeFI0,                           name = _('(6) Longitudinal Missile Aiming Mode/FLOOD mode'),   category = _('Modes') },
 
     -- Sensors
-    { combos = { { key = 'JOY_BTN3' } },                     down = iCommandPlaneChangeLock,                                up = iCommandPlaneChangeLockUp,          name = _('Target Lock'),                 category = _('Sensors') },
+    { combos = { { key = 'JOY_BTN3' } },                     down = iCommandPlaneChangeLock,                                up = iCommandPlaneChangeLockUp,          name = _('Target Lock'),                       category = _('Sensors') },
     { down = iCommandSensorReset,                            name = _('Radar - Return To Search/NDTWS'),                    category = _('Sensors') },
     { down = iCommandRefusalTWS,                             name = _('Unlock TWS Target'),                                 category = _('Sensors') },
     { down = iCommandPlaneRadarOnOff,                        name = _('Radar On/Off'),                                      category = _('Sensors') },
@@ -72,15 +72,14 @@ join(res.keyCommands, {
 
     -- Weapons
     { down = iCommandPlaneSalvoOnOff,                        name = _('Salvo Mode'),                                        category = _('Weapons') },
-    { combos = { { key = 'JOY_BTN2' } },                     down = iCommandPlanePickleOn,                                  up = iCommandPlanePickleOff,             name = _('Weapon Release'),              category = _('Weapons') },
+    { combos = { { key = 'JOY_BTN2' } },                     down = iCommandPlanePickleOn,                                  up = iCommandPlanePickleOff,             name = _('Weapon Release'),                    category = _('Weapons') },
     --{down = iCommandChangeGunRateOfFire, name = _('Cannon Rate Of Fire / Cut Of Burst select'), category = _('Weapons')},
 
     -- Communications
     { down = iCommandPlaneRefuelingReadyPreContact,          name = _('A/A refueling - "Ready for precontact" radio call'), category = _('Communications') },
 
-    { down = device_commands.left_rudder_start,              up = device_commands.left_rudder_stop,                         cockpit_device_id = devices.RUDDER,      name = _('Aircraft Rudder Left (Key)'),  category = { _('Flight Control'), _('YF23A') } },
-    { down = device_commands.right_rudder_start,             up = device_commands.right_rudder_stop,                        cockpit_device_id = devices.RUDDER,      name = _('Aircraft Rudder Right (Key)'), category = { _('Flight Control'), _('YF23A') } },
-
+    { down = Keys.LeftRudderStart,                           up = Keys.LeftRudderStop,                                      name = _('Aircraft Rudder Left'),        category = { _('Flight Control'), _('YF23A') } },
+    { down = Keys.RightRudderStart,                          up = Keys.RightRudderStop,                                     name = _('Aircraft Rudder Right'),       category = { _('Flight Control'), _('YF23A') } },
 })
 -- joystick axes
 join(res.axisCommands, {
