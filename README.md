@@ -56,7 +56,6 @@ Formally designated as the YF-23A, two prototypes were built. The first prototyp
 ### Known Issues
   - No exterior lights
   - Incorrect weapon bay modeling.
-  - Weird behavior on ground taxi.
-
+  
 ## Installation
 Download the zip file and extract to `C:\Users\{username}\Saved Games\DCS\Mods\aircraft` folder.
